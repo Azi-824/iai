@@ -10,6 +10,11 @@
 #include "IMAGE.hpp"
 
 //############### マクロ定義 ################
+#define GAME_LEFT	  0		//画面の横の始点
+#define GAME_TOP	  0		//画面の縦の始点
+#define GAME_WIDTH	880		//画面の横の大きさ
+#define GAME_HEIGHT	640		//画面の縦の大きさ
+
 #define GAME_FPS_SPEED					   60
 
 //テキスト関係

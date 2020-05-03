@@ -179,7 +179,7 @@ void GAMEMANEGER::Scene_Title()
 void GAMEMANEGER::Draw_Scene_Title()
 {
 
-	this->back->Draw(0, 0, 0);	//背景描画
+	this->back->Draw(GAME_LEFT,GAME_TOP);	//背景描画
 
 	DrawString(TEST_TEXT_X, TEST_TEXT_Y, TITLE_TEXT, GetColor(255, 255, 255));	//テスト用のテキストを描画
 
