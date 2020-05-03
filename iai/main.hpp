@@ -25,6 +25,7 @@
 
 //テキスト関係
 #define LOAD_TEXT	"NowLoading…"		//ロード画面のテキスト
+#define PUSH_TEXT	"PushEnter"			//エンターキーを押す、のテキスト
 #define TITLE_TEXT	"NowTitle"			//タイトル画面のテキスト
 #define PLAY_TEXT	"NowPlay"			//プレイ画面のテキスト
 #define END_TEXT	"NowEnd"			//エンド画面のテキスト

@@ -11,6 +11,7 @@ KEYDOWN *keydown = new KEYDOWN();			//KEYDOWNクラスのオブジェクトを生成
 
 //######### グローバル変数 ############
 int NowScene = (int)SCENE_LOAD;	//現在のシーン(最初はロード画面から)
+bool IsLoad = false;			//読み込みが終わったか（最初は読み込めていない）
 
 //########## プログラムで最初に実行される関数 ##########
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
@@ -45,6 +46,10 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 }
 
 //読み込み処理
+/*
+戻り値：true：正常
+戻り値：false：エラー、強制終了
+*/
 bool Load()
 {
 	return true;	//読み込み成功
@@ -139,6 +144,10 @@ bool ProcesScene()
 
 
 //ロード画面の処理
+/*
+戻り値：true：正常
+戻り値：false：エラー、強制終了
+*/
 bool Scene_Load()
 {
 
@@ -147,13 +156,29 @@ bool Scene_Load()
 		NowScene = (int)SCENE_TITLE;	//タイトル画面へ
 	}
 
+	if (GetASyncLoadNum() == 0)	//非同期で読み込んでいる処理が終わったら
+	{
+
+		SetUseASyncLoadFlag(FALSE);		//同期読み込みに設定
+
+		IsLoad = true;	//読み込み完了
+	}
+
 	return Load();		//読み込み処理
 }
 
 //ロード画面の描画処理
 void Draw_Scene_Load()
 {
-	DrawString(TEST_TEXT_X, TEST_TEXT_Y, LOAD_TEXT, GetColor(255, 255, 255));	//テスト用のテキストを描画
+
+	if (IsLoad)	//読み込みが完了したら
+	{
+		DrawString(TEST_TEXT_X, TEST_TEXT_Y, PUSH_TEXT, GetColor(255, 255, 255));	//プッシュ、のテキストを描画
+	}
+	else		//完了していなければ
+	{
+		DrawString(TEST_TEXT_X, TEST_TEXT_Y, LOAD_TEXT, GetColor(255, 255, 255));	//読み込み中のテキストを描画
+	}
 
 	return;
 }
