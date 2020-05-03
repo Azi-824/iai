@@ -150,10 +150,12 @@ bool ProcesScene()
 */
 bool Scene_Load()
 {
-
-	if (keydown->IsKeyDownOne(KEY_INPUT_RETURN))		//エンターキーを押されたら
+	if (IsLoad)	//読み込みが完了していたら
 	{
-		NowScene = (int)SCENE_TITLE;	//タイトル画面へ
+		if (keydown->IsKeyDownOne(KEY_INPUT_RETURN))		//エンターキーを押されたら
+		{
+			NowScene = (int)SCENE_TITLE;	//タイトル画面へ
+		}
 	}
 
 	if (GetASyncLoadNum() == 0)	//非同期で読み込んでいる処理が終わったら
