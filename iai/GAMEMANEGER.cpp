@@ -27,6 +27,7 @@ GAMEMANEGER::~GAMEMANEGER()
 	//オブジェクトの破棄
 	delete this->fps;		//fps破棄
 	delete this->keydown;	//keydown破棄
+	delete this->back;		//back破棄
 
 	return;
 
@@ -39,6 +40,10 @@ GAMEMANEGER::~GAMEMANEGER()
 */
 bool GAMEMANEGER::Load()
 {
+	//画像関係
+	this->back = new IMAGE(IMG_DIR_BACK, IMG_NAME_TITLE);	//タイトル画像生成
+	if (this->back->GetIsLoad() == false) { return false; }	//読み込み失敗
+
 	return true;	//読み込み成功
 }
 
@@ -74,11 +79,7 @@ bool GAMEMANEGER::GameMainLoop()
 }
 
 //各シーンの処理
-/*
-戻り値：true：正常
-戻り値：false：エラー、強制終了
-*/
-bool GAMEMANEGER::ProcesScene()
+void GAMEMANEGER::ProcesScene()
 {
 	switch (this->NowScene)		//現在のシーンの描画処理を実行
 	{
@@ -87,7 +88,7 @@ bool GAMEMANEGER::ProcesScene()
 
 		this->Draw_Scene_Load();	//ロード画面の描画処理
 
-		return this->Scene_Load();//ロード画面の処理
+		this->Scene_Load();			//ロード画面の処理
 
 		break;				//ロード画面のときここまで
 
@@ -119,18 +120,13 @@ bool GAMEMANEGER::ProcesScene()
 		break;
 	}
 
-	return true;	//通常
+	return;	
 
 }
 
-
 //***************************** シーン毎の処理 ********************************
 //ロード画面の処理
-/*
-戻り値：true：正常
-戻り値：false：エラー、強制終了
-*/
-bool GAMEMANEGER::Scene_Load()
+void GAMEMANEGER::Scene_Load()
 {
 	if (this->IsLoad)	//読み込みが完了していたら
 	{
@@ -143,12 +139,12 @@ bool GAMEMANEGER::Scene_Load()
 	if (GetASyncLoadNum() == 0)	//非同期で読み込んでいる処理が終わったら
 	{
 
-		SetUseASyncLoadFlag(FALSE);		//同期読み込みに設定
+		SetUseASyncLoadFlag(FALSE);	//同期読み込みに設定
 
-		this->IsLoad = true;	//読み込み完了
+		this->IsLoad = true;		//読み込み完了
 	}
 
-	return this->Load();		//読み込み処理
+	return;		
 }
 
 //ロード画面の描画処理
@@ -182,6 +178,8 @@ void GAMEMANEGER::Scene_Title()
 //タイトル画面の描画処理
 void GAMEMANEGER::Draw_Scene_Title()
 {
+
+	this->back->Draw(0, 0, 0);	//背景描画
 
 	DrawString(TEST_TEXT_X, TEST_TEXT_Y, TITLE_TEXT, GetColor(255, 255, 255));	//テスト用のテキストを描画
 

@@ -7,6 +7,7 @@
 #include "DxLib.h"
 #include "FPS.hpp"
 #include "KEYDOWN.hpp"
+#include "IMAGE.hpp"
 
 //############### マクロ定義 ################
 #define GAME_FPS_SPEED					   60
@@ -39,6 +40,7 @@ private:
 
 	FPS *fps;					//fps
 	KEYDOWN *keydown;			//キーボード関係
+	IMAGE *back;				//背景画像
 
 	int NowScene;				//現在のシーン
 	bool IsLoad;				//読み込みが終わったか
@@ -51,11 +53,11 @@ public:
 	bool Load();				//ゲームに使用するデータの読み込み処理
 	bool GameMainLoop();		//ゲームのメインループ
 
-	bool ProcesScene();			//各シーンの処理
+	void ProcesScene();			//各シーンの処理
 
 
 	//****************** シーン関係 *************************
-	bool Scene_Load();			//ロード画面の処理
+	void Scene_Load();			//ロード画面の処理
 	void Draw_Scene_Load();		//ロード画面の描画処理
 
 	void Scene_Title();			//タイトル画面の処理
