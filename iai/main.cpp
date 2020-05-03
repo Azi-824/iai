@@ -141,13 +141,19 @@ bool ProcesScene()
 //ロード画面の処理
 bool Scene_Load()
 {
+
+	if (keydown->IsKeyDownOne(KEY_INPUT_RETURN))		//エンターキーを押されたら
+	{
+		NowScene = (int)SCENE_TITLE;	//タイトル画面へ
+	}
+
 	return Load();		//読み込み処理
 }
 
 //ロード画面の描画処理
 void Draw_Scene_Load()
 {
-	DrawString(30, 30, "NowLoading…", GetColor(255, 255, 255));
+	DrawString(TEST_TEXT_X, TEST_TEXT_Y, LOAD_TEXT, GetColor(255, 255, 255));	//テスト用のテキストを描画
 
 	return;
 }
@@ -156,35 +162,61 @@ void Draw_Scene_Load()
 void Scene_Title()
 {
 
+	if (keydown->IsKeyDownOne(KEY_INPUT_RETURN))		//エンターキーを押されたら
+	{
+		NowScene = (int)SCENE_PLAY;	//プレイ画面へ
+	}
+
 	return;
 }
 
 //タイトル画面の描画処理
 void Draw_Scene_Title()
 {
+
+	DrawString(TEST_TEXT_X, TEST_TEXT_Y, TITLE_TEXT, GetColor(255, 255, 255));	//テスト用のテキストを描画
+
 	return;
 }
 
 //プレイ画面の処理
 void Scene_Play()
 {
+
+	if (keydown->IsKeyDownOne(KEY_INPUT_RETURN))		//エンターキーを押されたら
+	{
+		NowScene = (int)SCENE_END;	//エンド画面へ
+	}
+
 	return;
 }
 
 //プレイ画面の描画処理
 void Draw_Scene_Play()
 {
+
+	DrawString(TEST_TEXT_X, TEST_TEXT_Y, PLAY_TEXT, GetColor(255, 255, 255));	//テスト用のテキストを描画
+
 	return;
 }
 
 //エンド画面の処理
 void Scene_End()
 {
+
+	if (keydown->IsKeyDownOne(KEY_INPUT_RETURN))		//エンターキーを押されたら
+	{
+		NowScene = (int)SCENE_TITLE;	//タイトル画面へ
+	}
+
 	return;
 }
 
 //エンド画面の描画処理
 void Draw_Scene_End()
 {
+
+	DrawString(TEST_TEXT_X, TEST_TEXT_Y, END_TEXT, GetColor(255, 255, 255));	//テスト用のテキストを描画
+
 	return;
 }
