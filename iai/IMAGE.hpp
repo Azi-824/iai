@@ -17,7 +17,9 @@
 
 //########## マクロ定義：画像のファイルパスと名前 ##########
 #define IMG_DIR_BACK		R"(.\MY_IMG\Back)"				//背景画像のファイルの場所
-#define IMG_NAME_TITLE		R"(\Title.jpg)"					//タイトル画像の名前
+
+#define IMG_NAME_TITLE		R"(\Title.jpg)"					//タイトル画面の背景画像の名前
+#define IMG_NAME_PLAY		R"(\Play.jpg)"					//プレイ画面の背景画像の名前
 
 //########## マクロ定義：エラーメッセージ##########
 #define IMAGE_ERROR_TITLE "IMAGE_ERROR"					//エラータイトル

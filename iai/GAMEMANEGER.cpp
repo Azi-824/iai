@@ -41,8 +41,9 @@ GAMEMANEGER::~GAMEMANEGER()
 bool GAMEMANEGER::Load()
 {
 	//画像関係
-	this->back = new IMAGE(IMG_DIR_BACK, IMG_NAME_TITLE);	//タイトル画像生成
+	this->back = new IMAGE(IMG_DIR_BACK, IMG_NAME_TITLE);	//背景画像を管理するオブジェクトを生成(タイトル画面の画像を読み込む)
 	if (this->back->GetIsLoad() == false) { return false; }	//読み込み失敗
+	if (this->back->AddImage(IMG_DIR_BACK, IMG_NAME_PLAY) == false) { return -1; }		//背景画像追加(プレイ画面)
 
 	return true;	//読み込み成功
 }
@@ -201,6 +202,8 @@ void GAMEMANEGER::Scene_Play()
 //プレイ画面の描画処理
 void GAMEMANEGER::Draw_Scene_Play()
 {
+
+	this->back->Draw(GAME_LEFT, GAME_TOP, PLAY_BACK);	//背景画像描画
 
 	DrawString(TEST_TEXT_X, TEST_TEXT_Y, PLAY_TEXT, COLOR_WHITE);	//テスト用のテキストを描画
 
