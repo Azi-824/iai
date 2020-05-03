@@ -28,6 +28,13 @@
 #define TEST_TEXT_X	30					//テスト用のテキスト描画X位置
 #define TEST_TEXT_Y	30					//テスト用のテキスト描画Y位置
 
+//色関係
+#define COLOR_RED	GetColor(255,0,0)		//赤色
+#define COLOR_GREEN	GetColor(0,255,0)		//緑色
+#define COLOR_BLUE	GetColor(0,0,255)		//青色
+#define COLOR_WHITE GetColor(255,255,255)	//白色
+#define COLOR_BLACK GetColor(0,0,0)			//黒色
+
 //############### 列挙型 ################
 enum GAME_SCENE
 {

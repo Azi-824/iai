@@ -153,11 +153,11 @@ void GAMEMANEGER::Draw_Scene_Load()
 
 	if (IsLoad)	//読み込みが完了したら
 	{
-		DrawString(TEST_TEXT_X, TEST_TEXT_Y, PUSH_TEXT, GetColor(255, 255, 255));	//プッシュ、のテキストを描画
+		DrawString(TEST_TEXT_X, TEST_TEXT_Y, PUSH_TEXT, COLOR_WHITE);	//プッシュ、のテキストを描画
 	}
 	else		//完了していなければ
 	{
-		DrawString(TEST_TEXT_X, TEST_TEXT_Y, LOAD_TEXT, GetColor(255, 255, 255));	//読み込み中のテキストを描画
+		DrawString(TEST_TEXT_X, TEST_TEXT_Y, LOAD_TEXT, COLOR_WHITE);	//読み込み中のテキストを描画
 	}
 
 	return;
@@ -179,9 +179,9 @@ void GAMEMANEGER::Scene_Title()
 void GAMEMANEGER::Draw_Scene_Title()
 {
 
-	this->back->Draw(GAME_LEFT,GAME_TOP);	//背景描画
+	this->back->Draw(GAME_LEFT,GAME_TOP,(int)TITLE_BACK);	//背景描画
 
-	DrawString(TEST_TEXT_X, TEST_TEXT_Y, TITLE_TEXT, GetColor(255, 255, 255));	//テスト用のテキストを描画
+	DrawString(TEST_TEXT_X, TEST_TEXT_Y, TITLE_TEXT, COLOR_WHITE);	//テスト用のテキストを描画
 
 	return;
 }
@@ -202,7 +202,7 @@ void GAMEMANEGER::Scene_Play()
 void GAMEMANEGER::Draw_Scene_Play()
 {
 
-	DrawString(TEST_TEXT_X, TEST_TEXT_Y, PLAY_TEXT, GetColor(255, 255, 255));	//テスト用のテキストを描画
+	DrawString(TEST_TEXT_X, TEST_TEXT_Y, PLAY_TEXT, COLOR_WHITE);	//テスト用のテキストを描画
 
 	return;
 }
@@ -223,7 +223,7 @@ void GAMEMANEGER::Scene_End()
 void GAMEMANEGER::Draw_Scene_End()
 {
 
-	DrawString(TEST_TEXT_X, TEST_TEXT_Y, END_TEXT, GetColor(255, 255, 255));	//テスト用のテキストを描画
+	DrawString(TEST_TEXT_X, TEST_TEXT_Y, END_TEXT, COLOR_WHITE);	//テスト用のテキストを描画
 
 	return;
 }
