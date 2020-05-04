@@ -20,7 +20,6 @@ private:
 	SIKAKU *sikaku_draw;		//キャラの描画する領域
 
 	bool IsArive;				//生きているか
-	bool IsDraw;				//描画できるか
 
 public:
 
@@ -28,7 +27,6 @@ public:
 	~CHARACTOR();				//デストラクタ
 
 	void SetIsArive(bool);		//生きているかを設定
-	void SetIsDraw(bool);		//描画してよいかを設定
 	bool SetImage(const char*, const char*);//画像設定
 
 	void SetImagePos(int, int);		//画像の位置を設定する
@@ -36,7 +34,6 @@ public:
 	int  GetWidth();			//横幅取得
 	int GetHeight();			//高さ取得
 	bool GetIsArive();			//生きているか取得
-	bool GetIsDraw();			//描画できるか取得
 
 	void Operation(KEYDOWN *);	//操作
 

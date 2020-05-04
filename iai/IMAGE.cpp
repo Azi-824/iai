@@ -47,6 +47,8 @@ IMAGE::IMAGE(const char *dir,const char *name)
 
 	this->IsLoad = true;		//“Ç‚İ‚ß‚½
 
+	this->IsDraw.push_back(true);	//•`‰æ‚µ‚Ä‚æ‚¢
+
 	this->ImageKind = this->Handle.size();	//“Ç‚İ‚ñ‚¾”‚ğæ“¾
 
 	return;
@@ -69,6 +71,9 @@ IMAGE::~IMAGE()
 
 	std::vector<int>v3;
 	this->Height.swap(v3);
+
+	std::vector<bool>v4;
+	this->IsDraw.swap(v4);
 
 	return;
 }
@@ -113,7 +118,12 @@ bool IMAGE::GetIsLoad(void)
 //‰æ‘œ‚ğ•`‰æiw’è‚µ‚È‚¢ê‡Aæ“ª‚Ì‰æ‘œj
 void IMAGE::Draw(int x, int y, int type)
 {
-	DrawGraph(x, y, this->Handle[type], TRUE);	//w’è‚³‚ê‚½‰æ‘œ‚ğ•`‰æ
+	
+	if (this->IsDraw[type])	//•`‰æ‚µ‚Ä‚æ‚¯‚ê‚Î
+	{
+		DrawGraph(x, y, this->Handle[type], TRUE);	//w’è‚³‚ê‚½‰æ‘œ‚ğ•`‰æ
+	}
+
 }
 
 //‰æ‘œ‚ğ’Ç‰Á
@@ -148,6 +158,8 @@ bool IMAGE::AddImage(const char *dir, const char *name)
 	}
 
 	this->IsLoad = true;		//“Ç‚İ‚ß‚½
+
+	this->IsDraw.push_back(true);	//•`‰æ‚µ‚Ä‚æ‚¢
 
 	this->ImageKind = this->Handle.size();	//“Ç‚İ‚ñ‚¾”‚ğæ“¾
 

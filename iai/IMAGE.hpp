@@ -48,7 +48,8 @@ private:
 
 	int ImageKind;			//読み込んだ画像の種類
 
-	bool IsLoad;			//読み込めたか？
+	bool IsLoad;				//読み込めたか？
+	std::vector<bool> IsDraw;	//描画してよいか
 
 public:
 	IMAGE(const char *,const char *);	//コンストラクタ

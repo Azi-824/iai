@@ -27,13 +27,6 @@ void CHARACTOR::SetIsArive(bool Isarive)
 	return;
 }
 
-//•`‰æ‚Å‚«‚é‚©Ý’è
-void CHARACTOR::SetIsDraw(bool Isdraw)
-{
-	this->IsDraw = IsDraw;
-	return;
-}
-
 //‰æ‘œ‚ðÝ’è
 bool CHARACTOR::SetImage(const char *dir, const char *name)
 {
@@ -79,12 +72,6 @@ bool CHARACTOR::GetIsArive()
 	return this->IsArive;
 }
 
-//•`‰æ‚Å‚«‚é‚©Žæ“¾
-bool CHARACTOR::GetIsDraw()
-{
-	return this->IsDraw;
-}
-
 //‘€ì
 void CHARACTOR::Operation(KEYDOWN *keydown)
 {
@@ -128,7 +115,6 @@ bool CHARACTOR::SetInit()
 	//this->sikaku_draw->SetValue(GAME_LEFT, GAME_TOP, this->image->GetWidth(), this->image->GetHeight());	//“–‚½‚è”»’è‚Ì—Ìˆæ‚ðÝ’è
 
 	this->IsArive = true;	//¶‚«‚Ä‚¢‚é
-	this->IsDraw = true;	//•`‰æ‚µ‚Ä‚æ‚¢
 
 	return true;
 
@@ -139,9 +125,6 @@ void CHARACTOR::Draw()
 {
 	if (this->IsArive)	//¶‚«‚Ä‚¢‚ê‚Î
 	{
-		if (this->IsDraw)	//•`‰æ‚Å‚«‚ê‚Î
-		{
 			this->image->Draw(this->sikaku_draw->Left, this->sikaku_draw->Top);	//‰æ‘œ•`‰æ
-		}
 	}
 }

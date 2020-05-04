@@ -155,6 +155,7 @@
     <ClInclude Include="IMAGE.hpp" />
     <ClInclude Include="KEYDOWN.hpp" />
     <ClInclude Include="main.hpp" />
+    <ClInclude Include="PLAYER.hpp" />
     <ClInclude Include="SIKAKU.hpp" />
   </ItemGroup>
   <ItemGroup>
