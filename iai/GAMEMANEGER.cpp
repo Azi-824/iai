@@ -48,6 +48,14 @@ bool GAMEMANEGER::Load()
 	return true;	//読み込み成功
 }
 
+//画像などのサイズを取得し、設定する
+void GAMEMANEGER::SetSize()
+{
+	this->back->SetSize();	//背景画像、サイズ設定
+
+	return;
+}
+
 //ゲームのメインループ
 /*
 戻り値：true：正常
@@ -141,6 +149,8 @@ void GAMEMANEGER::Scene_Load()
 	{
 
 		SetUseASyncLoadFlag(FALSE);	//同期読み込みに設定
+
+		this->SetSize();			//サイズ設定
 
 		this->IsLoad = true;		//読み込み完了
 	}
