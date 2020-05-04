@@ -46,7 +46,7 @@ private:
 	std::vector<int> Width;					//•
 	std::vector<int> Height;				//‚‚³
 
-	int ImageKind;			//“Ç‚İ‚ñ‚¾‰æ‘œ‚Ìí—Ş
+	int ImageKind;				//“Ç‚İ‚ñ‚¾‰æ‘œ‚Ìí—Ş
 
 	bool IsLoad;				//“Ç‚İ‚ß‚½‚©H
 	std::vector<bool> IsDraw;	//•`‰æ‚µ‚Ä‚æ‚¢‚©
