@@ -30,6 +30,12 @@
     <ClInclude Include="IMAGE.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
+    <ClInclude Include="CHARACTOR.hpp">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="SIKAKU.hpp">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="FPS.cpp">
@@ -45,6 +51,12 @@
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="IMAGE.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="CHARACTOR.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="SIKAKU.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>

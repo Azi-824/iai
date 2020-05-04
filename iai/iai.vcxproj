@@ -149,18 +149,22 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="CHARACTOR.hpp" />
     <ClInclude Include="FPS.hpp" />
     <ClInclude Include="GAMEMANEGER.hpp" />
     <ClInclude Include="IMAGE.hpp" />
     <ClInclude Include="KEYDOWN.hpp" />
     <ClInclude Include="main.hpp" />
+    <ClInclude Include="SIKAKU.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CHARACTOR.cpp" />
     <ClCompile Include="FPS.cpp" />
     <ClCompile Include="GAMEMANEGER.cpp" />
     <ClCompile Include="IMAGE.cpp" />
     <ClCompile Include="KEYDOWN.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="SIKAKU.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
