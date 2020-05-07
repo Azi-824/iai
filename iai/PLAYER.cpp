@@ -31,19 +31,21 @@ void PLAYER::IncreaseWinNum()
 }
 
 //勝ち数を取得
+//戻り値：int：現在の勝ち数
 int PLAYER::GetWinNum()
 {
 	return this->WinNum;
 }
 
-//押されてからの時間を設定
+//押すまでの時間を設定
 void PLAYER::SetPushTime(double time)
 {
 	this->PushTime = time;
 	return;
 }
 
-//押されてからの時間を取得
+//押すまでの時間を取得
+//戻り値：double：押すまでの時間
 double PLAYER::GetPushTime()
 {
 	return this->PushTime;
