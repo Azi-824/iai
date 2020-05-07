@@ -8,6 +8,9 @@
 #include "CHARACTOR.hpp"
 
 //############## マクロ定義 #######################
+#define IMG_DIR_PLAYER		R"(.\MY_IMG\Player)"		//プレイヤー関係の画像ディレクトリ
+
+#define IMG_NAME_PLAYER		R"(\Player.png)"			//プレイヤーの画像の名前
 
 //############## クラス定義 #######################
 class PLAYER : public CHARACTOR		//キャラクタークラスを継承
