@@ -8,6 +8,10 @@
 //コンストラクタ
 CHARACTOR::CHARACTOR()
 {
+	//メンバー変数初期化
+	this->IsArive = false;	//死んでいる
+	this->IsLoad = false;	//読み込めていない
+
 	return;
 }
 
@@ -28,12 +32,12 @@ void CHARACTOR::SetIsArive(bool Isarive)
 }
 
 //画像を設定
-bool CHARACTOR::SetImage(const char *dir, const char *name)
+void CHARACTOR::SetImage(const char *dir, const char *name)
 {
 	this->image = new IMAGE(dir, name);
-	if (this->image->GetIsLoad() == false) { return false; }	//読み込み失敗
+	this->IsLoad = this->image->GetIsLoad();	//読み込めたか設定
 
-	return true;
+	return;
 
 }
 
@@ -72,6 +76,12 @@ bool CHARACTOR::GetIsArive()
 	return this->IsArive;
 }
 
+//読み込めたか取得
+bool CHARACTOR::GetIsLoad()
+{
+	return this->IsLoad;
+}
+
 //操作
 void CHARACTOR::Operation(KEYDOWN *keydown)
 {
@@ -105,18 +115,18 @@ void CHARACTOR::Operation(KEYDOWN *keydown)
 }
 
 //初期化設定
-bool CHARACTOR::SetInit()
+void CHARACTOR::SetInit()
 {
 
 	this->image->SetSize();		//画像サイズ設定
 
 
 	this->sikaku_draw = new SIKAKU();		//描画領域を作成
-	//this->sikaku_draw->SetValue(GAME_LEFT, GAME_TOP, this->image->GetWidth(), this->image->GetHeight());	//当たり判定の領域を設定
+	this->sikaku_draw->SetValue(0, 0, this->image->GetWidth(), this->image->GetHeight());	//当たり判定の領域を設定
 
 	this->IsArive = true;	//生きている
 
-	return true;
+	return;
 
 }
 

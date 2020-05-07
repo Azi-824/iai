@@ -7,8 +7,13 @@
 //############## クラス定義 #####################
 
 //コンストラクタ
-PLAYER::PLAYER()
+//引　数：const char *：画像のディレクトリ
+//引　数：const char *：画像の名前
+PLAYER::PLAYER(const char *dir,const char *name)
 {
+
+	this->SetImage(dir, name);	//画像を生成
+
 	return;
 }
 

@@ -45,6 +45,11 @@ bool GAMEMANEGER::Load()
 	if (this->back->GetIsLoad() == false) { return false; }	//読み込み失敗
 	if (this->back->AddImage(IMG_DIR_BACK, IMG_NAME_PLAY) == false) { return -1; }		//背景画像追加(プレイ画面)
 
+	//プレイヤー関係
+	this->player = new PLAYER(IMG_DIR_PLAYER, IMG_NAME_PLAYER);		//プレイヤー生成
+	if (this->player->GetIsLoad() == false) { return false; }		//読み込み失敗
+
+
 	return true;	//読み込み成功
 }
 
@@ -151,6 +156,7 @@ void GAMEMANEGER::Scene_Load()
 		SetUseASyncLoadFlag(FALSE);	//同期読み込みに設定
 
 		this->SetSize();			//サイズ設定
+		this->player->SetInit();	//プレイヤーの初期設定
 
 		this->IsLoad = true;		//読み込み完了
 	}
@@ -214,6 +220,8 @@ void GAMEMANEGER::Draw_Scene_Play()
 {
 
 	this->back->Draw(GAME_LEFT, GAME_TOP, PLAY_BACK);	//背景画像描画
+
+	this->player->Draw();		//プレイヤー描画
 
 	DrawString(TEST_TEXT_X, TEST_TEXT_Y, PLAY_TEXT, COLOR_WHITE);	//テスト用のテキストを描画
 

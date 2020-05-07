@@ -8,6 +8,7 @@
 #include "FPS.hpp"
 #include "KEYDOWN.hpp"
 #include "IMAGE.hpp"
+#include "PLAYER.hpp"
 
 //############### マクロ定義 ################
 #define GAME_LEFT	  0		//画面の横の始点
@@ -53,6 +54,7 @@ private:
 	FPS *fps;					//fps
 	KEYDOWN *keydown;			//キーボード関係
 	IMAGE *back;				//背景画像
+	PLAYER *player;				//プレイヤー
 
 	int NowScene;				//現在のシーン
 	bool IsLoad;				//読み込みが終わったか

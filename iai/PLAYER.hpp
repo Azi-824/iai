@@ -23,8 +23,8 @@ private:
 
 public:
 
-	PLAYER();		//コンストラクタ
-	~PLAYER();		//デストラクタ
+	PLAYER(const char *,const char *);		//コンストラクタ
+	~PLAYER();								//デストラクタ
 
 	void IncreaseWinNum();		//勝ち数を増やす
 	int GetWinNum();			//勝ち数を取得

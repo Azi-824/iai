@@ -59,8 +59,8 @@ public:
 
 	void SetSize(void);				//サイズをセット
 
-	int GetWidth(int);				//幅を取得
-	int GetHeight(int);				//高さを取得
+	int GetWidth(int kind = 0);		//幅を取得
+	int GetHeight(int kind = 0);	//高さを取得
 
 	bool GetIsLoad(void);			//読み込めた？
 
