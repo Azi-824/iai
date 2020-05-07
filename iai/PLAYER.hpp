@@ -12,6 +12,9 @@
 
 #define IMG_NAME_PLAYER		R"(\Player.png)"			//プレイヤーの画像の名前
 
+#define PLAYER_START_X		50		//プレイヤーの描画開始X位置
+#define PLAYER_START_Y		250		//プレイヤーの描画開始Y位置
+
 //############## クラス定義 #######################
 class PLAYER : public CHARACTOR		//キャラクタークラスを継承
 {
@@ -25,6 +28,8 @@ public:
 
 	PLAYER(const char *,const char *);		//コンストラクタ
 	~PLAYER();								//デストラクタ
+
+	void PosInit();				//描画位置を初期状態に戻す
 
 	void IncreaseWinNum();		//勝ち数を増やす
 	int GetWinNum();			//勝ち数を取得

@@ -28,6 +28,7 @@ GAMEMANEGER::~GAMEMANEGER()
 	delete this->fps;		//fps破棄
 	delete this->keydown;	//keydown破棄
 	delete this->back;		//back破棄
+	delete this->player;	//player破棄
 
 	return;
 
@@ -48,7 +49,6 @@ bool GAMEMANEGER::Load()
 	//プレイヤー関係
 	this->player = new PLAYER(IMG_DIR_PLAYER, IMG_NAME_PLAYER);		//プレイヤー生成
 	if (this->player->GetIsLoad() == false) { return false; }		//読み込み失敗
-
 
 	return true;	//読み込み成功
 }
@@ -156,6 +156,7 @@ void GAMEMANEGER::Scene_Load()
 		SetUseASyncLoadFlag(FALSE);	//同期読み込みに設定
 
 		this->SetSize();			//サイズ設定
+
 		this->player->SetInit();	//プレイヤーの初期設定
 
 		this->IsLoad = true;		//読み込み完了
@@ -206,6 +207,8 @@ void GAMEMANEGER::Draw_Scene_Title()
 //プレイ画面の処理
 void GAMEMANEGER::Scene_Play()
 {
+
+	this->player->PosInit();	//描画位置を初期化
 
 	if (this->keydown->IsKeyDownOne(KEY_INPUT_RETURN))		//エンターキーを押されたら
 	{

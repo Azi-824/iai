@@ -8,6 +8,10 @@
 //コンストラクタ
 CHARACTOR::CHARACTOR()
 {
+	
+	//オブジェクトの生成
+	this->sikaku_draw = new SIKAKU();		//描画領域を作成
+
 	//メンバー変数初期化
 	this->IsArive = false;	//死んでいる
 	this->IsLoad = false;	//読み込めていない
@@ -120,11 +124,7 @@ void CHARACTOR::SetInit()
 
 	this->image->SetSize();		//画像サイズ設定
 
-
-	this->sikaku_draw = new SIKAKU();		//描画領域を作成
-	this->sikaku_draw->SetValue(0, 0, this->image->GetWidth(), this->image->GetHeight());	//当たり判定の領域を設定
-
-	this->IsArive = true;	//生きている
+	this->IsArive = true;		//生きている
 
 	return;
 
