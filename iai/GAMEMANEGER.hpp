@@ -68,6 +68,7 @@ public:
 
 	bool Load();				//ゲームに使用するデータの読み込み処理
 	void SetSize();				//画像などのサイズを取得し、設定する
+	void SetInit();				//初期設定をする
 	bool GameMainLoop();		//ゲームのメインループ
 
 	void ProcesScene();			//各シーンの処理

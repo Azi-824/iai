@@ -67,6 +67,17 @@ void GAMEMANEGER::SetSize()
 	return;
 }
 
+//初期設定をする
+void GAMEMANEGER::SetInit()
+{
+
+	this->SetSize();			//サイズ設定
+
+	this->player->SetInit();	//プレイヤーの初期設定
+	this->enemy->SetInit();		//敵の初期設定
+
+}
+
 //ゲームのメインループ
 /*
 戻り値：true：正常
@@ -161,10 +172,7 @@ void GAMEMANEGER::Scene_Load()
 
 		SetUseASyncLoadFlag(FALSE);	//同期読み込みに設定
 
-		this->SetSize();			//サイズ設定
-
-		this->player->SetInit();	//プレイヤーの初期設定
-		this->enemy->SetInit();		//敵の初期設定
+		this->SetInit();			//初期設定
 
 		this->IsLoad = true;		//読み込み完了
 	}
