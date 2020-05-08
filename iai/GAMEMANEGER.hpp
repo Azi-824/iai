@@ -108,6 +108,9 @@ public:
 	bool WaitStartTime();		//スタート時間まで待つ
 	void PlayReset();			//プレイ画面で使用するものをリセット
 	void Judg();				//どちらが勝ったか判定
+	void PlayStage_DrawText();	//プレイ段階、テキスト表示のときの処理
+	void PlayStage_Main();		//プレイ段階、ゲーム中のときの処理
+	void PlayStage_Result();	//プレイ段階、結果表示のときの処理
 
 
 };

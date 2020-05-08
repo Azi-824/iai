@@ -239,55 +239,32 @@ void GAMEMANEGER::Draw_Scene_Title()
 void GAMEMANEGER::Scene_Play()
 {
 
+	this->back->ChengeImage((int)PLAY_BACK);	//背景画像変更
+
 	switch (this->Play_NowStage)		//現在の段階ごとに処理を分ける
 	{
 
 	case (int)PLAY_STAGE_TEXT_DRAW:		//テキスト表示段階のとき
 
-		this->Play_NowStage = (int)PLAY_STAGE_MAIN;	//ゲームプレイ段階へ
+		this->PlayStage_DrawText();		//テキスト表示段階の処理
 
 		break;			//テキスト表示段階ここまで
 
 	case (int)PLAY_STAGE_MAIN:		//ゲームプレイ中のとき
 
-		if (this->GameStartFlg)	//ゲームが始まったら
-		{
-			if (this->keydown->IsKeyDownOne(KEY_INPUT_RETURN))		//エンターキーを押されたら
-			{
-				this->player->ChengeImage((int)PLAYER_IMG_ACT);		//描画するプレイヤーの画像をアクション後の画像に変更
-				this->enemy->ChengeImage((int)ENEMY_IMG_ACT);		//描画する敵の画像をアクション後の画像に変更
-
-				this->player->SetPushTime((GetNowCount() - this->StartTime));	//押すまでにかかった時間を設定
-
-				this->Judg();		//どちらが勝ったか判定
-
-			}
-
-		}
-		else					//ゲームが始まっていなかったら
-		{
-			//ゲームが始まるまで待つ
-			if (this->WaitStartTime())	//スタート時間になったら
-			{
-				this->mark->SetIsDraw(true);		//マークを描画してよい
-				this->StartTime = GetNowCount();	//マークを描画し始めた時間をスタート時間に設定
-				this->GameStartFlg = true;			//ゲームスタート
-			}
-		}
-
+		this->PlayStage_Main();		//ゲームプレイ中のときの処理
 
 		break;		//ゲームプレイ中のときここまで
 
 	case (int)PLAY_STAGE_RESULT:	//結果表示のとき
+
+		this->PlayStage_Result();	//結果表示段階の処理
 
 		break;		//結果表示ここまで
 
 	default:
 		break;
 	}
-
-
-	this->back->ChengeImage((int)PLAY_BACK);	//背景画像変更
 
 
 	if (this->keydown->IsKeyDownOne(KEY_INPUT_SPACE))	//スペースキーを押されたら
@@ -389,4 +366,50 @@ void GAMEMANEGER::Judg()
 
 	return;
 
+}
+
+//プレイ段階、テキスト表示のときの処理
+void GAMEMANEGER::PlayStage_DrawText()
+{
+	this->Play_NowStage = (int)PLAY_STAGE_MAIN;	//ゲームプレイ段階へ
+
+	return;
+}
+
+//プレイ段階、ゲーム中のときの処理
+void GAMEMANEGER::PlayStage_Main()
+{
+	if (this->GameStartFlg)	//ゲームが始まったら
+	{
+		if (this->keydown->IsKeyDownOne(KEY_INPUT_RETURN))		//エンターキーを押されたら
+		{
+			this->player->ChengeImage((int)PLAYER_IMG_ACT);		//描画するプレイヤーの画像をアクション後の画像に変更
+			this->enemy->ChengeImage((int)ENEMY_IMG_ACT);		//描画する敵の画像をアクション後の画像に変更
+
+			this->player->SetPushTime((GetNowCount() - this->StartTime));	//押すまでにかかった時間を設定
+
+			this->Judg();		//どちらが勝ったか判定
+
+		}
+
+	}
+	else					//ゲームが始まっていなかったら
+	{
+		//ゲームが始まるまで待つ
+		if (this->WaitStartTime())	//スタート時間になったら
+		{
+			this->mark->SetIsDraw(true);		//マークを描画してよい
+			this->StartTime = GetNowCount();	//マークを描画し始めた時間をスタート時間に設定
+			this->GameStartFlg = true;			//ゲームスタート
+		}
+	}
+
+	return;
+
+}
+
+//プレイ段階、結果表示のときの処理
+void GAMEMANEGER::PlayStage_Result()
+{
+	return;
 }
