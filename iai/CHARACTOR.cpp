@@ -62,13 +62,13 @@ void CHARACTOR::ChengeImage(int kind)
 //‰¡•‚ğæ“¾
 int CHARACTOR::GetWidth()
 {
-	return this->image->GetWidth(0);
+	return this->image->GetWidth();
 }
 
 //‚‚³‚ğæ“¾
 int CHARACTOR::GetHeight()
 {
-	return this->image->GetHeight(0);
+	return this->image->GetHeight();
 }
 
 //‰æ‘œ‚ÌˆÊ’u‚ğİ’è‚·‚é

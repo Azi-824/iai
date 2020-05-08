@@ -99,15 +99,15 @@ void IMAGE::SetSize(void)
 }
 
 //•‚ğæ“¾
-int IMAGE::GetWidth(int kind)
+int IMAGE::GetWidth()
 {
-	return this->Width[kind];
+	return this->Width[this->Draw_Num];
 }
 
 //‚‚³‚ğæ“¾
-int IMAGE::GetHeight(int kind)
+int IMAGE::GetHeight()
 {
-	return this->Height[kind];
+	return this->Height[this->Draw_Num];
 }
 
 //“Ç‚İ‚ß‚½H
