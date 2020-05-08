@@ -211,14 +211,7 @@ void GAMEMANEGER::Scene_Title()
 
 	this->back->ChengeImage((int)TITLE_BACK);	//背景画像変更
 
-	//リセット処理
-	this->player->ChengeImage((int)PLAYER_IMG_NORMAL);		//描画するプレイヤーの画像を通常時の画像に変更
-	this->enemy->ChengeImage((int)ENEMY_IMG_NORMAL);		//描画する敵の画像を通常時の画像に変更
-
-	this->player->SetImagePos(PLAYER_START_X, PLAYER_START_Y);	//プレイヤーの描画位置を初期化
-	this->enemy->SetImagePos(ENEMY_START_X, ENEMY_START_Y);		//敵の描画位置を初期化
-
-	this->mark->SetIsDraw(false);			//マークを描画してはいけない
+	this->PlayReset();		//リセット処理
 
 	if (this->keydown->IsKeyDownOne(KEY_INPUT_RETURN))		//エンターキーを押されたら
 	{
@@ -247,6 +240,11 @@ void GAMEMANEGER::Scene_Play()
 
 	if (this->GameStartFlg)	//ゲームが始まったら
 	{
+		if (this->keydown->IsKeyDownOne(KEY_INPUT_RETURN))		//エンターキーを押されたら
+		{
+			this->player->ChengeImage((int)PLAYER_IMG_ACT);		//描画するプレイヤーの画像をアクション後の画像に変更
+			this->enemy->ChengeImage((int)ENEMY_IMG_ACT);		//描画する敵の画像をアクション後の画像に変更
+		}
 
 	}
 	else					//ゲームが始まっていなかったら
@@ -256,19 +254,16 @@ void GAMEMANEGER::Scene_Play()
 		{
 			this->mark->SetIsDraw(true);		//マークを描画してよい
 			this->StartTime = GetNowCount();	//マークを描画し始めた時間をスタート時間に設定
+			this->GameStartFlg = true;			//ゲームスタート
 		}
 	}
 
 	this->back->ChengeImage((int)PLAY_BACK);	//背景画像変更
 
-	if (this->keydown->IsKeyDownOne(KEY_INPUT_RETURN))		//エンターキーを押されたら
+
+	if (this->keydown->IsKeyDownOne(KEY_INPUT_SPACE))	//スペースキーを押されたら
 	{
 		this->NowScene = (int)SCENE_END;	//エンド画面へ
-	}
-	else if (this->keydown->IsKeyDownOne(KEY_INPUT_SPACE))	//スペースキーを押されたら
-	{
-		this->player->ChengeImage((int)PLAYER_IMG_ACT);		//描画するプレイヤーの画像をアクション後の画像に変更
-		this->enemy->ChengeImage((int)ENEMY_IMG_ACT);		//描画する敵の画像をアクション後の画像に変更
 	}
 
 	return;
@@ -325,4 +320,20 @@ bool GAMEMANEGER::WaitStartTime()
 	{
 		return true;
 	}
+}
+
+//プレイ画面で使用するものをリセット
+void GAMEMANEGER::PlayReset()
+{
+	this->player->ChengeImage((int)PLAYER_IMG_NORMAL);		//描画するプレイヤーの画像を通常時の画像に変更
+	this->enemy->ChengeImage((int)ENEMY_IMG_NORMAL);		//描画する敵の画像を通常時の画像に変更
+
+	this->player->SetImagePos(PLAYER_START_X, PLAYER_START_Y);	//プレイヤーの描画位置を初期化
+	this->enemy->SetImagePos(ENEMY_START_X, ENEMY_START_Y);		//敵の描画位置を初期化
+
+	this->mark->SetIsDraw(false);			//マークを描画してはいけない
+	this->GameStartFlg = false;				//ゲームスタートしない
+
+	return;
+
 }
