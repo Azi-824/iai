@@ -17,6 +17,7 @@ GAMEMANEGER::GAMEMANEGER()
 	this->NowScene = (int)SCENE_LOAD;		//最初のシーンは、ロード画面
 	this->IsLoad = false;					//読み込み、未完了
 	this->StartTime = 0;					//計測開始時間初期化
+	this->WaitTime = 0;						//待ち時間初期化
 
 	return;
 
@@ -220,6 +221,7 @@ void GAMEMANEGER::Scene_Title()
 	{
 		this->NowScene = (int)SCENE_PLAY;	//プレイ画面へ
 		this->StartTime = GetNowCount();	//計測開始時間取得
+		this->WaitTime = GetRand((GAME_START_WAITTIME_MAX / 2)) + GAME_START_WAITTIME_MIN;	//待ち時間を設定
 	}
 
 	return;
@@ -301,11 +303,12 @@ void GAMEMANEGER::Draw_Scene_End()
 //スタート時間まで待つ
 bool GAMEMANEGER::WaitStartTime()
 {
-	if (GetNowCount() - this->StartTime < 3000)
+
+	if ((GetNowCount() - this->StartTime) / 1000 < this->WaitTime)	//待ち時間が過ぎていなければ
 	{
 		return false;
 	}
-	else
+	else 			//待ち時間が過ぎたら
 	{
 		return true;
 	}
