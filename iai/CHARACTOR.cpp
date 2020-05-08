@@ -32,6 +32,8 @@ void CHARACTOR::SetIsArive(bool Isarive)
 }
 
 //画像を設定
+//引　数：const char *：画像のディレクトリ
+//引　数：const char *：画像の名前
 void CHARACTOR::SetImage(const char *dir, const char *name)
 {
 	this->image = new IMAGE(dir, name);
@@ -39,6 +41,22 @@ void CHARACTOR::SetImage(const char *dir, const char *name)
 
 	return;
 
+}
+
+//画像を追加
+//引　数：const char *：画像のディレクトリ
+//引　数：const char *：画像の名前
+bool CHARACTOR::AddImage(const char *dir, const char *name)
+{
+	return this->image->AddImage(dir, name);	
+}
+
+//画像を変更する
+//引数：int：変更する画像の番号
+void CHARACTOR::ChengeImage(int kind)
+{
+	this->image->ChengeImage(kind);
+	return;
 }
 
 //横幅を取得

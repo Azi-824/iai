@@ -17,6 +17,7 @@ IMAGE::IMAGE(const char *dir,const char *name)
 	this->FileName = "";	//–¼‘O
 	
 	this->ImageKind = 0;	//“Ç‚İ‚ñ‚¾‰æ‘œ‚Ìí—Ş
+	this->Draw_Num = 0;		//•`‰æ‚·‚é‰æ‘œ‚Ì”Ô†
 
 	this->IsLoad = false;	//“Ç‚İ‚ß‚½‚©H
 
@@ -115,13 +116,13 @@ bool IMAGE::GetIsLoad(void)
 	return this->IsLoad;
 }
 
-//‰æ‘œ‚ğ•`‰æiw’è‚µ‚È‚¢ê‡Aæ“ª‚Ì‰æ‘œj
-void IMAGE::Draw(int x, int y, int type)
+//‰æ‘œ‚ğ•`‰æ
+void IMAGE::Draw(int x, int y)
 {
 	
-	if (this->IsDraw[type])	//•`‰æ‚µ‚Ä‚æ‚¯‚ê‚Î
+	if (this->IsDraw[this->Draw_Num])	//•`‰æ‚µ‚Ä‚æ‚¯‚ê‚Î
 	{
-		DrawGraph(x, y, this->Handle[type], TRUE);	//w’è‚³‚ê‚½‰æ‘œ‚ğ•`‰æ
+		DrawGraph(x, y, this->Handle[this->Draw_Num], TRUE);	//‰æ‘œ‚ğ•`‰æ
 	}
 
 }
@@ -165,4 +166,11 @@ bool IMAGE::AddImage(const char *dir, const char *name)
 
 	return true;
 
+}
+
+//•`‰æ‚·‚é‰æ‘œ‚ğ•ÏX
+void IMAGE::ChengeImage(int kind)
+{
+	this->Draw_Num = kind;
+	return;
 }

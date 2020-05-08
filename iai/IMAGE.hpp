@@ -47,6 +47,7 @@ private:
 	std::vector<int> Height;				//高さ
 
 	int ImageKind;				//読み込んだ画像の種類
+	int Draw_Num;				//描画する画像の番号
 
 	bool IsLoad;				//読み込めたか？
 	std::vector<bool> IsDraw;	//描画してよいか
@@ -64,9 +65,10 @@ public:
 
 	bool GetIsLoad(void);			//読み込めた？
 
-	void Draw(int, int, int type=0);	//指定された画像を描画(指定しない場合、先頭の画像)
+	void Draw(int, int);		//画像を描画
 
 	bool AddImage(const char *, const char *);	//画像を追加
+	void ChengeImage(int);						//描画する画像を変更
 
 };
 

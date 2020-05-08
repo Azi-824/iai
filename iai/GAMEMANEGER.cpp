@@ -44,15 +44,17 @@ bool GAMEMANEGER::Load()
 	//‰æ‘œŠÖŒW
 	this->back = new IMAGE(IMG_DIR_BACK, IMG_NAME_TITLE);	//”wŒi‰æ‘œ‚ðŠÇ—‚·‚éƒIƒuƒWƒFƒNƒg‚ð¶¬(ƒ^ƒCƒgƒ‹‰æ–Ê‚Ì‰æ‘œ‚ð“Ç‚Ýž‚Þ)
 	if (this->back->GetIsLoad() == false) { return false; }	//“Ç‚Ýž‚ÝŽ¸”s
-	if (this->back->AddImage(IMG_DIR_BACK, IMG_NAME_PLAY) == false) { return -1; }		//”wŒi‰æ‘œ’Ç‰Á(ƒvƒŒƒC‰æ–Ê)
+	if (this->back->AddImage(IMG_DIR_BACK, IMG_NAME_PLAY) == false) { return false; }		//”wŒi‰æ‘œ’Ç‰Á(ƒvƒŒƒC‰æ–Ê)
 
 	//ƒvƒŒƒCƒ„[ŠÖŒW
 	this->player = new PLAYER(IMG_DIR_PLAYER, IMG_NAME_PLAYER);		//ƒvƒŒƒCƒ„[¶¬
 	if (this->player->GetIsLoad() == false) { return false; }		//“Ç‚Ýž‚ÝŽ¸”s
+	if (this->player->AddImage(IMG_DIR_PLAYER, IMG_NAME_PLAYER_ACT) == false) { return false; }	//‰æ‘œ’Ç‰Á
 
 	//“GŠÖŒW
 	this->enemy = new ENEMY(IMG_DIR_ENEMY, IMG_NAME_ENEMY);		//“G¶¬
 	if (this->enemy->GetIsLoad() == false) { return false; }	//“Ç‚Ýž‚ÝŽ¸”s
+	if (this->enemy->AddImage(IMG_DIR_ENEMY, IMG_NAME_ENEMY_ACT) == false) { return false; }	//‰æ‘œ’Ç‰Á
 
 	return true;	//“Ç‚Ýž‚Ý¬Œ÷
 }
@@ -190,6 +192,15 @@ void GAMEMANEGER::Draw_Scene_Load()
 void GAMEMANEGER::Scene_Title()
 {
 
+	this->back->ChengeImage((int)TITLE_BACK);	//”wŒi‰æ‘œ•ÏX
+
+	//ƒŠƒZƒbƒgˆ—
+	this->player->ChengeImage((int)PLAYER_IMG_NORMAL);		//•`‰æ‚·‚éƒvƒŒƒCƒ„[‚Ì‰æ‘œ‚ð’ÊíŽž‚Ì‰æ‘œ‚É•ÏX
+	this->enemy->ChengeImage((int)ENEMY_IMG_NORMAL);		//•`‰æ‚·‚é“G‚Ì‰æ‘œ‚ð’ÊíŽž‚Ì‰æ‘œ‚É•ÏX
+
+	this->player->SetImagePos(PLAYER_START_X, PLAYER_START_Y);	//ƒvƒŒƒCƒ„[‚Ì•`‰æˆÊ’u‚ð‰Šú‰»
+	this->enemy->SetImagePos(ENEMY_START_X, ENEMY_START_Y);		//“G‚Ì•`‰æˆÊ’u‚ð‰Šú‰»
+
 	if (this->keydown->IsKeyDownOne(KEY_INPUT_RETURN))		//ƒGƒ“ƒ^[ƒL[‚ð‰Ÿ‚³‚ê‚½‚ç
 	{
 		this->NowScene = (int)SCENE_PLAY;	//ƒvƒŒƒC‰æ–Ê‚Ö
@@ -202,7 +213,7 @@ void GAMEMANEGER::Scene_Title()
 void GAMEMANEGER::Draw_Scene_Title()
 {
 
-	this->back->Draw(GAME_LEFT,GAME_TOP,(int)TITLE_BACK);	//”wŒi•`‰æ
+	this->back->Draw(GAME_LEFT,GAME_TOP);	//”wŒi•`‰æ
 
 	DrawString(TEST_TEXT_X, TEST_TEXT_Y, TITLE_TEXT, COLOR_WHITE);	//ƒeƒXƒg—p‚ÌƒeƒLƒXƒg‚ð•`‰æ
 
@@ -213,12 +224,16 @@ void GAMEMANEGER::Draw_Scene_Title()
 void GAMEMANEGER::Scene_Play()
 {
 
-	this->player->SetImagePos(PLAYER_START_X, PLAYER_START_Y);	//ƒvƒŒƒCƒ„[‚Ì•`‰æˆÊ’u‚ð‰Šú‰»
-	this->enemy->SetImagePos(ENEMY_START_X, ENEMY_START_Y);		//“G‚Ì•`‰æˆÊ’u‚ð‰Šú‰»
+	this->back->ChengeImage((int)PLAY_BACK);	//”wŒi‰æ‘œ•ÏX
 
 	if (this->keydown->IsKeyDownOne(KEY_INPUT_RETURN))		//ƒGƒ“ƒ^[ƒL[‚ð‰Ÿ‚³‚ê‚½‚ç
 	{
 		this->NowScene = (int)SCENE_END;	//ƒGƒ“ƒh‰æ–Ê‚Ö
+	}
+	else if (this->keydown->IsKeyDownOne(KEY_INPUT_SPACE))	//ƒXƒy[ƒXƒL[‚ð‰Ÿ‚³‚ê‚½‚ç
+	{
+		this->player->ChengeImage((int)PLAYER_IMG_ACT);		//•`‰æ‚·‚éƒvƒŒƒCƒ„[‚Ì‰æ‘œ‚ðƒAƒNƒVƒ‡ƒ“Œã‚Ì‰æ‘œ‚É•ÏX
+		this->enemy->ChengeImage((int)ENEMY_IMG_ACT);		//•`‰æ‚·‚é“G‚Ì‰æ‘œ‚ðƒAƒNƒVƒ‡ƒ“Œã‚Ì‰æ‘œ‚É•ÏX
 	}
 
 	return;
@@ -228,7 +243,7 @@ void GAMEMANEGER::Scene_Play()
 void GAMEMANEGER::Draw_Scene_Play()
 {
 
-	this->back->Draw(GAME_LEFT, GAME_TOP, PLAY_BACK);	//”wŒi‰æ‘œ•`‰æ
+	this->back->Draw(GAME_LEFT, GAME_TOP);	//”wŒi‰æ‘œ•`‰æ
 
 	this->player->Draw();		//ƒvƒŒƒCƒ„[•`‰æ
 	this->enemy->Draw();		//“G•`‰æ

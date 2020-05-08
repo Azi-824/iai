@@ -29,7 +29,9 @@ public:
 	~CHARACTOR();				//デストラクタ
 
 	void SetIsArive(bool);		//生きているかを設定
-	void SetImage(const char*, const char*);//画像設定
+	void SetImage(const char*, const char*);	//画像設定
+	bool AddImage(const char *, const char *);	//画像追加
+	void ChengeImage(int);						//画像を変更する
 
 	void SetImagePos(int, int);		//画像の位置を設定する
 

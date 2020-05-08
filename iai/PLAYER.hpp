@@ -11,9 +11,17 @@
 #define IMG_DIR_PLAYER		R"(.\MY_IMG\Player)"		//プレイヤー関係の画像ディレクトリ
 
 #define IMG_NAME_PLAYER		R"(\Player.png)"			//プレイヤーの画像の名前
+#define IMG_NAME_PLAYER_ACT	R"(\Player_2.png)"			//アクション後のプレイヤーの画像の名前
 
 #define PLAYER_START_X		50		//プレイヤーの描画開始X位置
 #define PLAYER_START_Y		250		//プレイヤーの描画開始Y位置
+
+//############### 列挙型 ####################
+enum PLAYER_IMAGE
+{
+	PLAYER_IMG_NORMAL,		//通常時の画像
+	PLAYER_IMG_ACT			//アクション後の画像
+};
 
 //############## クラス定義 #######################
 class PLAYER : public CHARACTOR		//キャラクタークラスを継承
