@@ -217,6 +217,8 @@ void GAMEMANEGER::Scene_Title()
 	this->player->SetImagePos(PLAYER_START_X, PLAYER_START_Y);	//プレイヤーの描画位置を初期化
 	this->enemy->SetImagePos(ENEMY_START_X, ENEMY_START_Y);		//敵の描画位置を初期化
 
+	this->mark->SetIsDraw(false);			//マークを描画してはいけない
+
 	if (this->keydown->IsKeyDownOne(KEY_INPUT_RETURN))		//エンターキーを押されたら
 	{
 		this->NowScene = (int)SCENE_PLAY;	//プレイ画面へ
@@ -241,6 +243,14 @@ void GAMEMANEGER::Draw_Scene_Title()
 //プレイ画面の処理
 void GAMEMANEGER::Scene_Play()
 {
+
+	if (this->WaitStartTime())	//スタート時間まで待つ
+	{
+		this->mark->SetIsDraw(true);	//マークを描画してよい
+
+
+
+	}
 
 
 	this->back->ChengeImage((int)PLAY_BACK);	//背景画像変更
@@ -267,10 +277,7 @@ void GAMEMANEGER::Draw_Scene_Play()
 	this->player->Draw();		//プレイヤー描画
 	this->enemy->Draw();		//敵描画
 
-	if (this->WaitStartTime())	//スタート時間まで待つ
-	{
-		this->mark->Draw(MARK_DRAW_X, MARK_DRAW_Y);	//マーク描画
-	}
+	this->mark->Draw(MARK_DRAW_X, MARK_DRAW_Y);	//マーク描画
 
 	DrawString(TEST_TEXT_X, TEST_TEXT_Y, PLAY_TEXT, COLOR_WHITE);	//テスト用のテキストを描画
 

@@ -70,6 +70,7 @@ public:
 	int GetHeight();	//‚‚³‚ğæ“¾
 
 	bool GetIsLoad(void);			//“Ç‚İ‚ß‚½H
+	void SetIsDraw(bool);			//•`‰æ‚µ‚Ä‚æ‚¢‚©İ’è
 
 	void Draw(int, int);		//‰æ‘œ‚ğ•`‰æ
 

@@ -116,6 +116,13 @@ bool IMAGE::GetIsLoad(void)
 	return this->IsLoad;
 }
 
+//•`‰æ‚µ‚Ä‚æ‚¢‚©Ý’è
+void IMAGE::SetIsDraw(bool isdraw)
+{
+	this->IsDraw[this->Draw_Num] = isdraw;
+	return;
+}
+
 //‰æ‘œ‚ð•`‰æ
 void IMAGE::Draw(int x, int y)
 {
