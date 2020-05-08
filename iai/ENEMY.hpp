@@ -15,6 +15,9 @@
 #define ENEMY_START_X		600		//敵の描画開始X位置
 #define ENEMY_START_Y		250		//敵の描画開始Y位置
 
+#define ENEMY_SPD_MIN		0.5		//敵のはやさの最小値
+#define ENEMY_SPD_MAX		1.5		//敵のはやさの最大値
+
 //################ 列挙型 ################
 enum ENEMY_IMAGE
 {

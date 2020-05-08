@@ -23,6 +23,14 @@ enum PLAYER_IMAGE
 	PLAYER_IMG_ACT			//アクション後の画像
 };
 
+enum PLAYER_RESULT
+{
+	RESULT_WIN,			//プレイヤーが勝利
+	RESULT_LOSE,		//プレイヤーが敗北
+	RESULT_DRAW,		//引き分け
+	RESULT_NONE = -1	//初期値
+};
+
 //############## クラス定義 #######################
 class PLAYER : public CHARACTOR		//キャラクタークラスを継承
 {
@@ -31,6 +39,7 @@ private:
 
 	int WinNum;		//勝ち数
 	double PushTime;//キーボードを押すまでにかかった時間
+	int Result;	//勝利フラグ
 
 public:
 
@@ -42,5 +51,8 @@ public:
 
 	void SetPushTime(double);	//押すまでにかかった時間を設定
 	double GetPushTime();		//押すまでにかかった時間を取得
+
+	void SetResult(int);		//結果を設定
+	int GetResult();			//結果を取得
 
 };

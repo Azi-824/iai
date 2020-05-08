@@ -244,6 +244,11 @@ void GAMEMANEGER::Scene_Play()
 		{
 			this->player->ChengeImage((int)PLAYER_IMG_ACT);		//描画するプレイヤーの画像をアクション後の画像に変更
 			this->enemy->ChengeImage((int)ENEMY_IMG_ACT);		//描画する敵の画像をアクション後の画像に変更
+
+			this->player->SetPushTime((GetNowCount() - this->StartTime));	//押すまでにかかった時間を設定
+
+			this->Judg();		//どちらが勝ったか判定
+
 		}
 
 	}
@@ -333,6 +338,28 @@ void GAMEMANEGER::PlayReset()
 
 	this->mark->SetIsDraw(false);			//マークを描画してはいけない
 	this->GameStartFlg = false;				//ゲームスタートしない
+
+	return;
+
+}
+
+//どちらが勝ったか判定
+void GAMEMANEGER::Judg()
+{
+	//キーを押すまでにかかった時間を基に、どちらが勝ったか判定する
+	if (this->player->GetPushTime() < enemy->GetSpeed())		//押すのにかかった時間が、敵のスピードより速かったら
+	{
+		this->player->IncreaseWinNum();					//勝ち数を増やす
+		this->player->SetResult((int)RESULT_WIN);		//結果を設定(勝利)
+	}
+	else if (this->player->GetPushTime() > enemy->GetSpeed())		//敵より遅かったら
+	{
+		this->player->SetResult((int)RESULT_LOSE);		//結果を設定(敗北)
+	}
+	else		//引き分けだったら
+	{
+		this->player->SetResult((int)RESULT_DRAW);		//結果を設定(引き分け)
+	}
 
 	return;
 

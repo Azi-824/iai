@@ -14,6 +14,11 @@ PLAYER::PLAYER(const char *dir,const char *name)
 
 	this->SetImage(dir, name);	//画像を生成
 
+	//メンバー変数の初期化
+	this->WinNum = 0;					//勝利数初期化
+	this->PushTime = 0.0;				//押すのにかかった時間初期化
+	this->Result = (int)RESULT_NONE;	//勝利結果初期化
+
 	return;
 }
 
@@ -40,7 +45,8 @@ int PLAYER::GetWinNum()
 //押すまでの時間を設定
 void PLAYER::SetPushTime(double time)
 {
-	this->PushTime = time;
+	//時間は、ミリ秒で指定されるため、秒数に変換して設定する
+	this->PushTime = time/1000;
 	return;
 }
 
@@ -49,4 +55,17 @@ void PLAYER::SetPushTime(double time)
 double PLAYER::GetPushTime()
 {
 	return this->PushTime;
+}
+
+//勝利結果設定
+void PLAYER::SetResult(int result)
+{
+	this->Result = result;
+	return;
+}
+
+//勝利結果取得
+int PLAYER::GetResult()
+{
+	return this->Result;
 }

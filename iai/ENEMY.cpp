@@ -14,6 +14,9 @@ ENEMY::ENEMY(const char *dir,const char *name)
 
 	this->SetImage(dir, name);	//‰æ‘œ‚ğ¶¬
 
+	//ƒƒ“ƒo[•Ï”‰Šú‰»
+	this->Speed = ENEMY_SPD_MAX;	//‚Í‚â‚³‚ğ‰Šú‰»
+
 	return;
 }
 
