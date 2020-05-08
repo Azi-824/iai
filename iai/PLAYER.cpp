@@ -23,15 +23,6 @@ PLAYER::~PLAYER()
 	return;
 }
 
-//‰Šúó‘Ô‚É–ß‚·
-void PLAYER::PosInit()
-{
-	this->SetImagePos(PLAYER_START_X, PLAYER_START_Y);	//•`‰æˆÊ’uİ’è
-
-	return;
-
-}
-
 //Ÿ‚¿”‚ğ‘‚â‚·
 void PLAYER::IncreaseWinNum()
 {

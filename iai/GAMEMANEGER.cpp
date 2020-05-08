@@ -50,6 +50,10 @@ bool GAMEMANEGER::Load()
 	this->player = new PLAYER(IMG_DIR_PLAYER, IMG_NAME_PLAYER);		//プレイヤー生成
 	if (this->player->GetIsLoad() == false) { return false; }		//読み込み失敗
 
+	//敵関係
+	this->enemy = new ENEMY(IMG_DIR_ENEMY, IMG_NAME_ENEMY);		//敵生成
+	if (this->enemy->GetIsLoad() == false) { return false; }	//読み込み失敗
+
 	return true;	//読み込み成功
 }
 
@@ -158,6 +162,7 @@ void GAMEMANEGER::Scene_Load()
 		this->SetSize();			//サイズ設定
 
 		this->player->SetInit();	//プレイヤーの初期設定
+		this->enemy->SetInit();		//敵の初期設定
 
 		this->IsLoad = true;		//読み込み完了
 	}
@@ -208,7 +213,8 @@ void GAMEMANEGER::Draw_Scene_Title()
 void GAMEMANEGER::Scene_Play()
 {
 
-	this->player->PosInit();	//描画位置を初期化
+	this->player->SetImagePos(PLAYER_START_X, PLAYER_START_Y);	//プレイヤーの描画位置を初期化
+	this->enemy->SetImagePos(ENEMY_START_X, ENEMY_START_Y);		//敵の描画位置を初期化
 
 	if (this->keydown->IsKeyDownOne(KEY_INPUT_RETURN))		//エンターキーを押されたら
 	{
@@ -225,6 +231,7 @@ void GAMEMANEGER::Draw_Scene_Play()
 	this->back->Draw(GAME_LEFT, GAME_TOP, PLAY_BACK);	//背景画像描画
 
 	this->player->Draw();		//プレイヤー描画
+	this->enemy->Draw();		//敵描画
 
 	DrawString(TEST_TEXT_X, TEST_TEXT_Y, PLAY_TEXT, COLOR_WHITE);	//テスト用のテキストを描画
 

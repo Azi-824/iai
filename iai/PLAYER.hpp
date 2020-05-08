@@ -29,8 +29,6 @@ public:
 	PLAYER(const char *,const char *);		//コンストラクタ
 	~PLAYER();								//デストラクタ
 
-	void PosInit();				//描画位置を初期状態に戻す
-
 	void IncreaseWinNum();		//勝ち数を増やす
 	int GetWinNum();			//勝ち数を取得
 
