@@ -7,7 +7,6 @@
 #include "DxLib.h"
 #include "IMAGE.hpp"
 #include "KEYDOWN.hpp"
-#include "SIKAKU.hpp"
 
 
 //###################### マクロ定義 #######################
@@ -17,7 +16,9 @@ class CHARACTOR
 {
 private:
 	IMAGE *image;				//画像
-	SIKAKU *sikaku_draw;		//キャラの描画する領域
+
+	int Draw_X;					//描画X位置
+	int Draw_Y;					//描画Y位置
 
 	bool IsArive;				//生きているか
 	bool IsLoad;				//読み込めたか

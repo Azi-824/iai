@@ -163,7 +163,6 @@
     <ClInclude Include="KEYDOWN.hpp" />
     <ClInclude Include="main.hpp" />
     <ClInclude Include="PLAYER.hpp" />
-    <ClInclude Include="SIKAKU.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CHARACTOR.cpp" />
@@ -174,7 +173,6 @@
     <ClCompile Include="KEYDOWN.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="PLAYER.cpp" />
-    <ClCompile Include="SIKAKU.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

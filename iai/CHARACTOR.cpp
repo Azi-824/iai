@@ -9,9 +9,6 @@
 CHARACTOR::CHARACTOR()
 {
 	
-	//ƒIƒuƒWƒFƒNƒg‚Ì¶¬
-	this->sikaku_draw = new SIKAKU();		//•`‰æ—Ìˆæ‚ðì¬
-
 	//ƒƒ“ƒo[•Ï”‰Šú‰»
 	this->IsArive = false;	//Ž€‚ñ‚Å‚¢‚é
 	this->IsLoad = false;	//“Ç‚Ýž‚ß‚Ä‚¢‚È‚¢
@@ -23,7 +20,6 @@ CHARACTOR::CHARACTOR()
 CHARACTOR::~CHARACTOR()
 {
 	delete this->image;		//imageíœ
-	delete this->sikaku_draw;	//sikaku_drawíœ
 
 	return;
 }
@@ -61,16 +57,8 @@ int CHARACTOR::GetHeight()
 void CHARACTOR::SetImagePos(int x, int y)
 {
 
-	this->sikaku_draw->Left = x;
-	this->sikaku_draw->Top = y;
-
-	//•`‰æ—Ìˆæ
-	this->sikaku_draw->SetValue(
-		this->sikaku_draw->Left,
-		this->sikaku_draw->Top,
-		this->sikaku_draw->Width,
-		this->sikaku_draw->Height
-	);
+	this->Draw_X = x;
+	this->Draw_Y = y;
 
 }
 
@@ -107,13 +95,6 @@ void CHARACTOR::Operation(KEYDOWN *keydown)
 	//	this->MoveRight();						//‰E‚ÖˆÚ“®
 	//}
 
-	//•`‰æ—ÌˆæÄÝ’è
-	this->sikaku_draw->SetValue(
-		this->sikaku_draw->Left,
-		this->sikaku_draw->Top,
-		this->sikaku_draw->Width,
-		this->sikaku_draw->Height);
-
 	return;
 	
 }
@@ -135,6 +116,6 @@ void CHARACTOR::Draw()
 {
 	if (this->IsArive)	//¶‚«‚Ä‚¢‚ê‚Î
 	{
-			this->image->Draw(this->sikaku_draw->Left, this->sikaku_draw->Top);	//‰æ‘œ•`‰æ
+		this->image->Draw(this->Draw_X, this->Draw_Y);	//‰æ‘œ•`‰æ
 	}
 }
