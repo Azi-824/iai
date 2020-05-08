@@ -19,6 +19,7 @@ GAMEMANEGER::GAMEMANEGER()
 	this->StartTime = 0;					//計測開始時間初期化
 	this->WaitTime = 0;						//待ち時間初期化
 	this->GameStartFlg = false;				//ゲーム始まっていない。
+	this->Play_NowStage = (int)PLAY_STAGE_TEXT_DRAW;	//プレイシーンの現在の段階を初期化
 
 	return;
 
@@ -238,30 +239,53 @@ void GAMEMANEGER::Draw_Scene_Title()
 void GAMEMANEGER::Scene_Play()
 {
 
-	if (this->GameStartFlg)	//ゲームが始まったら
+	switch (this->Play_NowStage)		//現在の段階ごとに処理を分ける
 	{
-		if (this->keydown->IsKeyDownOne(KEY_INPUT_RETURN))		//エンターキーを押されたら
+
+	case (int)PLAY_STAGE_TEXT_DRAW:		//テキスト表示段階のとき
+
+		this->Play_NowStage = (int)PLAY_STAGE_MAIN;	//ゲームプレイ段階へ
+
+		break;			//テキスト表示段階ここまで
+
+	case (int)PLAY_STAGE_MAIN:		//ゲームプレイ中のとき
+
+		if (this->GameStartFlg)	//ゲームが始まったら
 		{
-			this->player->ChengeImage((int)PLAYER_IMG_ACT);		//描画するプレイヤーの画像をアクション後の画像に変更
-			this->enemy->ChengeImage((int)ENEMY_IMG_ACT);		//描画する敵の画像をアクション後の画像に変更
+			if (this->keydown->IsKeyDownOne(KEY_INPUT_RETURN))		//エンターキーを押されたら
+			{
+				this->player->ChengeImage((int)PLAYER_IMG_ACT);		//描画するプレイヤーの画像をアクション後の画像に変更
+				this->enemy->ChengeImage((int)ENEMY_IMG_ACT);		//描画する敵の画像をアクション後の画像に変更
 
-			this->player->SetPushTime((GetNowCount() - this->StartTime));	//押すまでにかかった時間を設定
+				this->player->SetPushTime((GetNowCount() - this->StartTime));	//押すまでにかかった時間を設定
 
-			this->Judg();		//どちらが勝ったか判定
+				this->Judg();		//どちらが勝ったか判定
+
+			}
 
 		}
-
-	}
-	else					//ゲームが始まっていなかったら
-	{
-		//ゲームが始まるまで待つ
-		if (this->WaitStartTime())	//スタート時間になったら
+		else					//ゲームが始まっていなかったら
 		{
-			this->mark->SetIsDraw(true);		//マークを描画してよい
-			this->StartTime = GetNowCount();	//マークを描画し始めた時間をスタート時間に設定
-			this->GameStartFlg = true;			//ゲームスタート
+			//ゲームが始まるまで待つ
+			if (this->WaitStartTime())	//スタート時間になったら
+			{
+				this->mark->SetIsDraw(true);		//マークを描画してよい
+				this->StartTime = GetNowCount();	//マークを描画し始めた時間をスタート時間に設定
+				this->GameStartFlg = true;			//ゲームスタート
+			}
 		}
+
+
+		break;		//ゲームプレイ中のときここまで
+
+	case (int)PLAY_STAGE_RESULT:	//結果表示のとき
+
+		break;		//結果表示ここまで
+
+	default:
+		break;
 	}
+
 
 	this->back->ChengeImage((int)PLAY_BACK);	//背景画像変更
 
@@ -338,6 +362,8 @@ void GAMEMANEGER::PlayReset()
 
 	this->mark->SetIsDraw(false);			//マークを描画してはいけない
 	this->GameStartFlg = false;				//ゲームスタートしない
+
+	this->Play_NowStage = (int)PLAY_STAGE_TEXT_DRAW;	//プレイシーンの現在の段階を初期化
 
 	return;
 

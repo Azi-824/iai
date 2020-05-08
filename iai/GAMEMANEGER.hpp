@@ -49,6 +49,13 @@ enum GAME_SCENE
 	SCENE_END			//エンドシーン
 };
 
+enum PLAY_STAGE
+{
+	PLAY_STAGE_TEXT_DRAW,		//テキスト表示段階
+	PLAY_STAGE_MAIN,			//ゲームプレイ段階
+	PLAY_STAGE_RESULT			//結果表示段階
+};
+
 //############### クラス定義 ################
 class GAMEMANEGER
 {
@@ -68,6 +75,8 @@ private:
 	int StartTime;				//計測開始時間
 	int WaitTime;				//待ち時間
 	bool GameStartFlg;			//ゲームが始まったか
+
+	int Play_NowStage;			//プレイシーンの現在の段階
 
 public:
 
