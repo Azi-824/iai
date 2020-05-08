@@ -62,6 +62,8 @@ private:
 	int NowScene;				//現在のシーン
 	bool IsLoad;				//読み込みが終わったか
 
+	int StartTime;				//計測開始時間
+
 public:
 
 	GAMEMANEGER();				//コンストラクタ
@@ -88,6 +90,8 @@ public:
 	void Scene_End();			//エンド画面の処理
 	void Draw_Scene_End();		//エンド画面の描画処理
 
+	//******************** プレイ画面で使用する処理関係 ***********************
+	bool WaitStartTime();		//スタート時間まで待つ
 
 
 };

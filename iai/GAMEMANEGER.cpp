@@ -16,6 +16,7 @@ GAMEMANEGER::GAMEMANEGER()
 	//メンバー変数初期化
 	this->NowScene = (int)SCENE_LOAD;		//最初のシーンは、ロード画面
 	this->IsLoad = false;					//読み込み、未完了
+	this->StartTime = 0;					//計測開始時間初期化
 
 	return;
 
@@ -218,6 +219,7 @@ void GAMEMANEGER::Scene_Title()
 	if (this->keydown->IsKeyDownOne(KEY_INPUT_RETURN))		//エンターキーを押されたら
 	{
 		this->NowScene = (int)SCENE_PLAY;	//プレイ画面へ
+		this->StartTime = GetNowCount();	//計測開始時間取得
 	}
 
 	return;
@@ -237,6 +239,7 @@ void GAMEMANEGER::Draw_Scene_Title()
 //プレイ画面の処理
 void GAMEMANEGER::Scene_Play()
 {
+
 
 	this->back->ChengeImage((int)PLAY_BACK);	//背景画像変更
 
@@ -262,7 +265,10 @@ void GAMEMANEGER::Draw_Scene_Play()
 	this->player->Draw();		//プレイヤー描画
 	this->enemy->Draw();		//敵描画
 
-	this->mark->Draw(MARK_DRAW_X, MARK_DRAW_Y);	//マーク描画
+	if (this->WaitStartTime())	//スタート時間まで待つ
+	{
+		this->mark->Draw(MARK_DRAW_X, MARK_DRAW_Y);	//マーク描画
+	}
 
 	DrawString(TEST_TEXT_X, TEST_TEXT_Y, PLAY_TEXT, COLOR_WHITE);	//テスト用のテキストを描画
 
@@ -290,3 +296,17 @@ void GAMEMANEGER::Draw_Scene_End()
 	return;
 }
 
+
+//******************** プレイ画面で使用する処理関係 ***********************
+//スタート時間まで待つ
+bool GAMEMANEGER::WaitStartTime()
+{
+	if (GetNowCount() - this->StartTime < 3000)
+	{
+		return false;
+	}
+	else
+	{
+		return true;
+	}
+}
