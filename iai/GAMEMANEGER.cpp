@@ -18,6 +18,7 @@ GAMEMANEGER::GAMEMANEGER()
 	this->IsLoad = false;					//読み込み、未完了
 	this->StartTime = 0;					//計測開始時間初期化
 	this->WaitTime = 0;						//待ち時間初期化
+	this->GameStartFlg = false;				//ゲーム始まっていない。
 
 	return;
 
@@ -244,14 +245,19 @@ void GAMEMANEGER::Draw_Scene_Title()
 void GAMEMANEGER::Scene_Play()
 {
 
-	if (this->WaitStartTime())	//スタート時間まで待つ
+	if (this->GameStartFlg)	//ゲームが始まったら
 	{
-		this->mark->SetIsDraw(true);	//マークを描画してよい
-
-
 
 	}
-
+	else					//ゲームが始まっていなかったら
+	{
+		//ゲームが始まるまで待つ
+		if (this->WaitStartTime())	//スタート時間になったら
+		{
+			this->mark->SetIsDraw(true);		//マークを描画してよい
+			this->StartTime = GetNowCount();	//マークを描画し始めた時間をスタート時間に設定
+		}
+	}
 
 	this->back->ChengeImage((int)PLAY_BACK);	//背景画像変更
 

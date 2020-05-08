@@ -67,6 +67,7 @@ private:
 
 	int StartTime;				//計測開始時間
 	int WaitTime;				//待ち時間
+	bool GameStartFlg;			//ゲームが始まったか
 
 public:
 
