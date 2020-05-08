@@ -28,6 +28,7 @@ GAMEMANEGER::~GAMEMANEGER()
 	delete this->fps;		//fps破棄
 	delete this->keydown;	//keydown破棄
 	delete this->back;		//back破棄
+	delete this->mark;		//mark破棄
 	delete this->player;	//player破棄
 
 	return;
@@ -42,9 +43,13 @@ GAMEMANEGER::~GAMEMANEGER()
 bool GAMEMANEGER::Load()
 {
 	//画像関係
+	//背景画像
 	this->back = new IMAGE(IMG_DIR_BACK, IMG_NAME_TITLE);	//背景画像を管理するオブジェクトを生成(タイトル画面の画像を読み込む)
 	if (this->back->GetIsLoad() == false) { return false; }	//読み込み失敗
 	if (this->back->AddImage(IMG_DIR_BACK, IMG_NAME_PLAY) == false) { return false; }		//背景画像追加(プレイ画面)
+	//マーク画像
+	this->mark = new IMAGE(IMG_DIR_MARK, IMG_NAME_MARK);	//マーク画像を生成
+	if (this->mark->GetIsLoad() == false) { return false; }	//読み込み失敗
 
 	//プレイヤー関係
 	this->player = new PLAYER(IMG_DIR_PLAYER, IMG_NAME_PLAYER);		//プレイヤー生成
@@ -63,6 +68,7 @@ bool GAMEMANEGER::Load()
 void GAMEMANEGER::SetSize()
 {
 	this->back->SetSize();	//背景画像、サイズ設定
+	this->mark->SetSize();	//マーク画像サイズ設定
 
 	return;
 }
@@ -255,6 +261,8 @@ void GAMEMANEGER::Draw_Scene_Play()
 
 	this->player->Draw();		//プレイヤー描画
 	this->enemy->Draw();		//敵描画
+
+	this->mark->Draw(MARK_DRAW_X, MARK_DRAW_Y);	//マーク描画
 
 	DrawString(TEST_TEXT_X, TEST_TEXT_Y, PLAY_TEXT, COLOR_WHITE);	//テスト用のテキストを描画
 
