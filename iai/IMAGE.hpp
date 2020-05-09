@@ -28,6 +28,7 @@
 #define IMG_NAME_TEXT_WIN	R"(\Win_text.png)"				//勝利テキストの画像の名前
 #define IMG_NAME_TEXT_LOSE	R"(\Lose_text.png)"				//敗北テキストの画像の名前
 #define IMG_NAME_TEXT_DRAW	R"(\Draw_text.png)"				//引き分けテキストの画像の名前
+#define IMG_NAME_TEXT_OTETUKI	R"(\Otetuki.png)"			//お手付きのテキストの画像の名前
 
 #define MARK_DRAW_Y			100		//マーク画像の描画Y位置
 
@@ -49,7 +50,8 @@ enum TEXT_IMAGE
 {
 	TEXT_IMG_WIN,	//勝利テキスト
 	TEXT_IMG_LOSE,	//敗北テキスト
-	TEXT_IMG_DRAW	//引き分けテキスト
+	TEXT_IMG_DRAW,	//引き分けテキスト
+	TEXT_IMG_OTETUKI//お手付きテキスト
 };
 
 //########## クラスの定義 ##########

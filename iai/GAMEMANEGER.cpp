@@ -63,6 +63,7 @@ bool GAMEMANEGER::Load()
 	if (this->text_image->GetIsLoad() == false) { return false; }	//読み込み失敗
 	if (this->text_image->AddImage(IMG_DIR_TEXT, IMG_NAME_TEXT_LOSE) == false) { return -1; }	//敗北テキスト追加
 	if (this->text_image->AddImage(IMG_DIR_TEXT, IMG_NAME_TEXT_DRAW) == false) { return -1; }	//引き分けテキスト追加
+	if (this->text_image->AddImage(IMG_DIR_TEXT, IMG_NAME_TEXT_OTETUKI) == false) { return -1; }//お手付きテキスト追加
 
 	//プレイヤー関係
 	this->player = new PLAYER(IMG_DIR_PLAYER, IMG_NAME_PLAYER);		//プレイヤー生成
@@ -397,7 +398,6 @@ void GAMEMANEGER::PlayStage_DrawText()
 
 	this->Play_NowStage = (int)PLAY_STAGE_MAIN;	//ゲームプレイ段階へ
 
-
 	return;
 }
 
@@ -426,6 +426,20 @@ void GAMEMANEGER::PlayStage_Main()
 	}
 	else					//ゲームが始まっていなかったら
 	{
+
+		if (this->keydown->IsKeyDownOne(KEY_INPUT_RETURN))	//エンターキーを押されたら
+		{
+
+			this->text_image->ChengeImage((int)TEXT_IMG_OTETUKI);	//描画するテキストをお手付き画像に変更
+			this->text_image->DrawCenter(GAME_WIDTH, TEXT_DRAW_Y);	//お手付き画像を描画
+
+			//this->Play_NowStage = (int)PLAY_STAGE_RESULT;	//結果表示段階へ
+
+			this->Play_NowStage = (int)PLAY_STAGE_TEXT_DRAW;	//テキスト表示段階へ
+			this->PlayReset();	//ゲームに使用したデータをリセット
+
+		}
+
 		//ゲームが始まるまで待つ
 		if (this->WaitStartTime())	//スタート時間になったら
 		{
