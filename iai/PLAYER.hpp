@@ -15,6 +15,8 @@
 
 #define PLAYER_START_X		50		//プレイヤーの描画開始X位置
 #define PLAYER_START_Y		250		//プレイヤーの描画開始Y位置
+#define PLAYER_AFTER_X		500		//プレイヤーの描画X位置（アクション後）
+#define PLAYER_AFTER_Y		250		//プレイヤーの描画Y位置（アクション後）
 
 //############### 列挙型 ####################
 enum PLAYER_IMAGE
