@@ -479,7 +479,5 @@ void GAMEMANEGER::PlayStage_Result()
 		break;
 	}
 
-
-
 	return;
 }
