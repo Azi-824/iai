@@ -48,6 +48,7 @@ MUSIC::MUSIC(const char *dir, const char *name)
 	this->IsLoad = true;				//読み込み成功
 
 	this->IsPlay.push_back(false);		//再生中ではない
+
 	return;
 
 }
@@ -104,9 +105,11 @@ void MUSIC::ChengePlayType(int type)
 }
 
 //音量を変更する
-void MUSIC::ChengeVolume(int volume,int kind)
+//引数：int：音量(0～100%で指定)
+//引数：int：音量を変えたい音の種類
+void MUSIC::ChengeVolume(double volume,int kind)
 {
-	ChangeVolumeSoundMem(volume, this->Handle[kind]);
+	ChangeVolumeSoundMem(VOLUME_MAX * (volume / 100), this->Handle[kind]);
 	return;
 }
 
@@ -114,7 +117,10 @@ void MUSIC::ChengeVolume(int volume,int kind)
 void MUSIC::Play(int kind)
 {
 
-	PlaySoundMem(this->Handle[kind], this->PlayType);	//音の再生
+	if (!this->GetIsPlay(kind))		//プレイ中じゃなければ
+	{
+		PlaySoundMem(this->Handle[kind], this->PlayType);	//音の再生
+	}
 
 	return;
 }

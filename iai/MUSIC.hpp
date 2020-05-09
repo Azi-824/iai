@@ -28,6 +28,7 @@
 #define MUSIC_ERROR_MSG	"音が読み込めませんでした"		//エラーメッセージ
 
 //##################### マクロ定義 ##########################
+#define VOLUME_MAX		255	//音量の最大値
 
 //##################### 列挙型 #########################
 enum SE_TYPE
@@ -61,7 +62,7 @@ public:
 	bool GetIsPlay(int);					//音が再生されているか取得する
 
 	void ChengePlayType(int);				//音の再生方法を変更する
-	void ChengeVolume(int,int);				//音量を変更する
+	void ChengeVolume(double,int);			//音量を変更する
 
 	void Play(int);							//音を再生する
 

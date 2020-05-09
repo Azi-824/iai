@@ -80,6 +80,10 @@ bool GAMEMANEGER::Load()
 	if (this->se->GetIsLoad() == false) { return false; }		//読み込み失敗
 	if (this->se->Add(MUSIC_DIR_SE, SE_NAME_GAMEOVER) == false) { return false; }	//ゲームオーバーの音を追加
 
+	//音量変更
+	this->se->ChengeVolume(50.0, (int)SE_TYPE_GAMESTART);	//ゲームスタートの音量を50%に変更
+	this->se->ChengeVolume(50.0, (int)SE_TYPE_GAMEOVER);	//ゲームオーバーの音量を50%に変更
+
 	return true;	//読み込み成功
 }
 
@@ -463,6 +467,8 @@ void GAMEMANEGER::PlayStage_Result()
 		this->text_image->ChengeImage((int)TEXT_IMG_LOSE);	//表示するテキストを敗北テキストに変更
 
 		this->text_image->DrawCenter(GAME_WIDTH, TEXT_DRAW_Y);	//敗北テキスト描画
+
+		this->se->Play((int)SE_TYPE_GAMEOVER);		//ゲームオーバーの音を鳴らす
 
 		if (this->keydown->IsKeyDownOne(KEY_INPUT_RETURN))	//エンターキーを押されたら
 		{
