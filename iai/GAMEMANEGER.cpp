@@ -385,9 +385,9 @@ void GAMEMANEGER::PlayStage_Main()
 	{
 		if (this->keydown->IsKeyDownOne(KEY_INPUT_RETURN))		//エンターキーを押されたら
 		{
-			this->player->ChengeImage((int)PLAYER_IMG_ACT);		//描画するプレイヤーの画像をアクション後の画像に変更
+			this->player->ChengeImage((int)PLAYER_IMG_ACT);				//描画するプレイヤーの画像をアクション後の画像に変更
 			this->player->SetImagePos(PLAYER_AFTER_X, PLAYER_AFTER_Y);	//描画する位置をアクション後の位置に変更
-			this->enemy->ChengeImage((int)ENEMY_IMG_ACT);		//描画する敵の画像をアクション後の画像に変更
+			this->enemy->ChengeImage((int)ENEMY_IMG_ACT);				//描画する敵の画像をアクション後の画像に変更
 			this->enemy->SetImagePos(ENEMY_AFTER_X, ENEMY_AFTER_Y);		//描画位置をアクション後の位置に変更
 
 			this->mark->SetIsDraw(false);	//マーク非表示
