@@ -388,6 +388,8 @@ void GAMEMANEGER::PlayStage_Main()
 			this->player->ChengeImage((int)PLAYER_IMG_ACT);		//描画するプレイヤーの画像をアクション後の画像に変更
 			this->enemy->ChengeImage((int)ENEMY_IMG_ACT);		//描画する敵の画像をアクション後の画像に変更
 
+			this->mark->SetIsDraw(false);	//マーク非表示
+
 			this->player->SetPushTime((GetNowCount() - this->StartTime));	//押すまでにかかった時間を設定
 
 			this->Judg();		//どちらが勝ったか判定
