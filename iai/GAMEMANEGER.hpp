@@ -10,6 +10,7 @@
 #include "IMAGE.hpp"
 #include "PLAYER.hpp"
 #include "ENEMY.hpp"
+#include "MUSIC.hpp"
 
 //############### マクロ定義 ################
 #define GAME_LEFT	  0		//画面の横の始点
@@ -69,6 +70,7 @@ private:
 	IMAGE *text_image;			//テキスト画像
 	PLAYER *player;				//プレイヤー
 	ENEMY *enemy;				//敵
+	MUSIC *se;					//SE
 
 	int NowScene;				//現在のシーン
 	bool IsLoad;				//読み込みが終わったか

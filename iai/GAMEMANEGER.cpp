@@ -35,6 +35,8 @@ GAMEMANEGER::~GAMEMANEGER()
 	delete this->mark;		//mark破棄
 	delete this->text_image;//text_image破棄
 	delete this->player;	//player破棄
+	delete this->enemy;		//enemy破棄
+	delete this->se;		//se破棄
 
 	return;
 
@@ -70,6 +72,12 @@ bool GAMEMANEGER::Load()
 	this->enemy = new ENEMY(IMG_DIR_ENEMY, IMG_NAME_ENEMY);		//敵生成
 	if (this->enemy->GetIsLoad() == false) { return false; }	//読み込み失敗
 	if (this->enemy->AddImage(IMG_DIR_ENEMY, IMG_NAME_ENEMY_ACT) == false) { return false; }	//画像追加
+
+	//音関係
+	//SE
+	this->se = new MUSIC(MUSIC_DIR_SE, SE_NAME_GAMESTART);		//SEを管理するオブジェクトを生成
+	if (this->se->GetIsLoad() == false) { return false; }		//読み込み失敗
+	if (this->se->Add(MUSIC_DIR_SE, SE_NAME_GAMEOVER) == false) { return false; }	//ゲームオーバーの音を追加
 
 	return true;	//読み込み成功
 }
@@ -380,6 +388,9 @@ void GAMEMANEGER::Judg()
 //プレイ段階、テキスト表示のときの処理
 void GAMEMANEGER::PlayStage_DrawText()
 {
+
+	this->se->Play((int)SE_TYPE_GAMESTART);		//ゲームスタートのSEを鳴らす
+
 	this->Play_NowStage = (int)PLAY_STAGE_MAIN;	//ゲームプレイ段階へ
 
 	return;

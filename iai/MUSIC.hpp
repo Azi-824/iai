@@ -1,0 +1,81 @@
+//MUSIC.hpp
+//音楽用クラス
+
+/*
+追加方法
+・フォルダ名、ファイル名をマクロ定義する
+・追加した音の種類ごとに、列挙型に追加する
+　例：戦闘で使用するSEを追加した場合
+    　BT_SE_TYPEに追加する
+・Add処理を使用して、SEやBGMを追加することができる
+*/
+
+#pragma once
+
+//##################### ヘッダファイル読み込み #######################
+#include "DxLib.h"
+#include <string>
+#include <vector>
+
+//##################### マクロ定義：ファイルパス、名前 ###################
+#define MUSIC_DIR_SE		R"(.\MY_MUSIC\SE)"			//SEのファイル名
+
+#define SE_NAME_GAMESTART	R"(\gamestart.mp3)"		//ゲームスータトのSEの名前
+#define SE_NAME_GAMEOVER	R"(\gameover.mp3)"		//ゲームオーバーのSEの名前
+
+//##################### マクロ定義：エラーメッセージ ######################
+#define MUSIC_ERROR_TITLE "MUSIC_ERROR"					//エラータイトル
+#define MUSIC_ERROR_MSG	"音が読み込めませんでした"		//エラーメッセージ
+
+//##################### マクロ定義 ##########################
+
+//##################### 列挙型 #########################
+enum SE_TYPE
+{
+	SE_TYPE_GAMESTART,		//ゲームスタート
+	SE_TYPE_GAMEOVER		//ゲームオーバー
+};
+
+//##################### クラス定義 ############################
+class MUSIC
+{
+private:
+
+	std::string FilePath;		//ファイルパス
+	std::string FileName;		//名前
+
+	std::vector<int> Handle;	//ハンドル
+	int PlayType;				//音の再生方法
+
+	bool IsLoad;				//読み込めたか
+	std::vector<bool> IsPlay;	//再生中か
+
+	std::vector<bool>IsPlayed;	//再生済みか
+
+public:
+
+	MUSIC(const char *, const char *);		//コンストラクタ
+
+	~MUSIC();								//デストラクタ
+
+	bool GetIsLoad();						//読み込めたかを取得する
+	bool GetIsPlay(int );					//音が再生されているか取得する
+
+	void ChengePlayType(int);				//音の再生方法を変更する
+
+	void ChengeVolume(int,int);				//音量を変更する
+
+	void Play(int);							//音を再生する
+
+	void Stop();							//音を止める(全て)
+	void Stop(int);							//音を止める(指定されたものだけ)
+
+	bool Add(const char*, const char*);		//音を追加する
+
+	void SetIsPlayed(int,bool);				//再生済みか設定
+
+	bool GetIsPlayed(int);					//再生済みか取得
+
+	void Reset(void);						//再生状態リセット
+
+};
