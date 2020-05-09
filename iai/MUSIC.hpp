@@ -50,7 +50,6 @@ private:
 	bool IsLoad;				//読み込めたか
 	std::vector<bool> IsPlay;	//再生中か
 
-	std::vector<bool>IsPlayed;	//再生済みか
 
 public:
 
@@ -59,10 +58,9 @@ public:
 	~MUSIC();								//デストラクタ
 
 	bool GetIsLoad();						//読み込めたかを取得する
-	bool GetIsPlay(int );					//音が再生されているか取得する
+	bool GetIsPlay(int);					//音が再生されているか取得する
 
 	void ChengePlayType(int);				//音の再生方法を変更する
-
 	void ChengeVolume(int,int);				//音量を変更する
 
 	void Play(int);							//音を再生する
@@ -71,11 +69,5 @@ public:
 	void Stop(int);							//音を止める(指定されたものだけ)
 
 	bool Add(const char*, const char*);		//音を追加する
-
-	void SetIsPlayed(int,bool);				//再生済みか設定
-
-	bool GetIsPlayed(int);					//再生済みか取得
-
-	void Reset(void);						//再生状態リセット
 
 };
