@@ -218,8 +218,6 @@ void GAMEMANEGER::Scene_Title()
 		this->PlayReset();		//リセット処理
 
 		this->NowScene = (int)SCENE_PLAY;	//プレイ画面へ
-		this->StartTime = GetNowCount();	//計測開始時間取得
-		this->WaitTime = GetRand((GAME_START_WAITTIME_MAX / 2)) + GAME_START_WAITTIME_MIN;	//待ち時間を設定
 	}
 
 	return;
@@ -343,6 +341,9 @@ void GAMEMANEGER::PlayReset()
 
 	this->Play_NowStage = (int)PLAY_STAGE_TEXT_DRAW;	//プレイシーンの現在の段階を初期化
 
+	this->StartTime = GetNowCount();	//計測開始時間取得
+	this->WaitTime = GetRand((GAME_START_WAITTIME_MAX / 2)) + GAME_START_WAITTIME_MIN;	//待ち時間を設定
+
 	return;
 
 }
@@ -421,6 +422,8 @@ void GAMEMANEGER::PlayStage_Result()
 
 	case (int)RESULT_WIN:		//プレイヤーが勝った時
 
+		this->Play_NowStage = (int)PLAY_STAGE_TEXT_DRAW;	//テキスト表示段階へ
+
 		break;		//プレイヤーが勝った時ここまで
 
 	case (int)RESULT_LOSE:		//プレイヤーが負けたとき
@@ -431,11 +434,15 @@ void GAMEMANEGER::PlayStage_Result()
 
 	case (int)RESULT_DRAW:		//引き分けのとき
 
+		this->Play_NowStage = (int)PLAY_STAGE_TEXT_DRAW;	//テキスト表示段階へ
+
 		break;		//引き分けのときここまで
 
 	default:
 		break;
 	}
+
+	this->PlayReset();	//ゲームに使用したデータをリセット
 
 
 	return;
