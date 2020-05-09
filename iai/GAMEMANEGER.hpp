@@ -38,8 +38,8 @@
 #define COLOR_WHITE GetColor(255,255,255)	//白色
 #define COLOR_BLACK GetColor(0,0,0)			//黒色
 
-#define GAME_START_WAITTIME_MIN		2		//ゲーム開始までの待ち時間の最低値
-#define GAME_START_WAITTIME_MAX		6		//ゲーム開始までの待ち時間の最大値
+#define GAME_START_WAITTIME_MIN		3		//ゲーム開始までの待ち時間の最低値
+#define GAME_START_WAITTIME_MAX		8		//ゲーム開始までの待ち時間の最大値
 
 //############### 列挙型 ################
 enum GAME_SCENE

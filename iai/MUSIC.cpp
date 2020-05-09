@@ -89,7 +89,7 @@ bool MUSIC::GetIsPlay(int kind)
 	{
 		this->IsPlay[kind] = true;	//Ä¶’†
 	}
-	else									//Ä¶’†‚¶‚á‚È‚¯‚ê‚Î
+	else if(CheckSoundMem(this->Handle[kind])==0)//Ä¶’†‚¶‚á‚È‚¯‚ê‚Î
 	{
 		this->IsPlay[kind] = false;	//Ä¶’†‚¶‚á‚È‚¢
 	}
