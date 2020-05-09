@@ -212,10 +212,11 @@ void GAMEMANEGER::Scene_Title()
 
 	this->back->ChengeImage((int)TITLE_BACK);	//背景画像変更
 
-	this->PlayReset();		//リセット処理
-
 	if (this->keydown->IsKeyDownOne(KEY_INPUT_RETURN))		//エンターキーを押されたら
 	{
+
+		this->PlayReset();		//リセット処理
+
 		this->NowScene = (int)SCENE_PLAY;	//プレイ画面へ
 		this->StartTime = GetNowCount();	//計測開始時間取得
 		this->WaitTime = GetRand((GAME_START_WAITTIME_MAX / 2)) + GAME_START_WAITTIME_MIN;	//待ち時間を設定
