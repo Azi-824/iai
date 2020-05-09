@@ -30,6 +30,7 @@ enum PLAYER_RESULT
 	RESULT_WIN,			//プレイヤーが勝利
 	RESULT_LOSE,		//プレイヤーが敗北
 	RESULT_DRAW,		//引き分け
+	RESULT_OTETUKI,		//お手付き
 	RESULT_NONE = -1	//初期値
 };
 

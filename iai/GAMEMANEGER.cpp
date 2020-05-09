@@ -430,13 +430,9 @@ void GAMEMANEGER::PlayStage_Main()
 		if (this->keydown->IsKeyDownOne(KEY_INPUT_RETURN))	//エンターキーを押されたら
 		{
 
-			this->text_image->ChengeImage((int)TEXT_IMG_OTETUKI);	//描画するテキストをお手付き画像に変更
-			this->text_image->DrawCenter(GAME_WIDTH, TEXT_DRAW_Y);	//お手付き画像を描画
+			this->player->SetResult((int)RESULT_OTETUKI);	//結果をお手付きに設定
 
-			//this->Play_NowStage = (int)PLAY_STAGE_RESULT;	//結果表示段階へ
-
-			this->Play_NowStage = (int)PLAY_STAGE_TEXT_DRAW;	//テキスト表示段階へ
-			this->PlayReset();	//ゲームに使用したデータをリセット
+			this->Play_NowStage = (int)PLAY_STAGE_RESULT;	//結果表示段階へ
 
 		}
 
@@ -506,6 +502,19 @@ void GAMEMANEGER::PlayStage_Result()
 		}
 
 		break;		//引き分けのときここまで
+
+	case (int)RESULT_OTETUKI:		//お手付きのとき
+
+		this->text_image->ChengeImage((int)TEXT_IMG_OTETUKI);	//描画するテキストをお手付き画像に変更
+		this->text_image->DrawCenter(GAME_WIDTH, TEXT_DRAW_Y);	//お手付き画像を描画
+
+		if (this->keydown->IsKeyDownOne(KEY_INPUT_RETURN))	//エンターキーを押されたら
+		{
+			this->Play_NowStage = (int)PLAY_STAGE_TEXT_DRAW;	//テキスト表示段階へ
+			this->PlayReset();	//ゲームに使用したデータをリセット
+		}
+
+		break;		//お手付きのときここまで
 
 	default:
 		break;
