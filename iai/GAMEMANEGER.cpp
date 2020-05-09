@@ -57,6 +57,7 @@ bool GAMEMANEGER::Load()
 	//マーク画像
 	this->mark = new IMAGE(IMG_DIR_MARK, IMG_NAME_MARK);	//マーク画像を生成
 	if (this->mark->GetIsLoad() == false) { return false; }	//読み込み失敗
+	this->mark->SetIsDraw(false);							//最初は描画してはいけない
 	//テキスト画像
 	this->text_image = new IMAGE(IMG_DIR_TEXT, IMG_NAME_TEXT_WIN);	//テキスト画像を生成
 	if (this->text_image->GetIsLoad() == false) { return false; }	//読み込み失敗
@@ -229,9 +230,6 @@ void GAMEMANEGER::Scene_Title()
 
 	if (this->keydown->IsKeyDownOne(KEY_INPUT_RETURN))		//エンターキーを押されたら
 	{
-
-		this->PlayReset();		//リセット処理
-
 		this->NowScene = (int)SCENE_PLAY;	//プレイ画面へ
 	}
 
@@ -391,7 +389,10 @@ void GAMEMANEGER::PlayStage_DrawText()
 
 	this->se->Play((int)SE_TYPE_GAMESTART);		//ゲームスタートのSEを鳴らす
 
+	this->PlayReset();	//プレイ関係リセット
+
 	this->Play_NowStage = (int)PLAY_STAGE_MAIN;	//ゲームプレイ段階へ
+
 
 	return;
 }

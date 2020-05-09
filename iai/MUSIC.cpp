@@ -43,7 +43,7 @@ MUSIC::MUSIC(const char *dir, const char *name)
 	this->FilePath = LoadfilePath;		//音のパスを設定
 	this->FileName = name;				//音の名前を設定
 
-	this->PlayType = DX_PLAYTYPE_LOOP;	//最初は再生方法をループ再生にする
+	this->PlayType = DX_PLAYTYPE_BACK;	//最初は再生方法をバックグラウンド再生にする
 
 	this->IsLoad = true;				//読み込み成功
 
@@ -119,7 +119,9 @@ void MUSIC::ChengeVolume(int volume,int kind)
 //音を再生する
 void MUSIC::Play(int kind)
 {
+
 	PlaySoundMem(this->Handle[kind], this->PlayType);	//音の再生
+
 	return;
 }
 
