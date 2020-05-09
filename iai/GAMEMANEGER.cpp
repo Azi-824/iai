@@ -422,19 +422,39 @@ void GAMEMANEGER::PlayStage_Result()
 
 	case (int)RESULT_WIN:		//プレイヤーが勝った時
 
-		this->Play_NowStage = (int)PLAY_STAGE_TEXT_DRAW;	//テキスト表示段階へ
+		DrawString(50, 50, "勝利", COLOR_WHITE);
+
+		if (this->keydown->IsKeyDownOne(KEY_INPUT_RETURN))	//エンターキーを押されたら
+		{
+			this->Play_NowStage = (int)PLAY_STAGE_TEXT_DRAW;	//テキスト表示段階へ
+			this->PlayReset();	//ゲームに使用したデータをリセット
+		}
+
 
 		break;		//プレイヤーが勝った時ここまで
 
 	case (int)RESULT_LOSE:		//プレイヤーが負けたとき
 
-		this->NowScene = (int)SCENE_END;	//エンド画面へ
+		DrawString(50, 50, "敗北", COLOR_WHITE);
+
+		if (this->keydown->IsKeyDownOne(KEY_INPUT_RETURN))	//エンターキーを押されたら
+		{
+			this->NowScene = (int)SCENE_END;	//エンド画面へ
+			this->PlayReset();	//ゲームに使用したデータをリセット
+		}
 
 		break;		//プレイヤーが負けたときここまで
 
 	case (int)RESULT_DRAW:		//引き分けのとき
 
-		this->Play_NowStage = (int)PLAY_STAGE_TEXT_DRAW;	//テキスト表示段階へ
+
+		DrawString(50, 50, "引き分け", COLOR_WHITE);
+
+		if (this->keydown->IsKeyDownOne(KEY_INPUT_RETURN))	//エンターキーを押されたら
+		{
+			this->Play_NowStage = (int)PLAY_STAGE_TEXT_DRAW;	//テキスト表示段階へ
+			this->PlayReset();	//ゲームに使用したデータをリセット
+		}
 
 		break;		//引き分けのときここまで
 
@@ -442,7 +462,6 @@ void GAMEMANEGER::PlayStage_Result()
 		break;
 	}
 
-	this->PlayReset();	//ゲームに使用したデータをリセット
 
 
 	return;
