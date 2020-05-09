@@ -132,6 +132,25 @@ void IMAGE::Draw(int x, int y)
 		DrawGraph(x, y, this->Handle[this->Draw_Num], TRUE);	//‰æ‘œ‚ð•`‰æ
 	}
 
+	return;
+
+}
+
+//‰æ‘œ‚ð•`‰æi’†‰›j
+//ˆø”FintF‰æ–Ê‚Ì‰¡•
+//ˆø”FintF•`‰æ‚·‚é‚‚³
+void IMAGE::DrawCenter(int width,int y)
+{
+
+	int x = 0;	//•`‰æ‚·‚éXˆÊ’u
+	x = (width / 2) - (this->Width[this->Draw_Num] / 2);	//‰æ–Ê’†‰›‚É‚È‚é‚æ‚¤‚ÉŒvŽZ
+
+	if (this->IsDraw[this->Draw_Num])	//•`‰æ‚µ‚Ä‚æ‚¯‚ê‚Î
+	{
+		DrawGraph(x, y, this->Handle[this->Draw_Num], TRUE);	//‰æ‘œ‚ð•`‰æ
+	}
+
+	return;
 }
 
 //‰æ‘œ‚ð’Ç‰Á

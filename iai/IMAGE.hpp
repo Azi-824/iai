@@ -18,14 +18,20 @@
 //########## マクロ定義：画像のファイルパスと名前 ##########
 #define IMG_DIR_BACK		R"(.\MY_IMG\Back)"				//背景画像のファイルの場所
 #define IMG_DIR_MARK		R"(.\MY_IMG\Mark)"				//マーク画像のファイルの場所
+#define IMG_DIR_TEXT		R"(.\MY_IMG\Text)"				//テキスト画像のファイルの場所
 
 #define IMG_NAME_TITLE		R"(\Title.jpg)"					//タイトル画面の背景画像の名前
 #define IMG_NAME_PLAY		R"(\Play.jpg)"					//プレイ画面の背景画像の名前
 
 #define IMG_NAME_MARK		R"(\Mark.png)"					//マーク画像の名前
 
+#define IMG_NAME_TEXT_WIN	R"(\Win_text.png)"				//勝利テキストの画像の名前
+
 #define MARK_DRAW_X			350		//マーク画像の描画X位置
 #define MARK_DRAW_Y			100		//マーク画像の描画Y位置
+
+#define TEXT_DRAW_X			250		//テキスト画像の描画X位置
+#define TEXT_DRAW_Y			50		//テキスト画像の描画Y位置
 
 //########## マクロ定義：エラーメッセージ##########
 #define IMAGE_ERROR_TITLE "IMAGE_ERROR"					//エラータイトル
@@ -73,6 +79,7 @@ public:
 	void SetIsDraw(bool);			//描画してよいか設定
 
 	void Draw(int, int);		//画像を描画
+	void DrawCenter(int ,int);	//画像を描画（中央）
 
 	bool AddImage(const char *, const char *);	//画像を追加
 	void ChengeImage(int);						//描画する画像を変更

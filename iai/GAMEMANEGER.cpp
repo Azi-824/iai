@@ -33,6 +33,7 @@ GAMEMANEGER::~GAMEMANEGER()
 	delete this->keydown;	//keydown破棄
 	delete this->back;		//back破棄
 	delete this->mark;		//mark破棄
+	delete this->text_image;//text_image破棄
 	delete this->player;	//player破棄
 
 	return;
@@ -54,6 +55,9 @@ bool GAMEMANEGER::Load()
 	//マーク画像
 	this->mark = new IMAGE(IMG_DIR_MARK, IMG_NAME_MARK);	//マーク画像を生成
 	if (this->mark->GetIsLoad() == false) { return false; }	//読み込み失敗
+	//テキスト画像
+	this->text_image = new IMAGE(IMG_DIR_TEXT, IMG_NAME_TEXT_WIN);	//テキスト画像を生成
+	if (this->text_image->GetIsLoad() == false) { return false; }	//読み込み失敗
 
 	//プレイヤー関係
 	this->player = new PLAYER(IMG_DIR_PLAYER, IMG_NAME_PLAYER);		//プレイヤー生成
@@ -71,8 +75,9 @@ bool GAMEMANEGER::Load()
 //画像などのサイズを取得し、設定する
 void GAMEMANEGER::SetSize()
 {
-	this->back->SetSize();	//背景画像、サイズ設定
-	this->mark->SetSize();	//マーク画像サイズ設定
+	this->back->SetSize();			//背景画像、サイズ設定
+	this->mark->SetSize();			//マーク画像サイズ設定
+	this->text_image->SetSize();	//テキスト画像サイズ設定
 
 	return;
 }
@@ -426,7 +431,7 @@ void GAMEMANEGER::PlayStage_Result()
 
 	case (int)RESULT_WIN:		//プレイヤーが勝った時
 
-		DrawString(50, 50, "勝利", COLOR_WHITE);
+		this->text_image->DrawCenter(GAME_WIDTH, TEXT_DRAW_Y);	//勝利テキスト描画
 
 		if (this->keydown->IsKeyDownOne(KEY_INPUT_RETURN))	//エンターキーを押されたら
 		{
