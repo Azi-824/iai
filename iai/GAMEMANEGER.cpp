@@ -390,6 +390,8 @@ void GAMEMANEGER::PlayStage_Main()
 
 			this->Judg();		//どちらが勝ったか判定
 
+			this->Play_NowStage = (int)PLAY_STAGE_RESULT;	//結果表示段階へ
+
 		}
 
 	}
@@ -411,5 +413,29 @@ void GAMEMANEGER::PlayStage_Main()
 //プレイ段階、結果表示のときの処理
 void GAMEMANEGER::PlayStage_Result()
 {
+
+	//結果毎に処理を分岐
+	switch (this->player->GetResult())
+	{
+
+	case (int)RESULT_WIN:		//プレイヤーが勝った時
+
+		break;		//プレイヤーが勝った時ここまで
+
+	case (int)RESULT_LOSE:		//プレイヤーが負けたとき
+
+		this->NowScene = (int)SCENE_END;	//エンド画面へ
+
+		break;		//プレイヤーが負けたときここまで
+
+	case (int)RESULT_DRAW:		//引き分けのとき
+
+		break;		//引き分けのときここまで
+
+	default:
+		break;
+	}
+
+
 	return;
 }

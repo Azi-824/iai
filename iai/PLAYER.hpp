@@ -39,7 +39,7 @@ private:
 
 	int WinNum;		//勝ち数
 	double PushTime;//キーボードを押すまでにかかった時間
-	int Result;	//勝利フラグ
+	int Result;		//結果
 
 public:
 
