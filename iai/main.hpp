@@ -9,7 +9,7 @@
 //########## マクロ定義 ##########
 #define GAME_COLOR	32		//画面のカラービット
 
-#define GAME_WINDOW_NAME	"居合"				//ウィンドウのタイトル
+#define GAME_WINDOW_NAME	"居合斬り"			//ウィンドウのタイトル
 #define GAME_WINDOW_MODECHANGE	TRUE			//TRUE：ウィンドウモード / FALSE：フルスクリーン
 
 #define SET_WINDOW_ST_MODE_DEFAULT			0	//デフォルト

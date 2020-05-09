@@ -58,6 +58,8 @@ bool GAMEMANEGER::Load()
 	//テキスト画像
 	this->text_image = new IMAGE(IMG_DIR_TEXT, IMG_NAME_TEXT_WIN);	//テキスト画像を生成
 	if (this->text_image->GetIsLoad() == false) { return false; }	//読み込み失敗
+	if (this->text_image->AddImage(IMG_DIR_TEXT, IMG_NAME_TEXT_LOSE) == false) { return -1; }	//敗北テキスト追加
+	if (this->text_image->AddImage(IMG_DIR_TEXT, IMG_NAME_TEXT_DRAW) == false) { return -1; }	//引き分けテキスト追加
 
 	//プレイヤー関係
 	this->player = new PLAYER(IMG_DIR_PLAYER, IMG_NAME_PLAYER);		//プレイヤー生成
@@ -288,7 +290,7 @@ void GAMEMANEGER::Draw_Scene_Play()
 	this->player->Draw();		//プレイヤー描画
 	this->enemy->Draw();		//敵描画
 
-	this->mark->Draw(MARK_DRAW_X, MARK_DRAW_Y);	//マーク描画
+	this->mark->DrawCenter(GAME_WIDTH, MARK_DRAW_Y);	//マーク描画
 
 	DrawString(TEST_TEXT_X, TEST_TEXT_Y, PLAY_TEXT, COLOR_WHITE);	//テスト用のテキストを描画
 
@@ -431,6 +433,8 @@ void GAMEMANEGER::PlayStage_Result()
 
 	case (int)RESULT_WIN:		//プレイヤーが勝った時
 
+		this->text_image->ChengeImage((int)TEXT_IMG_WIN);		//表示するテキストを勝利テキストに変更
+
 		this->text_image->DrawCenter(GAME_WIDTH, TEXT_DRAW_Y);	//勝利テキスト描画
 
 		if (this->keydown->IsKeyDownOne(KEY_INPUT_RETURN))	//エンターキーを押されたら
@@ -444,7 +448,9 @@ void GAMEMANEGER::PlayStage_Result()
 
 	case (int)RESULT_LOSE:		//プレイヤーが負けたとき
 
-		DrawString(50, 50, "敗北", COLOR_WHITE);
+		this->text_image->ChengeImage((int)TEXT_IMG_LOSE);	//表示するテキストを敗北テキストに変更
+
+		this->text_image->DrawCenter(GAME_WIDTH, TEXT_DRAW_Y);	//敗北テキスト描画
 
 		if (this->keydown->IsKeyDownOne(KEY_INPUT_RETURN))	//エンターキーを押されたら
 		{
@@ -457,7 +463,9 @@ void GAMEMANEGER::PlayStage_Result()
 	case (int)RESULT_DRAW:		//引き分けのとき
 
 
-		DrawString(50, 50, "引き分け", COLOR_WHITE);
+		this->text_image->ChengeImage((int)TEXT_IMG_DRAW);	//表示するテキストを引き分けテキストに変更
+
+		this->text_image->DrawCenter(GAME_WIDTH, TEXT_DRAW_Y);	//引き分けテキスト描画
 
 		if (this->keydown->IsKeyDownOne(KEY_INPUT_RETURN))	//エンターキーを押されたら
 		{
