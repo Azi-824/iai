@@ -22,6 +22,7 @@
 
 #define SE_NAME_GAMESTART	R"(\gamestart.mp3)"		//ゲームスータトのSEの名前
 #define SE_NAME_GAMEOVER	R"(\gameover.mp3)"		//ゲームオーバーのSEの名前
+#define SE_NAME_TEXT_SE		R"(\text_se.mp3)"		//テキスト表示のSEの名前
 
 //##################### マクロ定義：エラーメッセージ ######################
 #define MUSIC_ERROR_TITLE "MUSIC_ERROR"					//エラータイトル
@@ -34,7 +35,8 @@
 enum SE_TYPE
 {
 	SE_TYPE_GAMESTART,		//ゲームスタート
-	SE_TYPE_GAMEOVER		//ゲームオーバー
+	SE_TYPE_GAMEOVER,		//ゲームオーバー
+	SE_TYPE_TEXT			//テキスト表示
 };
 
 //##################### クラス定義 ############################

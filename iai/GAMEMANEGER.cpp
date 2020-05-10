@@ -80,6 +80,7 @@ bool GAMEMANEGER::Load()
 	this->se = new MUSIC(MUSIC_DIR_SE, SE_NAME_GAMESTART);		//SEを管理するオブジェクトを生成
 	if (this->se->GetIsLoad() == false) { return false; }		//読み込み失敗
 	if (this->se->Add(MUSIC_DIR_SE, SE_NAME_GAMEOVER) == false) { return false; }	//ゲームオーバーの音を追加
+	if (this->se->Add(MUSIC_DIR_SE, SE_NAME_TEXT_SE) == false) { return false; }	//テキスト表示の音を追加
 
 	//音量変更
 	this->se->ChengeVolume(50.0, (int)SE_TYPE_GAMESTART);	//ゲームスタートの音量を50%に変更
@@ -519,6 +520,8 @@ void GAMEMANEGER::PlayStage_Result()
 	default:
 		break;
 	}
+
+	this->se->Play((int)SE_TYPE_TEXT);	//テキスト表示の音を鳴らす
 
 	return;
 }
