@@ -132,6 +132,13 @@ void MUSIC::PlayOne(int kind)
 	}
 }
 
+//再生済みかどうかをリセットする
+void MUSIC::PlayReset(int kind)
+{
+	this->IsPlayed[kind] = false;	//再生済みじゃない
+	return;
+}
+
 //音を止める（すべて）
 void MUSIC::Stop(void)
 {

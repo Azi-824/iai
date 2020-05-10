@@ -360,6 +360,8 @@ void GAMEMANEGER::PlayReset()
 
 	this->Play_NowStage = (int)PLAY_STAGE_TEXT_DRAW;	//プレイシーンの現在の段階を初期化
 
+	this->se->PlayReset((int)SE_TYPE_TEXT);		//テキスト表示の効果音を鳴らしていない状態へ
+
 	this->StartTime = GetNowCount();	//計測開始時間取得
 	this->WaitTime = GetRand((GAME_START_WAITTIME_MAX / 2)) + GAME_START_WAITTIME_MIN;	//待ち時間を設定
 
@@ -454,6 +456,8 @@ void GAMEMANEGER::PlayStage_Main()
 void GAMEMANEGER::PlayStage_Result()
 {
 
+	this->se->PlayOne((int)SE_TYPE_TEXT);	//テキスト表示の音を鳴らす
+
 	//結果毎に処理を分岐
 	switch (this->player->GetResult())
 	{
@@ -467,7 +471,6 @@ void GAMEMANEGER::PlayStage_Result()
 		if (this->keydown->IsKeyDownOne(KEY_INPUT_RETURN))	//エンターキーを押されたら
 		{
 			this->Play_NowStage = (int)PLAY_STAGE_TEXT_DRAW;	//テキスト表示段階へ
-			this->PlayReset();	//ゲームに使用したデータをリセット
 		}
 
 
@@ -479,12 +482,13 @@ void GAMEMANEGER::PlayStage_Result()
 
 		this->text_image->DrawCenter(GAME_WIDTH, TEXT_DRAW_Y);	//敗北テキスト描画
 
-		this->se->Play((int)SE_TYPE_GAMEOVER);		//ゲームオーバーの音を鳴らす
+		this->se->PlayOne((int)SE_TYPE_GAMEOVER);		//ゲームオーバーの音を鳴らす
 
 		if (this->keydown->IsKeyDownOne(KEY_INPUT_RETURN))	//エンターキーを押されたら
 		{
+			this->se->PlayReset((int)SE_TYPE_GAMEOVER);		//再生状態をリセット
+			this->Play_NowStage = (int)PLAY_STAGE_TEXT_DRAW;	//テキスト表示段階へ
 			this->NowScene = (int)SCENE_END;	//エンド画面へ
-			this->PlayReset();	//ゲームに使用したデータをリセット
 		}
 
 		break;		//プレイヤーが負けたときここまで
@@ -499,7 +503,6 @@ void GAMEMANEGER::PlayStage_Result()
 		if (this->keydown->IsKeyDownOne(KEY_INPUT_RETURN))	//エンターキーを押されたら
 		{
 			this->Play_NowStage = (int)PLAY_STAGE_TEXT_DRAW;	//テキスト表示段階へ
-			this->PlayReset();	//ゲームに使用したデータをリセット
 		}
 
 		break;		//引き分けのときここまで
@@ -512,7 +515,6 @@ void GAMEMANEGER::PlayStage_Result()
 		if (this->keydown->IsKeyDownOne(KEY_INPUT_RETURN))	//エンターキーを押されたら
 		{
 			this->Play_NowStage = (int)PLAY_STAGE_TEXT_DRAW;	//テキスト表示段階へ
-			this->PlayReset();	//ゲームに使用したデータをリセット
 		}
 
 		break;		//お手付きのときここまで
@@ -520,8 +522,6 @@ void GAMEMANEGER::PlayStage_Result()
 	default:
 		break;
 	}
-
-	this->se->PlayOne((int)SE_TYPE_TEXT);	//テキスト表示の音を鳴らす
 
 	return;
 }
