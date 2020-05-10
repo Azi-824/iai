@@ -51,7 +51,7 @@ private:
 	int PlayType;				//音の再生方法
 
 	bool IsLoad;				//読み込めたか
-	std::vector<bool> IsPlay;	//再生中か
+	std::vector<bool> IsPlayed;	//再生済みか
 
 
 public:
@@ -67,6 +67,7 @@ public:
 	void ChengeVolume(double,int);			//音量を変更する
 
 	void Play(int);							//音を再生する
+	void PlayOne(int);						//音を再生する(1回だけ)
 
 	void Stop();							//音を止める(全て)
 	void Stop(int);							//音を止める(指定されたものだけ)

@@ -521,7 +521,7 @@ void GAMEMANEGER::PlayStage_Result()
 		break;
 	}
 
-	this->se->Play((int)SE_TYPE_TEXT);	//テキスト表示の音を鳴らす
+	this->se->PlayOne((int)SE_TYPE_TEXT);	//テキスト表示の音を鳴らす
 
 	return;
 }

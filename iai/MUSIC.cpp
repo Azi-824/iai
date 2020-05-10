@@ -47,7 +47,7 @@ MUSIC::MUSIC(const char *dir, const char *name)
 
 	this->IsLoad = true;				//読み込み成功
 
-	this->IsPlay.push_back(false);		//再生中ではない
+	this->IsPlayed.push_back(false);	//再生済みではない
 
 	return;
 
@@ -71,7 +71,7 @@ MUSIC::~MUSIC()
 
 	//vectorのメモリ解放を行う
 	std::vector<bool> v2;		//空のvectorを作成する
-	this->IsPlay.swap(v2);		//空と中身を入れ替える
+	this->IsPlayed.swap(v2);	//空と中身を入れ替える
 
 	return;
 }
@@ -86,15 +86,7 @@ bool MUSIC::GetIsLoad()
 //戻り値：再生中：true　再生中じゃない：false
 bool MUSIC::GetIsPlay(int kind)
 {
-	if (CheckSoundMem(this->Handle[kind]) == 1)	//再生中なら
-	{
-		this->IsPlay[kind] = true;	//再生中
-	}
-	else if(CheckSoundMem(this->Handle[kind])==0)//再生中じゃなければ
-	{
-		this->IsPlay[kind] = false;	//再生中じゃない
-	}
-	return this->IsPlay[kind];
+	return CheckSoundMem(this->Handle[kind]);
 }
 
 //再生方法を変更する
@@ -123,6 +115,21 @@ void MUSIC::Play(int kind)
 	}
 
 	return;
+}
+
+//音を再生する(1回だけ)
+void MUSIC::PlayOne(int kind)
+{
+	if (!this->IsPlayed[kind])		//再生済みじゃなければ
+	{
+		if (!this->GetIsPlay(kind))		//プレイ中じゃなければ
+		{
+			PlaySoundMem(this->Handle[kind], this->PlayType);	//音の再生
+
+			this->IsPlayed[kind] = true;		//再生済み
+
+		}
+	}
 }
 
 //音を止める（すべて）
@@ -168,7 +175,7 @@ bool MUSIC::Add(const char *dir, const char *name)
 		return false;	//読み込み失敗
 	}
 
-	this->IsPlay.push_back(false);		//再生中ではない
+	this->IsPlayed.push_back(false);	//再生済みではない
 
 	return true;		//読み込み成功
 
