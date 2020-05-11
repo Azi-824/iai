@@ -101,10 +101,9 @@ public:
 
 	void ResetIsAnime(int);		//アニメーションがストップしたかをリセット
 
-	void Draw(int, int,int);			//描画
-	void DrawNormal(int, int, int);		//描画(フェードアウトなし)
+	void Draw(int, int, int);		//描画
 
-	bool Add(const char *, const char *, int, int, int, int, int, double, bool, int,int);	//エフェクト追加
+	bool Add(const char *, const char *, int, int, int, int, int, double, bool, int);	//エフェクト追加
 
 	void SetSize();				//サイズ設定
 

@@ -83,6 +83,8 @@ private:
 
 	int Play_NowStage;			//プレイシーンの現在の段階
 
+	bool PushFlg;				//キーを押したか
+
 public:
 
 	GAMEMANEGER();				//コンストラクタ

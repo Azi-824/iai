@@ -20,6 +20,7 @@ GAMEMANEGER::GAMEMANEGER()
 	this->WaitTime = 0;						//待ち時間初期化
 	this->GameStartFlg = false;				//ゲーム始まっていない。
 	this->Play_NowStage = (int)PLAY_STAGE_TEXT_DRAW;	//プレイシーンの現在の段階を初期化
+	this->PushFlg = false;					//キー押していない
 
 	return;
 
@@ -94,6 +95,9 @@ bool GAMEMANEGER::Load()
 	//エフェクト関係
 	this->effect = new EFFECT(EFFECT_DIR, EFFECT_NAME_START, EFFECT_START_ALL_CNT, EFFECT_START_YOKO_CNT, EFFECT_START_TATE_CNT, EFFECT_START_WIDTH, EFFECT_START_HEIGHT, EFFECT_START_SPEED, true,this->fps->Getvalue());
 	if (this->effect->GetIsLoad() == false) { return false; }	//読み込み失敗
+	//エフェクト追加
+	if (this->effect->Add(EFFECT_DIR, EFFECT_NAME_SLASH, EFFECT_SLASH_ALL_CNT, EFFECT_SLASH_YOKO_CNT, EFFECT_SLASH_TATE_CNT, EFFECT_SLASH_WIDTH, EFFECT_SLASH_HEIGHT, EFFECT_SLASH_SPEED, false, this->fps->Getvalue()) == false) { return false; }
+
 
 	return true;	//読み込み成功
 }
@@ -336,7 +340,7 @@ void GAMEMANEGER::Draw_Scene_End()
 
 	DrawString(TEST_TEXT_X, TEST_TEXT_Y, END_TEXT, COLOR_WHITE);	//テスト用のテキストを描画
 
-	effect->DrawNormal(0, 0, 0);
+	effect->Draw(GAME_LEFT, GAME_TOP, (int)EFFECT_START);	//テストエフェクト描画
 
 	return;
 }
@@ -373,6 +377,8 @@ void GAMEMANEGER::PlayReset()
 
 	this->se->PlayReset((int)SE_TYPE_TEXT);		//テキスト表示の効果音を鳴らしていない状態へ
 	this->se->PlayReset((int)SE_TYPE_GAMESTART);//ゲームスタートの効果音を鳴らしていない状態へ
+
+	this->PushFlg = false;	//キーを押していない
 
 	this->StartTime = GetNowCount();	//計測開始時間取得
 	this->WaitTime = GetRand((GAME_START_WAITTIME_MAX / 2)) + GAME_START_WAITTIME_MIN;	//待ち時間を設定
@@ -423,19 +429,7 @@ void GAMEMANEGER::PlayStage_Main()
 	{
 		if (this->keydown->IsKeyDownOne(KEY_INPUT_RETURN))		//エンターキーを押されたら
 		{
-			this->player->ChengeImage((int)PLAYER_IMG_ACT);				//描画するプレイヤーの画像をアクション後の画像に変更
-			this->player->SetImagePos(PLAYER_AFTER_X, PLAYER_AFTER_Y);	//描画する位置をアクション後の位置に変更
-			this->enemy->ChengeImage((int)ENEMY_IMG_ACT);				//描画する敵の画像をアクション後の画像に変更
-			this->enemy->SetImagePos(ENEMY_AFTER_X, ENEMY_AFTER_Y);		//描画位置をアクション後の位置に変更
-
-			this->mark->SetIsDraw(false);	//マーク非表示
-
-			this->player->SetPushTime((GetNowCount() - this->StartTime));	//押すまでにかかった時間を設定
-
-			this->Judg();		//どちらが勝ったか判定
-
-			this->Play_NowStage = (int)PLAY_STAGE_RESULT;	//結果表示段階へ
-
+			this->PushFlg = true;	//キーを押した
 		}
 
 	}
@@ -458,6 +452,28 @@ void GAMEMANEGER::PlayStage_Main()
 			this->StartTime = GetNowCount();	//マークを描画し始めた時間をスタート時間に設定
 			this->GameStartFlg = true;			//ゲームスタート
 		}
+	}
+
+	if (this->PushFlg)		//キーを押されたら
+	{
+		this->player->ChengeImage((int)PLAYER_IMG_ACT);				//描画するプレイヤーの画像をアクション後の画像に変更
+		this->player->SetImagePos(PLAYER_AFTER_X, PLAYER_AFTER_Y);	//描画する位置をアクション後の位置に変更
+		this->enemy->ChengeImage((int)ENEMY_IMG_ACT);				//描画する敵の画像をアクション後の画像に変更
+		this->enemy->SetImagePos(ENEMY_AFTER_X, ENEMY_AFTER_Y);		//描画位置をアクション後の位置に変更
+
+		this->mark->SetIsDraw(false);	//マーク非表示
+
+		this->player->SetPushTime((GetNowCount() - this->StartTime));	//押すまでにかかった時間を設定
+
+		this->effect->Draw(GAME_LEFT, GAME_TOP, (int)EFFECT_SLASH);	//エフェクト描画
+
+		this->Judg();		//どちらが勝ったか判定
+
+		if (this->effect->GetIsDrawEnd())	//エフェクト描画が終わったら
+		{
+			this->Play_NowStage = (int)PLAY_STAGE_RESULT;	//結果表示段階へ
+		}
+
 	}
 
 	return;
