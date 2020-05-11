@@ -14,7 +14,6 @@
 #include <vector>
 #include <string>
 #include "FPS.hpp"
-//#include "main.hpp"
 
 //###################### マクロ定義：ファイルパス、名前 ######################
 #define EFFECT_DIR				R"(.\MY_EFFECT)"				//エフェクトの画像ファイルの場所
@@ -48,7 +47,7 @@
 #define EFFECT_SLASH_ALL_CNT	EFFECT_SLASH_YOKO_CNT * EFFECT_SLASH_TATE_CNT	//総分割数
 
 //************************ 描画速度 ***************************
-#define EFFECT_START_SPEED		0.02
+#define EFFECT_START_SPEED		0.05
 
 #define EFFECT_SLASH_SPEED		0.02
 
@@ -72,9 +71,9 @@ private:
 	std::vector<int> Width;				//幅
 	std::vector<int> Height;			//高さ
 
-	double NextChangeSpeed;			//アニメーションを変更する速さ(秒)
-	int ChangeCnt;					//アニメーションするフレームのカウント
-	int ChangeMaxCnt;				//アニメーションするフレームの最大値
+	std::vector<double> NextChangeSpeed;		//アニメーションを変更する速さ(秒)
+	int ChangeCnt;								//アニメーションするフレームのカウント
+	std::vector<int> ChangeMaxCnt;				//アニメーションするフレームの最大値
 
 	std::vector<bool> IsAnimeLoop;			//アニメーションはループする？
 	std::vector<bool> IsAnimeStop;			//アニメーションはストップしたか？
@@ -85,7 +84,7 @@ private:
 
 public:
 
-	EFFECT(const char *, const char *, int, int, int, int, int, double, bool);	//コンストラクタ	
+	EFFECT(const char *, const char *, int, int, int, int, int, double, bool,int);	//コンストラクタ	
 
 	~EFFECT();					//デストラクタ
 
@@ -105,7 +104,7 @@ public:
 	void Draw(int, int,int);			//描画
 	void DrawNormal(int, int, int);		//描画(フェードアウトなし)
 
-	bool Add(const char *, const char *, int, int, int, int, int, double, bool, int);	//エフェクト追加
+	bool Add(const char *, const char *, int, int, int, int, int, double, bool, int,int);	//エフェクト追加
 
 	void SetSize();				//サイズ設定
 

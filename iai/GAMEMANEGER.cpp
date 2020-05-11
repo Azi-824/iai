@@ -92,7 +92,7 @@ bool GAMEMANEGER::Load()
 	this->se->ChengeVolume(50.0, (int)SE_TYPE_GAMEOVER);	//ゲームオーバーの音量を50%に変更
 
 	//エフェクト関係
-	this->effect = new EFFECT(EFFECT_DIR, EFFECT_NAME_START, EFFECT_START_ALL_CNT, EFFECT_START_YOKO_CNT, EFFECT_START_TATE_CNT, EFFECT_START_WIDTH, EFFECT_START_HEIGHT, EFFECT_START_SPEED, false);
+	this->effect = new EFFECT(EFFECT_DIR, EFFECT_NAME_START, EFFECT_START_ALL_CNT, EFFECT_START_YOKO_CNT, EFFECT_START_TATE_CNT, EFFECT_START_WIDTH, EFFECT_START_HEIGHT, EFFECT_START_SPEED, true,this->fps->Getvalue());
 	if (this->effect->GetIsLoad() == false) { return false; }	//読み込み失敗
 
 	return true;	//読み込み成功

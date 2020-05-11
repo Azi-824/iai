@@ -17,8 +17,9 @@
 引　数：int：画像の分割された縦の大きさ
 引　数：double：次の画像に変更する速さ
 引　数：bool：アニメーションをループするかどうか
+引　数：int：FPSの速度
 */
-EFFECT::EFFECT(const char *dir, const char *name, int SplitNumALL, int SpritNumX, int SplitNumY, int SplitWidth, int SplitHeight, double changeSpeed, bool IsLoop)
+EFFECT::EFFECT(const char *dir, const char *name, int SplitNumALL, int SpritNumX, int SplitNumY, int SplitWidth, int SplitHeight, double changeSpeed, bool IsLoop,int fps_spd)
 {
 
 	this->IsLoad = false;			//読み込めたか？
@@ -50,11 +51,10 @@ EFFECT::EFFECT(const char *dir, const char *name, int SplitNumALL, int SpritNumX
 		return;
 	}
 
-	//this->ChangeMaxCnt = (int)(changeSpeed * fps->Getvalue());	//アニメーションするフレームの最大値
-	this->ChangeMaxCnt = 60 * changeSpeed;
+	this->ChangeMaxCnt.push_back(fps_spd * changeSpeed);
 	this->ChangeCnt = 0;	//アニメーションするフレームのカウント
 
-	this->NextChangeSpeed = changeSpeed;	//画像を変える速さ
+	this->NextChangeSpeed.push_back(changeSpeed);	//画像を変える速さ
 
 	this->IsAnimeLoop.push_back(IsLoop);	//アニメーションがループするか
 	this->IsAnimeStop.push_back(false);		//アニメーションを動かす
@@ -94,6 +94,12 @@ EFFECT::~EFFECT()
 
 	std::vector<bool> v5;
 	this->IsAnimeStop.swap(v5);
+
+	std::vector<double> v6;
+	this->NextChangeSpeed.swap(v6);
+
+	std::vector<int> v7;
+	this->ChangeMaxCnt.swap(v7);
 
 	return;
 
@@ -153,7 +159,6 @@ void EFFECT::ResetIsAnime(int type)
 void EFFECT::Draw(int x, int y,int type)
 {
 
-
 	static int cnt = 0;		//フェードアウト用
 	static int cntMax = 60;	//フェードアウト用
 	static bool flg = false;//フェードアウト終了フラグ
@@ -188,7 +193,7 @@ void EFFECT::Draw(int x, int y,int type)
 				cnt = 0;		//フェードアウトカウントリセット
 			}
 
-			if (this->ChangeCnt == this->ChangeMaxCnt)	//次の画像を表示する時がきたら
+			if (this->ChangeCnt == this->ChangeMaxCnt.at(type))	//次の画像を表示する時がきたら
 			{
 				//this->Handle.end()は、最後の要素の１個次のイテレータを返すので、-1している。
 				if (this->Handle_itr == this->Handle[type].end() - 1)	//イテレータ(ポインタ)が最後の要素のときは
@@ -249,7 +254,7 @@ void EFFECT::DrawNormal(int x, int y, int type)
 			setflg = false;				//ハンドル未設定
 		}
 
-		if (this->ChangeCnt == this->ChangeMaxCnt)	//次の画像を表示する時がきたら
+		if (this->ChangeCnt == this->ChangeMaxCnt.at(type))	//次の画像を表示する時がきたら
 		{
 			//this->Handle.end()は、最後の要素の１個次のイテレータを返すので、-1している。
 			if (this->Handle_itr == this->Handle[type].end() - 1)	//イテレータ(ポインタ)が最後の要素のときは
@@ -292,8 +297,9 @@ void EFFECT::DrawNormal(int x, int y, int type)
 引　数：double：次の画像に変更する速さ
 引　数：bool：アニメーションをループするかどうか
 引　数：int：追加するエフェクトの種類
+引　数：int：FPSの速度
 */
-bool EFFECT::Add(const char *dir, const char *name, int SplitNumALL, int SpritNumX, int SplitNumY, int SplitWidth, int SplitHeight, double changeSpeed, bool IsLoop, int type)
+bool EFFECT::Add(const char *dir, const char *name, int SplitNumALL, int SpritNumX, int SplitNumY, int SplitWidth, int SplitHeight, double changeSpeed, bool IsLoop, int type,int fps_spd)
 {
 	this->IsAnimeLoop.push_back(IsLoop);		//アニメーションはループする？
 	this->IsAnimeStop.push_back(false);			//アニメーションを動かす
@@ -324,11 +330,14 @@ bool EFFECT::Add(const char *dir, const char *name, int SplitNumALL, int SpritNu
 		return false;		//読み込み失敗
 	}
 
+	this->Handle_itr = this->Handle.at(type).begin();	//先頭要素をイテレータに設定
+
+	this->ChangeMaxCnt.push_back(fps_spd * changeSpeed);
+	this->NextChangeSpeed.push_back(changeSpeed);		//次の画像に変更する速さ
+
 	//vectorのメモリ解放を行う
 	std::vector<int> v;			//空のvectorを作成する
 	work.swap(v);				//空と中身を入れ替える
-
-	this->Handle_itr = this->Handle.at(type).begin();	//先頭要素をイテレータに設定
 
 	return true;		//読み込めた
 
