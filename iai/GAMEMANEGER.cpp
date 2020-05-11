@@ -69,11 +69,15 @@ bool GAMEMANEGER::Load()
 	this->player = new PLAYER(IMG_DIR_PLAYER, IMG_NAME_PLAYER);		//プレイヤー生成
 	if (this->player->GetIsLoad() == false) { return false; }		//読み込み失敗
 	if (this->player->AddImage(IMG_DIR_PLAYER, IMG_NAME_PLAYER_ACT) == false) { return false; }	//画像追加
+	//位置調整
+	this->player->SetImagePos(PLAYER_START_X, PLAYER_START_Y);	//プレイヤーの描画位置を初期化
 
 	//敵関係
 	this->enemy = new ENEMY(IMG_DIR_ENEMY, IMG_NAME_ENEMY);		//敵生成
 	if (this->enemy->GetIsLoad() == false) { return false; }	//読み込み失敗
 	if (this->enemy->AddImage(IMG_DIR_ENEMY, IMG_NAME_ENEMY_ACT) == false) { return false; }	//画像追加
+	//位置調整
+	this->enemy->SetImagePos(ENEMY_START_X, ENEMY_START_Y);		//敵の描画位置を初期化
 
 	//音関係
 	//SE
