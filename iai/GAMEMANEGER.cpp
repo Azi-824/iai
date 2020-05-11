@@ -37,6 +37,7 @@ GAMEMANEGER::~GAMEMANEGER()
 	delete this->player;	//player破棄
 	delete this->enemy;		//enemy破棄
 	delete this->se;		//se破棄
+	delete this->effect;	//effect破棄
 
 	return;
 
@@ -89,6 +90,10 @@ bool GAMEMANEGER::Load()
 	//音量変更
 	this->se->ChengeVolume(50.0, (int)SE_TYPE_GAMESTART);	//ゲームスタートの音量を50%に変更
 	this->se->ChengeVolume(50.0, (int)SE_TYPE_GAMEOVER);	//ゲームオーバーの音量を50%に変更
+
+	//エフェクト関係
+	this->effect = new EFFECT(EFFECT_DIR, EFFECT_NAME_START, EFFECT_START_ALL_CNT, EFFECT_START_YOKO_CNT, EFFECT_START_TATE_CNT, EFFECT_START_WIDTH, EFFECT_START_HEIGHT, EFFECT_START_SPEED, false);
+	if (this->effect->GetIsLoad() == false) { return false; }	//読み込み失敗
 
 	return true;	//読み込み成功
 }
@@ -331,6 +336,8 @@ void GAMEMANEGER::Draw_Scene_End()
 
 	DrawString(TEST_TEXT_X, TEST_TEXT_Y, END_TEXT, COLOR_WHITE);	//テスト用のテキストを描画
 
+	effect->DrawNormal(0, 0, 0);
+
 	return;
 }
 
@@ -365,6 +372,7 @@ void GAMEMANEGER::PlayReset()
 	this->Play_NowStage = (int)PLAY_STAGE_TEXT_DRAW;	//プレイシーンの現在の段階を初期化
 
 	this->se->PlayReset((int)SE_TYPE_TEXT);		//テキスト表示の効果音を鳴らしていない状態へ
+	this->se->PlayReset((int)SE_TYPE_GAMESTART);//ゲームスタートの効果音を鳴らしていない状態へ
 
 	this->StartTime = GetNowCount();	//計測開始時間取得
 	this->WaitTime = GetRand((GAME_START_WAITTIME_MAX / 2)) + GAME_START_WAITTIME_MIN;	//待ち時間を設定
@@ -399,9 +407,9 @@ void GAMEMANEGER::Judg()
 void GAMEMANEGER::PlayStage_DrawText()
 {
 
-	this->se->Play((int)SE_TYPE_GAMESTART);		//ゲームスタートのSEを鳴らす
-
 	this->PlayReset();	//プレイ関係リセット
+
+	this->se->Play((int)SE_TYPE_GAMESTART);		//ゲームスタートのSEを鳴らす
 
 	this->Play_NowStage = (int)PLAY_STAGE_MAIN;	//ゲームプレイ段階へ
 

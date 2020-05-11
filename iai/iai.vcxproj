@@ -156,6 +156,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="CHARACTOR.hpp" />
+    <ClInclude Include="EFFECT.hpp" />
     <ClInclude Include="ENEMY.hpp" />
     <ClInclude Include="FPS.hpp" />
     <ClInclude Include="GAMEMANEGER.hpp" />
@@ -167,6 +168,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CHARACTOR.cpp" />
+    <ClCompile Include="EFFECT.cpp" />
     <ClCompile Include="ENEMY.cpp" />
     <ClCompile Include="FPS.cpp" />
     <ClCompile Include="GAMEMANEGER.cpp" />

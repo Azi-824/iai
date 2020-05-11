@@ -11,6 +11,7 @@
 #include "PLAYER.hpp"
 #include "ENEMY.hpp"
 #include "MUSIC.hpp"
+#include "EFFECT.hpp"
 
 //############### マクロ定義 ################
 #define GAME_LEFT	  0		//画面の横の始点
@@ -71,6 +72,7 @@ private:
 	PLAYER *player;				//プレイヤー
 	ENEMY *enemy;				//敵
 	MUSIC *se;					//SE
+	EFFECT *effect;				//エフェクト
 
 	int NowScene;				//現在のシーン
 	bool IsLoad;				//読み込みが終わったか
