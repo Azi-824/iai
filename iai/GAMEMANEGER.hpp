@@ -27,6 +27,7 @@
 #define TITLE_TEXT	"NowTitle"			//タイトル画面のテキスト
 #define PLAY_TEXT	"NowPlay"			//プレイ画面のテキスト
 #define END_TEXT	"NowEnd"			//エンド画面のテキスト
+#define WIN_NUM_DRAW_TEXT	"%d人抜き"	//勝ち数表示のテキスト
 
 //座標関係
 #define TEST_TEXT_X	30					//テスト用のテキスト描画X位置

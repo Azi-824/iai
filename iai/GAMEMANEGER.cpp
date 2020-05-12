@@ -513,7 +513,7 @@ void GAMEMANEGER::PlayStage_Result()
 
 			this->text_image->DrawCenter(GAME_WIDTH, TEXT_DRAW_Y);	//勝利テキスト描画
 
-			DrawFormatString(300, 300, COLOR_BLACK, "%d人抜き", this->player->GetWinNum());	//勝ち数を表示
+			DrawFormatString(300, 300, COLOR_BLACK, WIN_NUM_DRAW_TEXT, this->player->GetWinNum());	//勝ち数を表示
 
 			if (this->keydown->IsKeyDownOne(KEY_INPUT_RETURN))	//エンターキーを押されたら
 			{
