@@ -39,6 +39,7 @@ GAMEMANEGER::~GAMEMANEGER()
 	delete this->enemy;		//enemy破棄
 	delete this->se;		//se破棄
 	delete this->effect;	//effect破棄
+	delete this->font;		//font破棄
 
 	return;
 
@@ -51,6 +52,11 @@ GAMEMANEGER::~GAMEMANEGER()
 */
 bool GAMEMANEGER::Load()
 {
+
+	//フォント関係
+	this->font = new FONT(FONT_DIR, FONT_FILE_NAME, FONT_NAME);		//フォントを管理するオブジェクトを生成
+	if (this->font->GetIsLoad() == false) { return false; }			//読み込み失敗
+
 	//画像関係
 	//背景画像
 	this->back = new IMAGE(IMG_DIR_BACK, IMG_NAME_TITLE);	//背景画像を管理するオブジェクトを生成(タイトル画面の画像を読み込む)

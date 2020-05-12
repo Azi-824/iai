@@ -12,6 +12,7 @@
 #include "ENEMY.hpp"
 #include "MUSIC.hpp"
 #include "EFFECT.hpp"
+#include "FONT.hpp"
 
 //############### マクロ定義 ################
 #define GAME_LEFT	  0		//画面の横の始点
@@ -76,6 +77,7 @@ private:
 	ENEMY *enemy;				//敵
 	MUSIC *se;					//SE
 	EFFECT *effect;				//エフェクト
+	FONT *font;					//フォント
 
 	int NowScene;				//現在のシーン
 	bool IsLoad;				//読み込みが終わったか
