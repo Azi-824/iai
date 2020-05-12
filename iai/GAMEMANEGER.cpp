@@ -478,12 +478,13 @@ void GAMEMANEGER::PlayStage_Main()
 
 		this->effect->Draw(GAME_LEFT, GAME_TOP, (int)EFFECT_SLASH);	//エフェクト描画
 
-		this->Judg();		//どちらが勝ったか判定
-
 		this->effect->SetIsFadein(true);		//フェードインを行う
 
 		if (this->effect->GetIsDrawEnd())	//エフェクト描画が終わったら
 		{
+
+			this->Judg();	//どちらが勝ったか判定
+
 			this->Play_NowStage = (int)PLAY_STAGE_RESULT;	//結果表示段階へ
 		}
 
@@ -511,6 +512,8 @@ void GAMEMANEGER::PlayStage_Result()
 			this->text_image->ChengeImage((int)TEXT_IMG_WIN);		//表示するテキストを勝利テキストに変更
 
 			this->text_image->DrawCenter(GAME_WIDTH, TEXT_DRAW_Y);	//勝利テキスト描画
+
+			DrawFormatString(300, 300, COLOR_BLACK, "%d人抜き", this->player->GetWinNum());	//勝ち数を表示
 
 			if (this->keydown->IsKeyDownOne(KEY_INPUT_RETURN))	//エンターキーを押されたら
 			{
