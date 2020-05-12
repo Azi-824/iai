@@ -331,6 +331,7 @@ bool EFFECT::FadeOut(int x,int y,int width,int height)
 	{
 		cnt = 0;			//カウントリセット
 		end_flg = false;	//終了フラグリセット
+		return true;		//フェードアウトは終わっている
 	}
 
 	return end_flg;
@@ -383,6 +384,7 @@ bool EFFECT::FadeIn(int x, int y, int width, int height)
 	{
 		cnt = FADE_MAX_CNT;	//カウントリセット
 		end_flg = false;	//終了フラグリセット
+		return true;		//フェードインは終わっている
 	}
 
 	return end_flg;

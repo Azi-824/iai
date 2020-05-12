@@ -18,7 +18,6 @@
 //###################### マクロ定義：ファイルパス、名前 ######################
 #define EFFECT_DIR				R"(.\MY_EFFECT)"				//エフェクトの画像ファイルの場所
 
-#define EFFECT_NAME_START		R"(\start.png)"					//開始エフェクトの画像の名前
 #define EFFECT_NAME_SLASH		R"(\slash.png)"					//スラッシュエフェクトの画像の名前
 
 //###################### マクロ定義：エラーメッセージ ########################
@@ -28,26 +27,18 @@
 //###################### マクロ定義 #################################
 
 //********************** サイズ ************************
-#define	EFFECT_START_WIDTH		880	//分割幅
-#define EFFECT_START_HEIGHT		640	//分割高さ
 #define EFFECT_SLASH_WIDTH		880	//分割幅
 #define EFFECT_SLASH_HEIGHT		640	//分割高さ
 
 
 //********************** 分割数 **************************
-#define EFFECT_START_YOKO_CNT		1	//横分割数
-#define EFFECT_START_TATE_CNT		5	//縦分割数
-
 #define EFFECT_SLASH_YOKO_CNT		3	//横分割数
 #define EFFECT_SLASH_TATE_CNT		3	//縦分割数
 
 //************************ 総分割数 **************************
-#define EFFECT_START_ALL_CNT	EFFECT_START_YOKO_CNT * EFFECT_START_TATE_CNT	//総分割数
-
 #define EFFECT_SLASH_ALL_CNT	EFFECT_SLASH_YOKO_CNT * EFFECT_SLASH_TATE_CNT	//総分割数
 
 //************************ 描画速度 ***************************
-#define EFFECT_START_SPEED		0.05
 
 #define EFFECT_SLASH_SPEED		0.02
 
@@ -59,7 +50,6 @@
 //###################### 列挙型 ##########################
 enum EFFECT_KIND
 {
-	EFFECT_START,		//スタートエフェクト
 	EFFECT_SLASH		//スラッシュエフェクト
 };
 

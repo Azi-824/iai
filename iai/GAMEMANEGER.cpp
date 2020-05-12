@@ -93,10 +93,8 @@ bool GAMEMANEGER::Load()
 	this->se->ChengeVolume(50.0, (int)SE_TYPE_GAMEOVER);	//ゲームオーバーの音量を50%に変更
 
 	//エフェクト関係
-	this->effect = new EFFECT(EFFECT_DIR, EFFECT_NAME_START, EFFECT_START_ALL_CNT, EFFECT_START_YOKO_CNT, EFFECT_START_TATE_CNT, EFFECT_START_WIDTH, EFFECT_START_HEIGHT, EFFECT_START_SPEED, true,this->fps->Getvalue());
+	this->effect = new EFFECT(EFFECT_DIR, EFFECT_NAME_SLASH, EFFECT_SLASH_ALL_CNT, EFFECT_SLASH_YOKO_CNT, EFFECT_SLASH_TATE_CNT, EFFECT_SLASH_WIDTH, EFFECT_SLASH_HEIGHT, EFFECT_SLASH_SPEED, false, this->fps->Getvalue());
 	if (this->effect->GetIsLoad() == false) { return false; }	//読み込み失敗
-	//エフェクト追加
-	if (this->effect->Add(EFFECT_DIR, EFFECT_NAME_SLASH, EFFECT_SLASH_ALL_CNT, EFFECT_SLASH_YOKO_CNT, EFFECT_SLASH_TATE_CNT, EFFECT_SLASH_WIDTH, EFFECT_SLASH_HEIGHT, EFFECT_SLASH_SPEED, false, this->fps->Getvalue()) == false) { return false; }
 
 
 	return true;	//読み込み成功
@@ -338,8 +336,6 @@ void GAMEMANEGER::Draw_Scene_End()
 
 	DrawString(TEST_TEXT_X, TEST_TEXT_Y, END_TEXT, COLOR_WHITE);	//テスト用のテキストを描画
 
-	effect->Draw(GAME_LEFT, GAME_TOP, (int)EFFECT_START);	//テストエフェクト描画
-
 	return;
 }
 
@@ -503,74 +499,78 @@ void GAMEMANEGER::PlayStage_Main()
 void GAMEMANEGER::PlayStage_Result()
 {
 
-	this->effect->FadeIn(GAME_LEFT, GAME_TOP, GAME_WIDTH, GAME_HEIGHT);	//フェードインエフェクト
-
-	this->se->PlayOne((int)SE_TYPE_TEXT);	//テキスト表示の音を鳴らす
-
-	//結果毎に処理を分岐
-	switch (this->player->GetResult())
+	//フェードインエフェクト
+	if (this->effect->FadeIn(GAME_LEFT, GAME_TOP, GAME_WIDTH, GAME_HEIGHT))		//フェードエフェクトが終わったら
 	{
+		this->se->PlayOne((int)SE_TYPE_TEXT);	//テキスト表示の音を鳴らす
 
-	case (int)RESULT_WIN:		//プレイヤーが勝った時
-
-		this->text_image->ChengeImage((int)TEXT_IMG_WIN);		//表示するテキストを勝利テキストに変更
-
-		this->text_image->DrawCenter(GAME_WIDTH, TEXT_DRAW_Y);	//勝利テキスト描画
-
-		if (this->keydown->IsKeyDownOne(KEY_INPUT_RETURN))	//エンターキーを押されたら
+//結果毎に処理を分岐
+		switch (this->player->GetResult())
 		{
-			this->Play_NowStage = (int)PLAY_STAGE_TEXT_DRAW;	//テキスト表示段階へ
+
+		case (int)RESULT_WIN:		//プレイヤーが勝った時
+
+			this->text_image->ChengeImage((int)TEXT_IMG_WIN);		//表示するテキストを勝利テキストに変更
+
+			this->text_image->DrawCenter(GAME_WIDTH, TEXT_DRAW_Y);	//勝利テキスト描画
+
+			if (this->keydown->IsKeyDownOne(KEY_INPUT_RETURN))	//エンターキーを押されたら
+			{
+				this->Play_NowStage = (int)PLAY_STAGE_TEXT_DRAW;	//テキスト表示段階へ
+			}
+
+
+			break;		//プレイヤーが勝った時ここまで
+
+		case (int)RESULT_LOSE:		//プレイヤーが負けたとき
+
+			this->text_image->ChengeImage((int)TEXT_IMG_LOSE);	//表示するテキストを敗北テキストに変更
+
+			this->text_image->DrawCenter(GAME_WIDTH, TEXT_DRAW_Y);	//敗北テキスト描画
+
+			this->se->PlayOne((int)SE_TYPE_GAMEOVER);		//ゲームオーバーの音を鳴らす
+
+			if (this->keydown->IsKeyDownOne(KEY_INPUT_RETURN))	//エンターキーを押されたら
+			{
+				this->se->PlayReset((int)SE_TYPE_GAMEOVER);		//再生状態をリセット
+				this->Play_NowStage = (int)PLAY_STAGE_TEXT_DRAW;	//テキスト表示段階へ
+				this->NowScene = (int)SCENE_END;	//エンド画面へ
+			}
+
+			break;		//プレイヤーが負けたときここまで
+
+		case (int)RESULT_DRAW:		//引き分けのとき
+
+
+			this->text_image->ChengeImage((int)TEXT_IMG_DRAW);	//表示するテキストを引き分けテキストに変更
+
+			this->text_image->DrawCenter(GAME_WIDTH, TEXT_DRAW_Y);	//引き分けテキスト描画
+
+			if (this->keydown->IsKeyDownOne(KEY_INPUT_RETURN))	//エンターキーを押されたら
+			{
+				this->Play_NowStage = (int)PLAY_STAGE_TEXT_DRAW;	//テキスト表示段階へ
+			}
+
+			break;		//引き分けのときここまで
+
+		case (int)RESULT_OTETUKI:		//お手付きのとき
+
+			this->text_image->ChengeImage((int)TEXT_IMG_OTETUKI);	//描画するテキストをお手付き画像に変更
+			this->text_image->DrawCenter(GAME_WIDTH, TEXT_DRAW_Y);	//お手付き画像を描画
+
+			if (this->keydown->IsKeyDownOne(KEY_INPUT_RETURN))	//エンターキーを押されたら
+			{
+				this->Play_NowStage = (int)PLAY_STAGE_TEXT_DRAW;	//テキスト表示段階へ
+			}
+
+			break;		//お手付きのときここまで
+
+		default:
+			break;
 		}
 
-
-		break;		//プレイヤーが勝った時ここまで
-
-	case (int)RESULT_LOSE:		//プレイヤーが負けたとき
-
-		this->text_image->ChengeImage((int)TEXT_IMG_LOSE);	//表示するテキストを敗北テキストに変更
-
-		this->text_image->DrawCenter(GAME_WIDTH, TEXT_DRAW_Y);	//敗北テキスト描画
-
-		this->se->PlayOne((int)SE_TYPE_GAMEOVER);		//ゲームオーバーの音を鳴らす
-
-		if (this->keydown->IsKeyDownOne(KEY_INPUT_RETURN))	//エンターキーを押されたら
-		{
-			this->se->PlayReset((int)SE_TYPE_GAMEOVER);		//再生状態をリセット
-			this->Play_NowStage = (int)PLAY_STAGE_TEXT_DRAW;	//テキスト表示段階へ
-			this->NowScene = (int)SCENE_END;	//エンド画面へ
-		}
-
-		break;		//プレイヤーが負けたときここまで
-
-	case (int)RESULT_DRAW:		//引き分けのとき
-
-
-		this->text_image->ChengeImage((int)TEXT_IMG_DRAW);	//表示するテキストを引き分けテキストに変更
-
-		this->text_image->DrawCenter(GAME_WIDTH, TEXT_DRAW_Y);	//引き分けテキスト描画
-
-		if (this->keydown->IsKeyDownOne(KEY_INPUT_RETURN))	//エンターキーを押されたら
-		{
-			this->Play_NowStage = (int)PLAY_STAGE_TEXT_DRAW;	//テキスト表示段階へ
-		}
-
-		break;		//引き分けのときここまで
-
-	case (int)RESULT_OTETUKI:		//お手付きのとき
-
-		this->text_image->ChengeImage((int)TEXT_IMG_OTETUKI);	//描画するテキストをお手付き画像に変更
-		this->text_image->DrawCenter(GAME_WIDTH, TEXT_DRAW_Y);	//お手付き画像を描画
-
-		if (this->keydown->IsKeyDownOne(KEY_INPUT_RETURN))	//エンターキーを押されたら
-		{
-			this->Play_NowStage = (int)PLAY_STAGE_TEXT_DRAW;	//テキスト表示段階へ
-		}
-
-		break;		//お手付きのときここまで
-
-	default:
-		break;
 	}
+
 
 	return;
 }
