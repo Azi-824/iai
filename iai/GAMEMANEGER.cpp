@@ -454,6 +454,8 @@ void GAMEMANEGER::PlayStage_Main()
 
 			this->player->SetResult((int)RESULT_OTETUKI);	//結果をお手付きに設定
 
+			this->effect->SetIsFadein(true);		//フェードインを行う
+
 			this->Play_NowStage = (int)PLAY_STAGE_RESULT;	//結果表示段階へ
 
 		}
@@ -482,6 +484,8 @@ void GAMEMANEGER::PlayStage_Main()
 
 		this->Judg();		//どちらが勝ったか判定
 
+		this->effect->SetIsFadein(true);		//フェードインを行う
+
 		if (this->effect->GetIsDrawEnd())	//エフェクト描画が終わったら
 		{
 			this->Play_NowStage = (int)PLAY_STAGE_RESULT;	//結果表示段階へ
@@ -497,7 +501,6 @@ void GAMEMANEGER::PlayStage_Main()
 void GAMEMANEGER::PlayStage_Result()
 {
 
-	this->effect->SetIsFadein(true);		//フェードインを行う
 	this->effect->FadeIn(GAME_LEFT, GAME_TOP, GAME_WIDTH, GAME_HEIGHT);	//フェードインエフェクト
 
 	this->se->PlayOne((int)SE_TYPE_TEXT);	//テキスト表示の音を鳴らす

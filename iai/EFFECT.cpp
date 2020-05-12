@@ -321,8 +321,9 @@ bool EFFECT::FadeOut(int x,int y,int width,int height)
 		}
 		else if (end_flg)	//フェードアウト終了したら
 		{
-			DrawBox(x, y, width, height, GetColor(0, 0, 0), TRUE);	//透過なしで、真っ暗な画面にする
-			cnt = 0;	//カウントリセット
+			this->IsFadeout = false;	//フェードアウトしない
+			cnt = 0;			//カウントリセット
+			end_flg = false;	//終了フラグリセット
 		}
 
 	}
@@ -372,8 +373,9 @@ bool EFFECT::FadeIn(int x, int y, int width, int height)
 		}
 		else if (end_flg)	//フェードイン終了したら
 		{
-			//DrawBox(x, y, width, height, GetColor(0, 0, 0), TRUE);	//透過なしで、真っ暗な画面にする
-			cnt = FADE_MAX_CNT;	//カウントリセット
+			cnt = FADE_MAX_CNT;		//カウントリセット
+			end_flg = false;		//エンドフラグリセット
+			this->IsFadein = false;	//フェードインしない
 		}
 
 	}
