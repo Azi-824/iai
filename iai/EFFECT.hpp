@@ -88,12 +88,12 @@ public:
 
 	~EFFECT();					//デストラクタ
 
-	int GetWidth(int);				//幅を取得
+	int GetWidth(int);			//幅を取得
 	int GetHeight(int);			//高さを取得
 
-	bool GetIsLoad(void);			//読み込めた？
+	bool GetIsLoad(void);		//読み込めた？
 
-	bool GetIsAnimeStop(int);		//アニメーションはストップしたかを取得
+	bool GetIsAnimeStop(int);	//アニメーションはストップしたかを取得
 
 	bool GetIsDrawEnd();		//描画終了したか取得
 
@@ -101,7 +101,7 @@ public:
 
 	void ResetIsAnime(int);		//アニメーションがストップしたかをリセット
 
-	void Draw(int, int, int);		//描画
+	void Draw(int, int, int);	//描画
 
 	bool Add(const char *, const char *, int, int, int, int, int, double, bool, int);	//エフェクト追加
 
