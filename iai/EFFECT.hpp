@@ -66,7 +66,7 @@ class EFFECT
 private:
 
 	std::vector<std::vector<int>> Handle;				//ハンドル
-	std::vector<int>::iterator Handle_itr;				//ハンドルのイテレータ
+	std::vector<std::vector<int>::iterator> Handle_itr;	//ハンドルのイテレータ
 	
 	std::vector<int> Width;				//幅
 	std::vector<int> Height;			//高さ

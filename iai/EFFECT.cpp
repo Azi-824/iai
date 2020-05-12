@@ -59,7 +59,7 @@ EFFECT::EFFECT(const char *dir, const char *name, int SplitNumALL, int SpritNumX
 	this->IsAnimeLoop.push_back(IsLoop);	//アニメーションがループするか
 	this->IsAnimeStop.push_back(false);		//アニメーションを動かす
 
-	this->Handle_itr = this->Handle.front().begin();	//先頭要素をイテレータに設定
+	this->Handle_itr.push_back(this->Handle.front().begin());	//先頭要素をイテレータに設定
 
 	this->IsLoad = true;		//読み込めた
 
@@ -100,6 +100,9 @@ EFFECT::~EFFECT()
 
 	std::vector<int> v7;
 	this->ChangeMaxCnt.swap(v7);
+
+	std::vector<std::vector<int>::iterator> v8;
+	this->Handle_itr.swap(v8);
 
 	return;
 
@@ -158,27 +161,20 @@ void EFFECT::ResetIsAnime(int type)
 */
 void EFFECT::Draw(int x, int y, int type)
 {
-	static bool setflg = false;	//ハンドル設定フラグ
-	if (setflg == false)
-	{
-		this->Handle_itr = this->Handle[type].begin();		//指定されたエフェクトタイプのハンドルを代入
-		setflg = true;	//ハンドル設定済み
-	}
 
 		if (this->IsAnimeStop[type] == false)	//アニメーションをストップさせないなら
 		{
-			DrawGraph(x, y, *this->Handle_itr, TRUE);	//イテレータ(ポインタ)を使用して描画
+			DrawGraph(x, y, *this->Handle_itr.at(type), TRUE);	//イテレータ(ポインタ)を使用して描画
 		}
 		else
 		{
 			this->IsDrawEnd = true;		//描画終了
-			setflg = false;				//ハンドル未設定
 		}
 
 		if (this->ChangeCnt == this->ChangeMaxCnt.at(type))	//次の画像を表示する時がきたら
 		{
 			//this->Handle.end()は、最後の要素の１個次のイテレータを返すので、-1している。
-			if (this->Handle_itr == this->Handle[type].end() - 1)	//イテレータ(ポインタ)が最後の要素のときは
+			if (this->Handle_itr.at(type) == this->Handle[type].end() - 1)	//イテレータ(ポインタ)が最後の要素のときは
 			{
 				//アニメーションをループしないなら
 				if (this->IsAnimeLoop[type] == false)
@@ -187,11 +183,11 @@ void EFFECT::Draw(int x, int y, int type)
 				}
 
 				//次回の描画に備えて、先頭の画像に戻しておく
-				this->Handle_itr = this->Handle[type].begin();	//イテレータ(ポインタ)を要素の最初に戻す
+				this->Handle_itr.at(type) = this->Handle[type].begin();	//イテレータ(ポインタ)を要素の最初に戻す
 			}
 			else
 			{
-				this->Handle_itr++;	//次のイテレータ(ポインタ)(次の画像)に移動する
+				++this->Handle_itr.at(type);	//次のイテレータ(ポインタ)(次の画像)に移動する
 			}
 
 			this->ChangeCnt = 0;	//カウント初期化
@@ -250,7 +246,7 @@ bool EFFECT::Add(const char *dir, const char *name, int SplitNumALL, int SpritNu
 		return false;		//読み込み失敗
 	}
 
-	this->Handle_itr = this->Handle.back().begin();		//先頭要素をイテレータに設定
+	this->Handle_itr.push_back(this->Handle.back().begin());		//先頭要素をイテレータに設定
 
 	this->ChangeMaxCnt.push_back(fps_spd * changeSpeed);
 	this->NextChangeSpeed.push_back(changeSpeed);		//次の画像に変更する速さ
