@@ -51,7 +51,10 @@
 
 #define EFFECT_SLASH_SPEED		0.02
 
-#define INIT_VALUE	0	//初期値
+//****************** その他 ***********************
+#define INIT_VALUE		0	//初期値
+#define FADE_MAX_CNT	60	//フェード処理のカウント最大値
+#define TOUKA_MAX_VALUE	255	//透過の最大値
 
 //###################### 列挙型 ##########################
 enum EFFECT_KIND
@@ -82,6 +85,9 @@ private:
 
 	bool IsLoad;				//読み込めたか？
 
+	bool IsFadeout;				//フェードアウト処理を行うか
+	bool IsFadein;				//フェードイン処理を行うか
+
 public:
 
 	EFFECT(const char *, const char *, int, int, int, int, int, double, bool,int);	//コンストラクタ	
@@ -105,6 +111,11 @@ public:
 
 	bool Add(const char *, const char *, int, int, int, int, int, double, bool, int);	//エフェクト追加
 
-	void SetSize();				//サイズ設定
+	void SetSize();						//サイズ設定
+
+	void SetIsFadeout(bool);			//フェードアウトをするか設定
+	void SetIsFadein(bool);				//フェードインをするか設定
+
+	bool FadeOut(int,int,int,int);		//フェードアウトエフェクト
 
 };

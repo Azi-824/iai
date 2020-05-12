@@ -21,9 +21,11 @@
 */
 EFFECT::EFFECT(const char *dir, const char *name, int SplitNumALL, int SpritNumX, int SplitNumY, int SplitWidth, int SplitHeight, double changeSpeed, bool IsLoop,int fps_spd)
 {
-
+	//メンバー変数初期化
 	this->IsLoad = false;			//読み込めたか？
 	this->IsDrawEnd = false;		//描画終了したか?
+	this->IsFadein = false;			//フェードイン処理を行わない
+	this->IsFadeout = false;		//フェードアウト処理を行わない
 
 	//画像を読み込み
 	std::string LoadfilePath;		//画像のファイルパスを作成
@@ -201,7 +203,6 @@ void EFFECT::Draw(int x, int y, int type)
 
 }
 
-
 //追加
 /*
 引　数：const char *：画像のディレクトリ
@@ -267,4 +268,70 @@ void EFFECT::SetSize(void)
 	{
 		GetGraphSize(this->Handle[i][0], &this->Width[i], &this->Height[i]);	//サイズ取得
 	}
+}
+
+//フェードアウトをするか設定
+void EFFECT::SetIsFadeout(bool isfadeout)
+{
+	this->IsFadeout = isfadeout;
+	return;
+}
+
+//フェードインをするか設定
+void EFFECT::SetIsFadein(bool isfadein)
+{
+	this->IsFadein = isfadein;
+	return;
+}
+
+//フェードアウトエフェクト
+//引数：int：透過させたい範囲のX位置
+//引数：int：透過させたい範囲のY位置
+//引数：int：透過させたい範囲の横幅
+//引数：int：透過させたい範囲の高さ
+//戻り値：bool：フェードアウトが終了したか
+//true：終了：false：終了していない
+bool EFFECT::FadeOut(int x,int y,int width,int height)
+{
+
+	static int cnt = 0;				//カウント用
+	static bool end_flg = false;	//フェード終了フラグ
+
+	if (this->IsFadeout)		//フェードアウトするとき
+	{
+
+		if (!end_flg)	//フェードアウト終了していなければ
+		{
+			//60フレーム分、待つ
+			if (cnt < FADE_MAX_CNT)
+			{
+				++cnt;	//カウントアップ
+			}
+			else
+			{
+				end_flg = true;	//フェード終了
+			}
+
+			//フェードアウトの処理
+			double ToukaPercent = cnt / (double)FADE_MAX_CNT;						//透過%を計算
+			SetDrawBlendMode(DX_BLENDMODE_ALPHA, ToukaPercent * TOUKA_MAX_VALUE);	//透過させる
+			DrawBox(x, y, width, height, GetColor(0, 0, 0), TRUE);					//真っ暗な画面にする
+			SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);								//透過をやめる
+
+		}
+		else if (end_flg)	//フェードアウト終了したら
+		{
+			DrawBox(x, y, width, height, GetColor(0, 0, 0), TRUE);	//透過なしで、真っ暗な画面にする
+			cnt = 0;	//カウントリセット
+		}
+
+	}
+	else		//フェードアウトをしない時
+	{
+		cnt = 0;			//カウントリセット
+		end_flg = false;	//終了フラグリセット
+	}
+
+	return end_flg;
+
 }

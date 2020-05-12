@@ -417,7 +417,13 @@ void GAMEMANEGER::PlayStage_DrawText()
 
 	this->se->Play((int)SE_TYPE_GAMESTART);		//ゲームスタートのSEを鳴らす
 
-	this->Play_NowStage = (int)PLAY_STAGE_MAIN;	//ゲームプレイ段階へ
+	this->effect->SetIsFadeout(true);	//フェードアウトを行う
+
+	if (this->effect->FadeOut(GAME_LEFT, GAME_TOP, GAME_WIDTH, GAME_HEIGHT))	//フェードアウト処理が終わったら
+	{
+		this->Play_NowStage = (int)PLAY_STAGE_MAIN;	//ゲームプレイ段階へ
+	}
+
 
 	return;
 }
