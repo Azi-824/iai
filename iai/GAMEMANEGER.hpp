@@ -32,6 +32,8 @@
 //座標関係
 #define TEST_TEXT_X	30					//テスト用のテキスト描画X位置
 #define TEST_TEXT_Y	30					//テスト用のテキスト描画Y位置
+#define DRAW_WIN_NUM_X	300				//勝ち数の描画X位置
+#define DRAW_WIN_NUM_Y	300				//勝ち数の描画Y位置
 
 //色関係
 #define COLOR_RED	GetColor(255,0,0)		//赤色
