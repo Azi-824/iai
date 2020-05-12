@@ -452,8 +452,6 @@ void GAMEMANEGER::PlayStage_Main()
 
 			this->player->SetResult((int)RESULT_OTETUKI);	//結果をお手付きに設定
 
-			this->effect->SetIsFadein(true);		//フェードインを行う
-
 			this->Play_NowStage = (int)PLAY_STAGE_RESULT;	//結果表示段階へ
 
 		}
