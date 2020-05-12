@@ -378,6 +378,8 @@ void GAMEMANEGER::PlayReset()
 
 	this->PushFlg = false;	//キーを押していない
 
+	this->effect->ResetIsAnime((int)EFFECT_SLASH);	//エフェクトの再生状態をリセット
+
 	this->StartTime = GetNowCount();	//計測開始時間取得
 	this->WaitTime = GetRand((GAME_START_WAITTIME_MAX / 2)) + GAME_START_WAITTIME_MIN;	//待ち時間を設定
 
