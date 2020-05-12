@@ -335,3 +335,55 @@ bool EFFECT::FadeOut(int x,int y,int width,int height)
 	return end_flg;
 
 }
+
+//フェードインエフェクト
+//引数：int：透過させたい範囲のX位置
+//引数：int：透過させたい範囲のY位置
+//引数：int：透過させたい範囲の横幅
+//引数：int：透過させたい範囲の高さ
+//戻り値：bool：フェードインが終了したか
+//true：終了：false：終了していない
+bool EFFECT::FadeIn(int x, int y, int width, int height)
+{
+	static int cnt = FADE_MAX_CNT;	//カウント用
+	static bool end_flg = false;	//フェード終了フラグ
+
+	if (this->IsFadein)		//フェードインするとき
+	{
+
+		if (!end_flg)	//フェードイン終了していなければ
+		{
+			//60フレーム分、待つ
+			if (cnt > 0)
+			{
+				--cnt;	//カウントダウン
+			}
+			else
+			{
+				end_flg = true;	//フェード終了
+			}
+
+			//フェードインの処理
+			double ToukaPercent = cnt / (double)FADE_MAX_CNT;						//透過%を計算
+			SetDrawBlendMode(DX_BLENDMODE_ALPHA, ToukaPercent * TOUKA_MAX_VALUE);	//透過させる
+			DrawBox(x, y, width, height, GetColor(0, 0, 0), TRUE);					//真っ暗な画面にする
+			SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);								//透過をやめる
+
+		}
+		else if (end_flg)	//フェードイン終了したら
+		{
+			//DrawBox(x, y, width, height, GetColor(0, 0, 0), TRUE);	//透過なしで、真っ暗な画面にする
+			cnt = FADE_MAX_CNT;	//カウントリセット
+		}
+
+	}
+	else		//フェードインをしない時
+	{
+		cnt = FADE_MAX_CNT;	//カウントリセット
+		end_flg = false;	//終了フラグリセット
+	}
+
+	return end_flg;
+
+}
+

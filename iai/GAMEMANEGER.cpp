@@ -315,8 +315,6 @@ void GAMEMANEGER::Draw_Scene_Play()
 	this->player->Draw();		//プレイヤー描画
 	this->enemy->Draw();		//敵描画
 
-	this->mark->DrawCenter(GAME_WIDTH, MARK_DRAW_Y);	//マーク描画
-
 	DrawString(TEST_TEXT_X, TEST_TEXT_Y, PLAY_TEXT, COLOR_WHITE);	//テスト用のテキストを描画
 
 	return;
@@ -431,6 +429,15 @@ void GAMEMANEGER::PlayStage_DrawText()
 //プレイ段階、ゲーム中のときの処理
 void GAMEMANEGER::PlayStage_Main()
 {
+
+
+	/*
+	修正ポイント
+	*/
+	DrawBox(GAME_LEFT, GAME_TOP, GAME_WIDTH, GAME_HEIGHT,COLOR_BLACK,TRUE);	//真っ暗な画面	
+
+	this->mark->DrawCenter(GAME_WIDTH, MARK_DRAW_Y);	//マーク描画
+
 	if (this->GameStartFlg)	//ゲームが始まったら
 	{
 		if (this->keydown->IsKeyDownOne(KEY_INPUT_RETURN))		//エンターキーを押されたら
@@ -489,6 +496,9 @@ void GAMEMANEGER::PlayStage_Main()
 //プレイ段階、結果表示のときの処理
 void GAMEMANEGER::PlayStage_Result()
 {
+
+	this->effect->SetIsFadein(true);		//フェードインを行う
+	this->effect->FadeIn(GAME_LEFT, GAME_TOP, GAME_WIDTH, GAME_HEIGHT);	//フェードインエフェクト
 
 	this->se->PlayOne((int)SE_TYPE_TEXT);	//テキスト表示の音を鳴らす
 

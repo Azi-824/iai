@@ -117,5 +117,6 @@ public:
 	void SetIsFadein(bool);				//フェードインをするか設定
 
 	bool FadeOut(int,int,int,int);		//フェードアウトエフェクト
+	bool FadeIn(int, int, int, int);	//フェードインエフェクト
 
 };
