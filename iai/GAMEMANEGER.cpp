@@ -243,6 +243,8 @@ void GAMEMANEGER::Scene_Title()
 
 	this->back->ChengeImage((int)TITLE_BACK);	//背景画像変更
 
+	this->player->ResetWinNum();		//勝ち数をリセット
+
 	if (this->keydown->IsKeyDownOne(KEY_INPUT_RETURN))		//エンターキーを押されたら
 	{
 		this->NowScene = (int)SCENE_PLAY;	//プレイ画面へ
@@ -507,7 +509,7 @@ void GAMEMANEGER::PlayStage_Result()
 
 		case (int)RESULT_WIN:		//プレイヤーが勝った時
 
-			DrawString(330, 30, "勝利", COLOR_BLACK);
+			DrawString(RESULT_TEXT_X, RESULT_TEXT_Y, RESULT_WIN_TEXT, COLOR_BLACK);
 
 			DrawFormatString(DRAW_WIN_NUM_X, DRAW_WIN_NUM_Y, COLOR_BLACK, WIN_NUM_DRAW_TEXT, this->player->GetWinNum());	//勝ち数を表示
 
@@ -521,7 +523,7 @@ void GAMEMANEGER::PlayStage_Result()
 
 		case (int)RESULT_LOSE:		//プレイヤーが負けたとき
 
-			DrawString(330, 30, "敗北", COLOR_BLACK);
+			DrawString(RESULT_TEXT_X, RESULT_TEXT_Y, RESULT_LOSE_TEXT, COLOR_BLACK);
 
 			this->se->PlayOne((int)SE_TYPE_GAMEOVER);		//ゲームオーバーの音を鳴らす
 
@@ -536,7 +538,7 @@ void GAMEMANEGER::PlayStage_Result()
 
 		case (int)RESULT_DRAW:		//引き分けのとき
 
-			DrawString(330, 30, "引き分け", COLOR_BLACK);
+			DrawString(RESULT_TEXT_X, RESULT_TEXT_Y, RESLUT_DRAW_TEXT, COLOR_BLACK);
 
 			if (this->keydown->IsKeyDownOne(KEY_INPUT_RETURN))	//エンターキーを押されたら
 			{
@@ -547,7 +549,7 @@ void GAMEMANEGER::PlayStage_Result()
 
 		case (int)RESULT_OTETUKI:		//お手付きのとき
 
-			DrawString(330, 30, "お手付き", COLOR_BLACK);
+			DrawString(RESULT_TEXT_X, RESULT_TEXT_Y, RESULT_OTETUKI_TEXT, COLOR_BLACK);
 
 			if (this->keydown->IsKeyDownOne(KEY_INPUT_RETURN))	//エンターキーを押されたら
 			{

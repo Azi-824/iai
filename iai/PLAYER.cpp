@@ -42,6 +42,13 @@ int PLAYER::GetWinNum()
 	return this->WinNum;
 }
 
+//勝ち数をリセット
+void PLAYER::ResetWinNum()
+{
+	this->WinNum = 0;	//勝ち数をリセット
+	return;
+}
+
 //押すまでの時間を設定
 void PLAYER::SetPushTime(double time)
 {

@@ -28,11 +28,18 @@
 #define TITLE_TEXT	"NowTitle"			//タイトル画面のテキスト
 #define PLAY_TEXT	"NowPlay"			//プレイ画面のテキスト
 #define END_TEXT	"NowEnd"			//エンド画面のテキスト
+
+#define RESULT_WIN_TEXT		"勝利"		//勝った時のテキスト
+#define RESULT_LOSE_TEXT	"敗北"		//負けた時のテキスト
+#define RESLUT_DRAW_TEXT	"引き分け"	//引き分けの時のテキスト
+#define RESULT_OTETUKI_TEXT	"お手付き"	//お手付きの時のテキスト
 #define WIN_NUM_DRAW_TEXT	"%d人抜き"	//勝ち数表示のテキスト
 
 //座標関係
 #define TEST_TEXT_X	30					//テスト用のテキスト描画X位置
 #define TEST_TEXT_Y	30					//テスト用のテキスト描画Y位置
+#define RESULT_TEXT_X	330				//結果描画X位置
+#define RESULT_TEXT_Y	50				//結果描画Y位置
 #define DRAW_WIN_NUM_X	300				//勝ち数の描画X位置
 #define DRAW_WIN_NUM_Y	300				//勝ち数の描画Y位置
 

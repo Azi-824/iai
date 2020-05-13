@@ -51,6 +51,7 @@ public:
 
 	void IncreaseWinNum();		//Ÿ‚¿”‚ğ‘‚â‚·
 	int GetWinNum();			//Ÿ‚¿”‚ğæ“¾
+	void ResetWinNum();			//Ÿ‚¿”‚ğƒŠƒZƒbƒg
 
 	void SetPushTime(double);	//‰Ÿ‚·‚Ü‚Å‚É‚©‚©‚Á‚½ŠÔ‚ğİ’è
 	double GetPushTime();		//‰Ÿ‚·‚Ü‚Å‚É‚©‚©‚Á‚½ŠÔ‚ğæ“¾
