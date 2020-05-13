@@ -72,7 +72,6 @@ private:
 	KEYDOWN *keydown;			//キーボード関係
 	IMAGE *back;				//背景画像
 	IMAGE *mark;				//マーク画像
-	IMAGE *text_image;			//テキスト画像
 	PLAYER *player;				//プレイヤー
 	ENEMY *enemy;				//敵
 	MUSIC *se;					//SE

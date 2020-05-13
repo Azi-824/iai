@@ -34,7 +34,6 @@ GAMEMANEGER::~GAMEMANEGER()
 	delete this->keydown;	//keydown破棄
 	delete this->back;		//back破棄
 	delete this->mark;		//mark破棄
-	delete this->text_image;//text_image破棄
 	delete this->player;	//player破棄
 	delete this->enemy;		//enemy破棄
 	delete this->se;		//se破棄
@@ -66,12 +65,6 @@ bool GAMEMANEGER::Load()
 	this->mark = new IMAGE(IMG_DIR_MARK, IMG_NAME_MARK);	//マーク画像を生成
 	if (this->mark->GetIsLoad() == false) { return false; }	//読み込み失敗
 	this->mark->SetIsDraw(false);							//最初は描画してはいけない
-	//テキスト画像
-	this->text_image = new IMAGE(IMG_DIR_TEXT, IMG_NAME_TEXT_WIN);	//テキスト画像を生成
-	if (this->text_image->GetIsLoad() == false) { return false; }	//読み込み失敗
-	if (this->text_image->AddImage(IMG_DIR_TEXT, IMG_NAME_TEXT_LOSE) == false) { return -1; }	//敗北テキスト追加
-	if (this->text_image->AddImage(IMG_DIR_TEXT, IMG_NAME_TEXT_DRAW) == false) { return -1; }	//引き分けテキスト追加
-	if (this->text_image->AddImage(IMG_DIR_TEXT, IMG_NAME_TEXT_OTETUKI) == false) { return -1; }//お手付きテキスト追加
 
 	//プレイヤー関係
 	this->player = new PLAYER(IMG_DIR_PLAYER, IMG_NAME_PLAYER);		//プレイヤー生成
@@ -111,7 +104,6 @@ void GAMEMANEGER::SetSize()
 {
 	this->back->SetSize();			//背景画像、サイズ設定
 	this->mark->SetSize();			//マーク画像サイズ設定
-	this->text_image->SetSize();	//テキスト画像サイズ設定
 
 	return;
 }
@@ -515,9 +507,7 @@ void GAMEMANEGER::PlayStage_Result()
 
 		case (int)RESULT_WIN:		//プレイヤーが勝った時
 
-			this->text_image->ChengeImage((int)TEXT_IMG_WIN);		//表示するテキストを勝利テキストに変更
-
-			this->text_image->DrawCenter(GAME_WIDTH, TEXT_DRAW_Y);	//勝利テキスト描画
+			DrawString(330, 30, "勝利", COLOR_BLACK);
 
 			DrawFormatString(DRAW_WIN_NUM_X, DRAW_WIN_NUM_Y, COLOR_BLACK, WIN_NUM_DRAW_TEXT, this->player->GetWinNum());	//勝ち数を表示
 
@@ -531,9 +521,7 @@ void GAMEMANEGER::PlayStage_Result()
 
 		case (int)RESULT_LOSE:		//プレイヤーが負けたとき
 
-			this->text_image->ChengeImage((int)TEXT_IMG_LOSE);	//表示するテキストを敗北テキストに変更
-
-			this->text_image->DrawCenter(GAME_WIDTH, TEXT_DRAW_Y);	//敗北テキスト描画
+			DrawString(330, 30, "敗北", COLOR_BLACK);
 
 			this->se->PlayOne((int)SE_TYPE_GAMEOVER);		//ゲームオーバーの音を鳴らす
 
@@ -548,10 +536,7 @@ void GAMEMANEGER::PlayStage_Result()
 
 		case (int)RESULT_DRAW:		//引き分けのとき
 
-
-			this->text_image->ChengeImage((int)TEXT_IMG_DRAW);	//表示するテキストを引き分けテキストに変更
-
-			this->text_image->DrawCenter(GAME_WIDTH, TEXT_DRAW_Y);	//引き分けテキスト描画
+			DrawString(330, 30, "引き分け", COLOR_BLACK);
 
 			if (this->keydown->IsKeyDownOne(KEY_INPUT_RETURN))	//エンターキーを押されたら
 			{
@@ -562,8 +547,7 @@ void GAMEMANEGER::PlayStage_Result()
 
 		case (int)RESULT_OTETUKI:		//お手付きのとき
 
-			this->text_image->ChengeImage((int)TEXT_IMG_OTETUKI);	//描画するテキストをお手付き画像に変更
-			this->text_image->DrawCenter(GAME_WIDTH, TEXT_DRAW_Y);	//お手付き画像を描画
+			DrawString(330, 30, "お手付き", COLOR_BLACK);
 
 			if (this->keydown->IsKeyDownOne(KEY_INPUT_RETURN))	//エンターキーを押されたら
 			{

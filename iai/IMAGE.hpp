@@ -18,21 +18,13 @@
 //########## マクロ定義：画像のファイルパスと名前 ##########
 #define IMG_DIR_BACK		R"(.\MY_IMG\Back)"				//背景画像のファイルの場所
 #define IMG_DIR_MARK		R"(.\MY_IMG\Mark)"				//マーク画像のファイルの場所
-#define IMG_DIR_TEXT		R"(.\MY_IMG\Text)"				//テキスト画像のファイルの場所
 
 #define IMG_NAME_TITLE		R"(\Title.jpg)"					//タイトル画面の背景画像の名前
 #define IMG_NAME_PLAY		R"(\Play.jpg)"					//プレイ画面の背景画像の名前
 
 #define IMG_NAME_MARK		R"(\Mark.png)"					//マーク画像の名前
 
-#define IMG_NAME_TEXT_WIN	R"(\Win_text.png)"				//勝利テキストの画像の名前
-#define IMG_NAME_TEXT_LOSE	R"(\Lose_text.png)"				//敗北テキストの画像の名前
-#define IMG_NAME_TEXT_DRAW	R"(\Draw_text.png)"				//引き分けテキストの画像の名前
-#define IMG_NAME_TEXT_OTETUKI	R"(\Otetuki.png)"			//お手付きのテキストの画像の名前
-
 #define MARK_DRAW_Y			100		//マーク画像の描画Y位置
-
-#define TEXT_DRAW_Y			50		//テキスト画像の描画Y位置
 
 //########## マクロ定義：エラーメッセージ##########
 #define IMAGE_ERROR_TITLE "IMAGE_ERROR"					//エラータイトル
@@ -44,14 +36,6 @@ enum BACK_IMAGE
 	TITLE_BACK,		//タイトル画面の背景画像
 	PLAY_BACK,		//プレイ画面の背景画像
 	END_BACK		//エンド画面の背景画像
-};
-
-enum TEXT_IMAGE
-{
-	TEXT_IMG_WIN,	//勝利テキスト
-	TEXT_IMG_LOSE,	//敗北テキスト
-	TEXT_IMG_DRAW,	//引き分けテキスト
-	TEXT_IMG_OTETUKI//お手付きテキスト
 };
 
 //########## クラスの定義 ##########
