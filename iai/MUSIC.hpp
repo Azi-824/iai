@@ -77,7 +77,8 @@ public:
 	void Play(int);							//音を再生する
 	void PlayOne(int);						//音を再生する(1回だけ)
 
-	void PlayReset(int);					//再生済みかどうかをリセットする
+	void PlayReset(int);					//再生済みかどうかをリセットする(指定されたものだけ)
+	void PlayReset();						//再生済みがどうかをリセットする(全て)
 
 	void Stop();							//音を止める(全て)
 	void Stop(int);							//音を止める(指定されたものだけ)

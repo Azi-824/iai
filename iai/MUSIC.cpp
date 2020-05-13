@@ -132,10 +132,20 @@ void MUSIC::PlayOne(int kind)
 	}
 }
 
-//再生済みかどうかをリセットする
+//再生済みかどうかをリセットする(指定されたものだけ)
 void MUSIC::PlayReset(int kind)
 {
 	this->IsPlayed[kind] = false;	//再生済みじゃない
+	return;
+}
+
+//再生済みかどうかをリセットする(全て)
+void MUSIC::PlayReset()
+{
+	for (int i = 0; i < this->Handle.size(); ++i)
+	{
+		this->IsPlayed[i] = false;	//再生済みじゃない
+	}
 	return;
 }
 

@@ -372,9 +372,7 @@ void GAMEMANEGER::PlayReset()
 
 	this->Play_NowStage = (int)PLAY_STAGE_TEXT_DRAW;	//プレイシーンの現在の段階を初期化
 
-	this->se->PlayReset((int)SE_TYPE_TEXT);		//テキスト表示の効果音を鳴らしていない状態へ
-	this->se->PlayReset((int)SE_TYPE_GAMESTART);//ゲームスタートの効果音を鳴らしていない状態へ
-	this->se->PlayReset((int)SE_TYPE_RESULT);	//結果表示の効果音を鳴らしていない状態へ
+	this->se->PlayReset();	//効果音の再生状態をリセット
 
 	this->PushFlg = false;	//キーを押していない
 
