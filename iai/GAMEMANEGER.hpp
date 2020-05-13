@@ -83,6 +83,7 @@ private:
 	PLAYER *player;				//プレイヤー
 	ENEMY *enemy;				//敵
 	MUSIC *se;					//SE
+	MUSIC *bgm;					//BGM
 	EFFECT *effect;				//エフェクト
 	FONT *font;					//フォント
 

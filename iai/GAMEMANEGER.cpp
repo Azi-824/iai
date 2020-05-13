@@ -37,6 +37,7 @@ GAMEMANEGER::~GAMEMANEGER()
 	delete this->player;	//player破棄
 	delete this->enemy;		//enemy破棄
 	delete this->se;		//se破棄
+	delete this->bgm;		//bgm破棄
 	delete this->effect;	//effect破棄
 	delete this->font;		//font破棄
 
@@ -86,6 +87,12 @@ bool GAMEMANEGER::Load()
 	if (this->se->GetIsLoad() == false) { return false; }		//読み込み失敗
 	if (this->se->Add(MUSIC_DIR_SE, SE_NAME_GAMEOVER) == false) { return false; }	//ゲームオーバーの音を追加
 	if (this->se->Add(MUSIC_DIR_SE, SE_NAME_TEXT_SE) == false) { return false; }	//テキスト表示の音を追加
+
+	//BGM
+	this->bgm = new MUSIC(MUSIC_DIR_BGM, BGM_NAME_TITLE_BGM);	//BGMを管理するオブジェクトを生成
+	if (this->bgm->GetIsLoad() == false) { return false; }		//読み込み失敗
+	this->bgm->ChengePlayType(DX_PLAYTYPE_LOOP);				//再生方法をループ再生に変更
+	this->bgm->ChengeVolume(50.0, (int)BGM_TYPE_TITLE);			//タイトルbgmの音量を50%に変更
 
 	//音量変更
 	this->se->ChengeVolume(50.0, (int)SE_TYPE_GAMESTART);	//ゲームスタートの音量を50%に変更
@@ -243,10 +250,13 @@ void GAMEMANEGER::Scene_Title()
 
 	this->back->ChengeImage((int)TITLE_BACK);	//背景画像変更
 
+	this->bgm->Play((int)BGM_TYPE_TITLE);		//bgmを再生
+
 	this->player->ResetWinNum();		//勝ち数をリセット
 
 	if (this->keydown->IsKeyDownOne(KEY_INPUT_RETURN))		//エンターキーを押されたら
 	{
+		this->bgm->Stop((int)BGM_TYPE_TITLE);	//BGMを止める
 		this->NowScene = (int)SCENE_PLAY;	//プレイ画面へ
 	}
 
@@ -524,7 +534,7 @@ void GAMEMANEGER::PlayStage_Result()
 			{
 				this->se->PlayReset((int)SE_TYPE_GAMEOVER);		//再生状態をリセット
 				this->Play_NowStage = (int)PLAY_STAGE_TEXT_DRAW;	//テキスト表示段階へ
-				this->NowScene = (int)SCENE_END;	//エンド画面へ
+				this->NowScene = (int)SCENE_TITLE;	//タイトル画面へ
 			}
 
 			break;		//プレイヤーが負けたときここまで
