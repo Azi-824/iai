@@ -18,7 +18,8 @@
 #define ENEMY_AFTER_Y		250		//敵の描画Y位置（アクション後）
 
 #define ENEMY_SPD_MIN		0.5		//敵のはやさの最小値
-#define ENEMY_SPD_MAX		1.5		//敵のはやさの最大値
+#define ENEMY_SPD_INIT		1.5		//敵のはやさの初期値
+#define ENEMY_SPD_UP_VALUE	0.1		//一回に早くなる値
 
 //################ 列挙型 ################
 enum ENEMY_IMAGE
@@ -33,7 +34,7 @@ class ENEMY :public CHARACTOR	//キャラクタークラスを継承
 
 private:
 
-	double Speed;		//速度
+	double Speed;									//速度
 
 public:
 
@@ -41,5 +42,7 @@ public:
 	~ENEMY();								//デストラクタ
 
 	double GetSpeed();	//速度を取得
+	void SpeedUp();		//速度を早くする
+	void SpeedReset();	//速度をリセットする
 
 };

@@ -392,11 +392,13 @@ void GAMEMANEGER::Judg()
 	if (this->player->GetPushTime() < enemy->GetSpeed())		//押すのにかかった時間が、敵のスピードより速かったら
 	{
 		this->player->IncreaseWinNum();					//勝ち数を増やす
+		this->enemy->SpeedUp();							//敵の速度を早くする
 		this->player->SetResult((int)RESULT_WIN);		//結果を設定(勝利)
 	}
 	else if (this->player->GetPushTime() > enemy->GetSpeed())		//敵より遅かったら
 	{
 		this->player->SetResult((int)RESULT_LOSE);		//結果を設定(敗北)
+		this->enemy->SpeedReset();						//速さをリセット
 	}
 	else		//引き分けだったら
 	{

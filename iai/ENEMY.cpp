@@ -15,7 +15,7 @@ ENEMY::ENEMY(const char *dir,const char *name)
 	this->SetImage(dir, name);	//画像を生成
 
 	//メンバー変数初期化
-	this->Speed = ENEMY_SPD_MAX;	//はやさを初期化
+	this->Speed = ENEMY_SPD_INIT;		//はやさを初期化
 
 	return;
 }
@@ -30,4 +30,21 @@ ENEMY::~ENEMY()
 double ENEMY::GetSpeed()
 {
 	return this->Speed;
+}
+
+//速度を早くする
+void ENEMY::SpeedUp()
+{
+	if (this->Speed > ENEMY_SPD_MIN)		//最高速度より遅ければ
+	{
+		this->Speed -= ENEMY_SPD_UP_VALUE;	//加速
+	}
+	return;
+}
+
+//速度をリセットする
+void ENEMY::SpeedReset()
+{
+	this->Speed = ENEMY_SPD_INIT;	//速さを初期化
+	return;
 }
