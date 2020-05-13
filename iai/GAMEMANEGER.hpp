@@ -131,4 +131,6 @@ public:
 	void PlayStage_Result();	//プレイ段階、結果表示のときの処理
 
 
+	void DrawTextCenter(const char *,int);	//渡された文字列を画面中央に描画する(高さは自分で指定する)
+
 };
