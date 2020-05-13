@@ -26,6 +26,8 @@ EFFECT::EFFECT(const char *dir, const char *name, int SplitNumALL, int SpritNumX
 	this->IsDrawEnd = false;		//描画終了したか?
 	this->IsFadein = false;			//フェードイン処理を行わない
 	this->IsFadeout = false;		//フェードアウト処理を行わない
+	this->Width.push_back(0);		//横幅を初期化
+	this->Height.push_back(0);		//高さを初期化
 
 	//画像を読み込み
 	std::string LoadfilePath;		//画像のファイルパスを作成
@@ -220,6 +222,8 @@ bool EFFECT::Add(const char *dir, const char *name, int SplitNumALL, int SpritNu
 {
 	this->IsAnimeLoop.push_back(IsLoop);		//アニメーションはループする？
 	this->IsAnimeStop.push_back(false);			//アニメーションを動かす
+	this->Width.push_back(0);					//横幅を初期化
+	this->Height.push_back(0);					//高さを初期化
 
 	//画像を読み込み
 	std::string LoadfilePath;		//画像のファイルパスを作成

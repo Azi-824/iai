@@ -35,13 +35,14 @@
 #define RESULT_OTETUKI_TEXT	"お手付き"	//お手付きの時のテキスト
 #define WIN_NUM_DRAW_TEXT	"%d人抜き"	//勝ち数表示のテキスト
 
+#define FORMAT_KEY_WORD		'%'			//書式指定子を検索するときのキーワード
+#define FORMAT_REPLACE_NUM	2			//書式指定子を置換するときの文字数
+
 //座標関係
 #define TEST_TEXT_X	30					//テスト用のテキスト描画X位置
 #define TEST_TEXT_Y	30					//テスト用のテキスト描画Y位置
-#define RESULT_TEXT_X	330				//結果描画X位置
-#define RESULT_TEXT_Y	50				//結果描画Y位置
-#define DRAW_WIN_NUM_X	300				//勝ち数の描画X位置
-#define DRAW_WIN_NUM_Y	300				//勝ち数の描画Y位置
+#define RESULT_TEXT_Y	5				//結果描画Y位置
+#define DRAW_WIN_NUM_Y	120				//勝ち数の描画Y位置
 
 //色関係
 #define COLOR_RED	GetColor(255,0,0)		//赤色
@@ -131,6 +132,7 @@ public:
 	void PlayStage_Result();	//プレイ段階、結果表示のときの処理
 
 
-	void DrawTextCenter(const char *,int);	//渡された文字列を画面中央に描画する(高さは自分で指定する)
+	void DrawTextCenter(int,const char *);			//渡された文字列を画面中央に描画する(高さは自分で指定する)
+	void DrawNumTextCenter(int, const char *, int);	//書式付き(数字)文字列を中央に描画する(高さは自分で指定する)
 
 };

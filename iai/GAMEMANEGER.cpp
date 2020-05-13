@@ -104,7 +104,7 @@ void GAMEMANEGER::SetSize()
 {
 	this->back->SetSize();			//背景画像、サイズ設定
 	this->mark->SetSize();			//マーク画像サイズ設定
-
+	this->effect->SetSize();		//エフェクトのサイズ設定
 	return;
 }
 
@@ -140,7 +140,7 @@ bool GAMEMANEGER::GameMainLoop()
 
 	//▲▲▲▲▲ゲームのシーンここまで▲▲▲▲▲
 
-	this->fps->Draw(0, 0);		//FPS描画
+	//this->fps->Draw(0, 0);		//FPS描画
 
 	ScreenFlip();				//モニタのリフレッシュレートの速さで裏画面を再描画
 
@@ -259,8 +259,6 @@ void GAMEMANEGER::Draw_Scene_Title()
 
 	this->back->Draw(GAME_LEFT,GAME_TOP);	//背景描画
 
-	//DrawString(TEST_TEXT_X, TEST_TEXT_Y, TITLE_TEXT, COLOR_WHITE);	//テスト用のテキストを描画
-
 	return;
 }
 
@@ -313,8 +311,6 @@ void GAMEMANEGER::Draw_Scene_Play()
 	this->player->Draw();		//プレイヤー描画
 	this->enemy->Draw();		//敵描画
 
-	//DrawString(TEST_TEXT_X, TEST_TEXT_Y, PLAY_TEXT, COLOR_WHITE);	//テスト用のテキストを描画
-
 	return;
 }
 
@@ -333,9 +329,6 @@ void GAMEMANEGER::Scene_End()
 //エンド画面の描画処理
 void GAMEMANEGER::Draw_Scene_End()
 {
-
-	//DrawString(TEST_TEXT_X, TEST_TEXT_Y, END_TEXT, COLOR_WHITE);	//テスト用のテキストを描画
-
 	return;
 }
 
@@ -503,15 +496,15 @@ void GAMEMANEGER::PlayStage_Result()
 	{
 		this->se->PlayOne((int)SE_TYPE_TEXT);	//テキスト表示の音を鳴らす
 
-//結果毎に処理を分岐
+		//結果毎に処理を分岐
 		switch (this->player->GetResult())
 		{
 
 		case (int)RESULT_WIN:		//プレイヤーが勝った時
 
-			this->DrawTextCenter(RESULT_WIN_TEXT, RESULT_TEXT_Y);
+			this->DrawTextCenter(RESULT_TEXT_Y,RESULT_WIN_TEXT);		//勝利文字描画
 
-			DrawFormatString(DRAW_WIN_NUM_X, DRAW_WIN_NUM_Y, COLOR_BLACK, WIN_NUM_DRAW_TEXT, this->player->GetWinNum());	//勝ち数を表示
+			this->DrawNumTextCenter(DRAW_WIN_NUM_Y, WIN_NUM_DRAW_TEXT, this->player->GetWinNum());	//勝ち数を描画
 
 			if (this->keydown->IsKeyDownOne(KEY_INPUT_RETURN))	//エンターキーを押されたら
 			{
@@ -523,7 +516,7 @@ void GAMEMANEGER::PlayStage_Result()
 
 		case (int)RESULT_LOSE:		//プレイヤーが負けたとき
 
-			this->DrawTextCenter(RESULT_LOSE_TEXT, RESULT_TEXT_Y);
+			this->DrawTextCenter(RESULT_TEXT_Y,RESULT_LOSE_TEXT);	//敗北文字描画
 
 			this->se->PlayOne((int)SE_TYPE_GAMEOVER);		//ゲームオーバーの音を鳴らす
 
@@ -538,7 +531,7 @@ void GAMEMANEGER::PlayStage_Result()
 
 		case (int)RESULT_DRAW:		//引き分けのとき
 
-			this->DrawTextCenter(RESLUT_DRAW_TEXT, RESULT_TEXT_Y);
+			this->DrawTextCenter(RESULT_TEXT_Y,RESLUT_DRAW_TEXT);	//引き分け文字描画
 
 			if (this->keydown->IsKeyDownOne(KEY_INPUT_RETURN))	//エンターキーを押されたら
 			{
@@ -549,7 +542,7 @@ void GAMEMANEGER::PlayStage_Result()
 
 		case (int)RESULT_OTETUKI:		//お手付きのとき
 
-			this->DrawTextCenter(RESULT_OTETUKI_TEXT, RESULT_TEXT_Y);
+			this->DrawTextCenter(RESULT_TEXT_Y,RESULT_OTETUKI_TEXT);	//お手付き文字描画
 
 			if (this->keydown->IsKeyDownOne(KEY_INPUT_RETURN))	//エンターキーを押されたら
 			{
@@ -570,7 +563,9 @@ void GAMEMANEGER::PlayStage_Result()
 
 
 //渡された文字列を画面中央に描画する(高さは自分で指定する)
-void GAMEMANEGER::DrawTextCenter(const char *text, int y)
+//引数：int：描画Y位置
+//引数：const char *：描画する文字列
+void GAMEMANEGER::DrawTextCenter(int y,const char *text)
 {
 	int Strlen = 0;		//文字列の長さ取得用
 	int Width = 0;		//文字列の幅取得用
@@ -581,5 +576,25 @@ void GAMEMANEGER::DrawTextCenter(const char *text, int y)
 	DrawString((GAME_WIDTH / 2) - (Width / 2), y, text, COLOR_BLACK);		//文字列を描画
 
 	return;
+
+}
+
+//書式付き(数字)文字列を中央に描画する(高さは自分で指定する)
+//引数：int：描画Y位置
+//引数：const char *：描画する文字列
+//引数：int：書式指定子で描画する数字
+void GAMEMANEGER::DrawNumTextCenter(int y, const char *text, int num)
+{
+	std::string draw_text = text;										//描画文字列
+	int keypos = draw_text.find(FORMAT_KEY_WORD);						//置換開始位置を取得
+	draw_text.replace(keypos, FORMAT_REPLACE_NUM, std::to_string(num));	//置換
+
+	int Strlen = 0;		//文字列の長さ取得用
+	int Width = 0;		//文字列の幅取得用
+
+	Strlen = strlen(draw_text.c_str());						//文字列長さを取得
+	Width = GetDrawStringWidth(draw_text.c_str(), Strlen);	//横幅取得
+
+	DrawString((GAME_WIDTH / 2) - (Width / 2), y, draw_text.c_str(), COLOR_BLACK);		//文字列を描画
 
 }
