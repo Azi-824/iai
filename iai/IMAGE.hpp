@@ -26,6 +26,9 @@
 
 #define MARK_DRAW_Y			100		//マーク画像の描画Y位置
 
+#define FADE_MAX_CNT	60	//フェード処理のカウント最大値
+#define TOUKA_MAX_VALUE	255	//透過の最大値
+
 //########## マクロ定義：エラーメッセージ##########
 #define IMAGE_ERROR_TITLE "IMAGE_ERROR"					//エラータイトル
 #define IMAGE_ERROR_MSG	"画像が読み込めませんでした"	//エラーメッセージ
@@ -76,6 +79,8 @@ public:
 
 	bool AddImage(const char *, const char *);	//画像を追加
 	void ChengeImage(int);						//描画する画像を変更
+
+	bool FadeOut(int,int,int);				//指定された画像をフェードアウトする
 
 };
 

@@ -200,3 +200,41 @@ void IMAGE::ChengeImage(int kind)
 	this->Draw_Num = kind;
 	return;
 }
+
+//指定された、画像をフェードアウトさせる
+//引数：int：フェードアウトさせる、画像のX位置
+//引数：int：フェードアウトさせる、画像のY位置
+//引数：int：フェードアウトさせる、画像の種類
+bool IMAGE::FadeOut(int x,int y,int kind)
+{
+	static int cnt = 0;				//カウント用
+	static bool end_flg = false;	//フェード終了フラグ
+
+	if (!end_flg)	//フェードアウト終了していなければ
+	{
+		//60フレーム分、待つ
+		if (cnt < FADE_MAX_CNT)
+		{
+			++cnt;	//カウントアップ
+		}
+		else
+		{
+			end_flg = true;	//フェード終了
+		}
+
+		//フェードアウトの処理
+		double ToukaPercent = cnt / (double)FADE_MAX_CNT;											//透過%を計算
+		SetDrawBlendMode(DX_BLENDMODE_ALPHA, ToukaPercent * TOUKA_MAX_VALUE);					//透過させる
+		DrawBox(x, y, this->Width.at(kind), this->Height.at(kind), GetColor(0, 0, 0), TRUE);	//真っ暗な画面にする
+		SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);												//透過をやめる
+
+	}
+	else if (end_flg)	//フェードアウト終了したら
+	{
+		cnt = 0;			//カウントリセット
+		end_flg = false;	//終了フラグリセット
+	}
+
+	return true;
+
+}

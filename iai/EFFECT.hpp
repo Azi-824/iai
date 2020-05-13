@@ -14,6 +14,7 @@
 #include <vector>
 #include <string>
 #include "FPS.hpp"
+#include "IMAGE.hpp"
 
 //###################### マクロ定義：ファイルパス、名前 ######################
 #define EFFECT_DIR				R"(.\MY_EFFECT)"				//エフェクトの画像ファイルの場所
@@ -44,8 +45,6 @@
 
 //****************** その他 ***********************
 #define INIT_VALUE		0	//初期値
-#define FADE_MAX_CNT	60	//フェード処理のカウント最大値
-#define TOUKA_MAX_VALUE	255	//透過の最大値
 
 //###################### 列挙型 ##########################
 enum EFFECT_KIND
