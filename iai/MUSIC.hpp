@@ -38,7 +38,7 @@
 enum SE_TYPE
 {
 	SE_TYPE_GAMESTART,		//ゲームスタート
-	SE_TYPE_GAMEOVER,		//ゲームオーバー
+	SE_TYPE_RESULT,			//結果表示
 	SE_TYPE_TEXT			//テキスト表示
 };
 

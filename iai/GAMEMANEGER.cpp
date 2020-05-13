@@ -96,7 +96,7 @@ bool GAMEMANEGER::Load()
 
 	//音量変更
 	this->se->ChengeVolume(50.0, (int)SE_TYPE_GAMESTART);	//ゲームスタートの音量を50%に変更
-	this->se->ChengeVolume(50.0, (int)SE_TYPE_GAMEOVER);	//ゲームオーバーの音量を50%に変更
+	this->se->ChengeVolume(50.0, (int)SE_TYPE_RESULT);	//ゲームオーバーの音量を50%に変更
 
 	//エフェクト関係
 	this->effect = new EFFECT(EFFECT_DIR, EFFECT_NAME_SLASH, EFFECT_SLASH_ALL_CNT, EFFECT_SLASH_YOKO_CNT, EFFECT_SLASH_TATE_CNT, EFFECT_SLASH_WIDTH, EFFECT_SLASH_HEIGHT, EFFECT_SLASH_SPEED, false, this->fps->Getvalue());
@@ -374,6 +374,7 @@ void GAMEMANEGER::PlayReset()
 
 	this->se->PlayReset((int)SE_TYPE_TEXT);		//テキスト表示の効果音を鳴らしていない状態へ
 	this->se->PlayReset((int)SE_TYPE_GAMESTART);//ゲームスタートの効果音を鳴らしていない状態へ
+	this->se->PlayReset((int)SE_TYPE_RESULT);	//結果表示の効果音を鳴らしていない状態へ
 
 	this->PushFlg = false;	//キーを押していない
 
@@ -504,7 +505,14 @@ void GAMEMANEGER::PlayStage_Result()
 	//フェードインエフェクト
 	if (this->effect->FadeIn(GAME_LEFT, GAME_TOP, GAME_WIDTH, GAME_HEIGHT))		//フェードエフェクトが終わったら
 	{
-		this->se->PlayOne((int)SE_TYPE_TEXT);	//テキスト表示の音を鳴らす
+		if (this->player->GetResult() != (int)RESULT_OTETUKI)	//お手付き以外のときは
+		{
+			this->se->PlayOne((int)SE_TYPE_RESULT);		//結果表示の音を鳴らす
+		}
+		else	//お手付きのときは
+		{
+			this->se->PlayOne((int)SE_TYPE_TEXT);	//テキスト表示の音を鳴らす
+		}
 
 		//結果毎に処理を分岐
 		switch (this->player->GetResult())
@@ -528,11 +536,9 @@ void GAMEMANEGER::PlayStage_Result()
 
 			this->DrawTextCenter(RESULT_TEXT_Y,RESULT_LOSE_TEXT);	//敗北文字描画
 
-			this->se->PlayOne((int)SE_TYPE_GAMEOVER);		//ゲームオーバーの音を鳴らす
-
 			if (this->keydown->IsKeyDownOne(KEY_INPUT_RETURN))	//エンターキーを押されたら
 			{
-				this->se->PlayReset((int)SE_TYPE_GAMEOVER);		//再生状態をリセット
+				this->se->PlayReset((int)SE_TYPE_RESULT);		//再生状態をリセット
 				this->Play_NowStage = (int)PLAY_STAGE_TEXT_DRAW;	//テキスト表示段階へ
 				this->NowScene = (int)SCENE_TITLE;	//タイトル画面へ
 			}
