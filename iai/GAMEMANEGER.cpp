@@ -524,24 +524,11 @@ void GAMEMANEGER::PlayStage_Result()
 
 			this->DrawNumTextCenter(DRAW_WIN_NUM_Y, WIN_NUM_DRAW_TEXT, this->player->GetWinNum());	//勝ち数を描画
 
-			if (this->keydown->IsKeyDownOne(KEY_INPUT_RETURN))	//エンターキーを押されたら
-			{
-				this->Play_NowStage = (int)PLAY_STAGE_TEXT_DRAW;	//テキスト表示段階へ
-			}
-
-
 			break;		//プレイヤーが勝った時ここまで
 
 		case (int)RESULT_LOSE:		//プレイヤーが負けたとき
 
 			this->DrawTextCenter(RESULT_TEXT_Y,RESULT_LOSE_TEXT);	//敗北文字描画
-
-			if (this->keydown->IsKeyDownOne(KEY_INPUT_RETURN))	//エンターキーを押されたら
-			{
-				this->se->PlayReset((int)SE_TYPE_RESULT);		//再生状態をリセット
-				this->Play_NowStage = (int)PLAY_STAGE_TEXT_DRAW;	//テキスト表示段階へ
-				this->NowScene = (int)SCENE_TITLE;	//タイトル画面へ
-			}
 
 			break;		//プレイヤーが負けたときここまで
 
@@ -549,26 +536,28 @@ void GAMEMANEGER::PlayStage_Result()
 
 			this->DrawTextCenter(RESULT_TEXT_Y,RESLUT_DRAW_TEXT);	//引き分け文字描画
 
-			if (this->keydown->IsKeyDownOne(KEY_INPUT_RETURN))	//エンターキーを押されたら
-			{
-				this->Play_NowStage = (int)PLAY_STAGE_TEXT_DRAW;	//テキスト表示段階へ
-			}
-
 			break;		//引き分けのときここまで
 
 		case (int)RESULT_OTETUKI:		//お手付きのとき
 
 			this->DrawTextCenter(RESULT_TEXT_Y,RESULT_OTETUKI_TEXT);	//お手付き文字描画
 
-			if (this->keydown->IsKeyDownOne(KEY_INPUT_RETURN))	//エンターキーを押されたら
-			{
-				this->Play_NowStage = (int)PLAY_STAGE_TEXT_DRAW;	//テキスト表示段階へ
-			}
-
 			break;		//お手付きのときここまで
 
 		default:
 			break;
+		}
+
+		//キー入力処理
+		if (this->keydown->IsKeyDownOne(KEY_INPUT_RETURN))	//エンターキーを押されたら
+		{
+			this->Play_NowStage = (int)PLAY_STAGE_TEXT_DRAW;	//テキスト表示段階へ
+
+			if (this->player->GetResult() == (int)RESULT_LOSE)	//負けたときは
+			{
+				this->NowScene = (int)SCENE_TITLE;	//タイトル画面へ
+			}
+
 		}
 
 	}
