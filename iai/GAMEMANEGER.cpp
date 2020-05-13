@@ -259,7 +259,7 @@ void GAMEMANEGER::Draw_Scene_Title()
 
 	this->back->Draw(GAME_LEFT,GAME_TOP);	//背景描画
 
-	DrawString(TEST_TEXT_X, TEST_TEXT_Y, TITLE_TEXT, COLOR_WHITE);	//テスト用のテキストを描画
+	//DrawString(TEST_TEXT_X, TEST_TEXT_Y, TITLE_TEXT, COLOR_WHITE);	//テスト用のテキストを描画
 
 	return;
 }
@@ -313,7 +313,7 @@ void GAMEMANEGER::Draw_Scene_Play()
 	this->player->Draw();		//プレイヤー描画
 	this->enemy->Draw();		//敵描画
 
-	DrawString(TEST_TEXT_X, TEST_TEXT_Y, PLAY_TEXT, COLOR_WHITE);	//テスト用のテキストを描画
+	//DrawString(TEST_TEXT_X, TEST_TEXT_Y, PLAY_TEXT, COLOR_WHITE);	//テスト用のテキストを描画
 
 	return;
 }
@@ -334,7 +334,7 @@ void GAMEMANEGER::Scene_End()
 void GAMEMANEGER::Draw_Scene_End()
 {
 
-	DrawString(TEST_TEXT_X, TEST_TEXT_Y, END_TEXT, COLOR_WHITE);	//テスト用のテキストを描画
+	//DrawString(TEST_TEXT_X, TEST_TEXT_Y, END_TEXT, COLOR_WHITE);	//テスト用のテキストを描画
 
 	return;
 }

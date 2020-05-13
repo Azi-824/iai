@@ -21,8 +21,7 @@
 #define FONT_FILE_NAME		R"(\HGRGY003.ttf)"			//フォントの名前
 //############### マクロ定義 ##################
 #define FONT_NAME		"HGS行書体"					//フォントの正式名称
-#define DEFAULT_FONTSIZE	40						//デフォルトのフォントサイズ
-#define BIG_FONTSIZE		64						//フォントサイズ大
+#define DEFAULT_FONTSIZE	128						//デフォルトのフォントサイズ
 
 //################ マクロ定義 エラーメッセージ #################
 #define FONT_ERROR_TITLE "FONT_ERROR"						//エラータイトル
