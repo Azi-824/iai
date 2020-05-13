@@ -46,5 +46,7 @@ public:
 
 	void SetInit();				//初期設定
 
+	void SetFade(bool);			//フェードアウトするか設定
+
 };
 

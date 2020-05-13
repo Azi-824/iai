@@ -59,6 +59,7 @@ private:
 
 	bool IsLoad;				//読み込めたか？
 	std::vector<bool> IsDraw;	//描画してよいか
+	std::vector<bool> IsFade;	//フェードアウトするか
 
 public:
 	IMAGE(const char *,const char *);	//コンストラクタ
@@ -80,7 +81,7 @@ public:
 	bool AddImage(const char *, const char *);	//画像を追加
 	void ChengeImage(int);						//描画する画像を変更
 
-	bool FadeOut(int,int,int);				//指定された画像をフェードアウトする
+	void SetIsFade(bool);		//フェードアウトするか設定
 
 };
 

@@ -95,26 +95,7 @@ bool CHARACTOR::GetIsLoad()
 //操作
 void CHARACTOR::Operation(KEYDOWN *keydown)
 {
-
-	//if (keydown->IsKeyDown(KEY_INPUT_W))		//Wキーを押しているとき
-	//{
-	//	this->MoveUp();							//上へ移動
-	//}
-	//else if (keydown->IsKeyDown(KEY_INPUT_S))	//Sキーを押しているとき
-	//{
-	//	this->MoveDown();						//下へ移動
-	//}
-	//else if (keydown->IsKeyDown(KEY_INPUT_A))	//Aキーを押しているとき
-	//{
-	//	this->MoveLeft();						//左へ移動
-	//}
-	//else if (keydown->IsKeyDown(KEY_INPUT_D))	//Dキーを押しているとき
-	//{
-	//	this->MoveRight();						//右へ移動
-	//}
-
 	return;
-	
 }
 
 //初期化設定
@@ -136,4 +117,11 @@ void CHARACTOR::Draw()
 	{
 		this->image->Draw(this->Draw_X, this->Draw_Y);	//画像描画
 	}
+}
+
+//フェードアウトするか設定
+void CHARACTOR::SetFade(bool isfade)
+{
+	this->image ->SetIsFade(isfade);
+	return;
 }

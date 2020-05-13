@@ -50,6 +50,8 @@ IMAGE::IMAGE(const char *dir,const char *name)
 
 	this->IsDraw.push_back(true);	//描画してよい
 
+	this->IsFade.push_back(false);	//フェードアウトしない
+
 	this->ImageKind = this->Handle.size();	//読み込んだ数を取得
 
 	return;
@@ -126,11 +128,60 @@ void IMAGE::SetIsDraw(bool isdraw)
 //画像を描画
 void IMAGE::Draw(int x, int y)
 {
-	
-	if (this->IsDraw[this->Draw_Num])	//描画してよければ
+
+	static int cnt = 0;				//カウント用
+	static bool end_flg = false;	//フェード終了フラグ
+
+	if (this->IsFade.at(this->Draw_Num))	//フェードアウトするときは
 	{
-		DrawGraph(x, y, this->Handle[this->Draw_Num], TRUE);	//画像を描画
+		if (!end_flg)	//フェードアウト終了していなければ
+		{
+
+			this->IsDraw.at(this->Draw_Num) = true;	//描画する
+
+			if (this->IsDraw[this->Draw_Num])	//描画してよければ
+			{
+				
+				//60フレーム分、待つ
+				if (cnt < FADE_MAX_CNT)
+				{
+					++cnt;	//カウントアップ
+				}
+				else
+				{
+					end_flg = true;	//フェード終了
+				}
+
+				//フェードアウトの処理
+				double ToukaPercent = cnt / (double)FADE_MAX_CNT;						//透過%を計算
+				SetDrawBlendMode(DX_BLENDMODE_ALPHA, ToukaPercent * TOUKA_MAX_VALUE);	//透過させる
+				DrawGraph(x, y, this->Handle[this->Draw_Num], TRUE);					//画像を描画
+				SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);								//透過をやめる
+
+
+			}
+
+
+		}
+		else if (end_flg)	//フェードアウト終了したら
+		{
+			this->IsDraw.at(this->Draw_Num) = false;	//描画しない
+			end_flg = false;	//フェードアウト終了フラグリセット
+			cnt = 0;		//カウントリセット
+			this->IsFade.at(this->Draw_Num) = false;	//フェードアウトしない
+		}
+
 	}
+	else		//フェードアウトしない時は
+	{
+
+		if (this->IsDraw[this->Draw_Num])	//描画してよければ
+		{
+			DrawGraph(x, y, this->Handle[this->Draw_Num], TRUE);	//画像を描画
+		}
+
+	}
+	
 
 	return;
 
@@ -187,6 +238,7 @@ bool IMAGE::AddImage(const char *dir, const char *name)
 	this->IsLoad = true;		//読み込めた
 
 	this->IsDraw.push_back(true);	//描画してよい
+	this->IsFade.push_back(false);	//フェードアウトしない
 
 	this->ImageKind = this->Handle.size();	//読み込んだ数を取得
 
@@ -201,40 +253,9 @@ void IMAGE::ChengeImage(int kind)
 	return;
 }
 
-//指定された、画像をフェードアウトさせる
-//引数：int：フェードアウトさせる、画像のX位置
-//引数：int：フェードアウトさせる、画像のY位置
-//引数：int：フェードアウトさせる、画像の種類
-bool IMAGE::FadeOut(int x,int y,int kind)
+//フェードアウトするか設定
+void IMAGE::SetIsFade(bool isfade)
 {
-	static int cnt = 0;				//カウント用
-	static bool end_flg = false;	//フェード終了フラグ
-
-	if (!end_flg)	//フェードアウト終了していなければ
-	{
-		//60フレーム分、待つ
-		if (cnt < FADE_MAX_CNT)
-		{
-			++cnt;	//カウントアップ
-		}
-		else
-		{
-			end_flg = true;	//フェード終了
-		}
-
-		//フェードアウトの処理
-		double ToukaPercent = cnt / (double)FADE_MAX_CNT;											//透過%を計算
-		SetDrawBlendMode(DX_BLENDMODE_ALPHA, ToukaPercent * TOUKA_MAX_VALUE);					//透過させる
-		DrawBox(x, y, this->Width.at(kind), this->Height.at(kind), GetColor(0, 0, 0), TRUE);	//真っ暗な画面にする
-		SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);												//透過をやめる
-
-	}
-	else if (end_flg)	//フェードアウト終了したら
-	{
-		cnt = 0;			//カウントリセット
-		end_flg = false;	//終了フラグリセット
-	}
-
-	return true;
-
+	this->IsFade.at(this->Draw_Num) = isfade;
+	return;
 }

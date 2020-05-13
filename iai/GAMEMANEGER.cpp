@@ -505,6 +505,19 @@ void GAMEMANEGER::PlayStage_Result()
 	//フェードインエフェクト
 	if (this->effect->FadeIn(GAME_LEFT, GAME_TOP, GAME_WIDTH, GAME_HEIGHT))		//フェードエフェクトが終わったら
 	{
+		/*
+		修正箇所
+		ここから
+		*/
+		if (this->player->GetResult() == (int)RESULT_WIN)	//プレイヤーが勝った時は
+		{
+			this->enemy->SetFade(true);	//敵をフェードアウト
+		}
+		/*
+		修正箇所
+		ここまで
+		*/
+
 		if (this->player->GetResult() != (int)RESULT_OTETUKI)	//お手付き以外のときは
 		{
 			this->se->PlayOne((int)SE_TYPE_RESULT);		//結果表示の音を鳴らす
