@@ -460,6 +460,8 @@ void GAMEMANEGER::PlayStage_Main()
 		if (this->keydown->IsKeyDownOne(KEY_INPUT_RETURN))	//エンターキーを押されたら
 		{
 
+			this->se->Stop();		//効果音の再生を止める
+
 			this->player->SetResult((int)RESULT_OTETUKI);	//結果をお手付きに設定
 
 			this->Play_NowStage = (int)PLAY_STAGE_RESULT;	//結果表示段階へ
@@ -559,6 +561,9 @@ void GAMEMANEGER::PlayStage_Result()
 		//キー入力処理
 		if (this->keydown->IsKeyDownOne(KEY_INPUT_RETURN))	//エンターキーを押されたら
 		{
+
+			this->se->Stop();	//効果音の再生を止める
+
 			this->Play_NowStage = (int)PLAY_STAGE_TEXT_DRAW;	//テキスト表示段階へ
 
 			if (this->player->GetResult() == (int)RESULT_LOSE)	//負けたときは
