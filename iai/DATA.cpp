@@ -23,3 +23,27 @@ DATA::~DATA()
 {
 	return;
 }
+
+//”NŽæ“¾
+int DATA::GetYear()
+{
+	return this->Year;
+}
+
+//ŒŽŽæ“¾
+int DATA::GetMonth()
+{
+	return this->Month;
+}
+
+//“úŽæ“¾
+int DATA::GetDay()
+{
+	return this->Day;
+}
+
+//Ÿ‚¿”Žæ“¾
+int DATA::GetWinNum()
+{
+	return this->WinNum;
+}

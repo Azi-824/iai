@@ -24,6 +24,9 @@ public:
 	DATA(int,int,int,int);			//コンストラクタ
 	~DATA();						//デストラクタ
 
-
+	int GetYear();		//年取得
+	int GetMonth();		//月取得
+	int GetDay();		//日取得
+	int GetWinNum();	//勝ち数取得
 
 };

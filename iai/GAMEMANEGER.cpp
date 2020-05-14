@@ -574,6 +574,8 @@ void GAMEMANEGER::PlayStage_Result()
 
 				this->save->Add(this->player->GetWinNum());	//セーブデータ追加
 
+				this->save->Save();		//セーブ処理
+
 				this->NowScene = (int)SCENE_TITLE;	//タイトル画面へ
 			}
 
