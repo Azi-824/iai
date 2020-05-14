@@ -9,8 +9,6 @@
 //コンストラクタ
 SAVEDATA::SAVEDATA()
 {
-
-
 	return;
 }
 
@@ -84,9 +82,69 @@ bool SAVEDATA::Save()
 		ofs << this->DataCode.at(i)->GetYear() << ',';				//年、書き出し
 		ofs << this->DataCode.at(i)->GetMonth() << ',';				//月、書き出し
 		ofs << this->DataCode.at(i)->GetDay() << ',';				//日、書き出し
-		ofs << this->DataCode.at(i)->GetWinNum() << std::endl;		//勝ち数、書き出し
+		if (i == this->DataCode.size() - 1)	//最後の書き込みだったら
+		{
+			//終端文字を付ける
+			ofs << this->DataCode.at(i)->GetWinNum() << '\0';			//勝ち数、書き出し
+		}
+		else	//最後の書き込みじゃなければ
+		{
+			//改行する
+			ofs << this->DataCode.at(i)->GetWinNum() << '\n';			//勝ち数、書き出し
+		}
+
 
 	}
 
 	return true;		//セーブ成功
+}
+
+//読み込み
+bool SAVEDATA::Load()
+{
+	std::string LoadFile;
+	LoadFile += SAVEDATA_DIR;
+	LoadFile += SAVEDATA_NAME;
+
+	std::ifstream ifs(LoadFile.c_str());	//ファイル読み取り
+
+	if (!ifs)		//ファイルオープン失敗時
+	{
+		std::string ErrorMsg(DATA_ERROR_MSG);	//エラーメッセージ作成
+		ErrorMsg += TEXT('\n');						//改行
+		ErrorMsg += LoadFile;					//画像のパス
+
+		MessageBox(
+			NULL,
+			ErrorMsg.c_str(),	//char * を返す
+			TEXT(DATA_ERROR_TTILE),
+			MB_OK);
+
+		return false;	//読み込み失敗
+
+	}
+
+
+	std::string buf;
+	int yy = 0, mm = 0, dd = 0, wn = 0;		//年、月、日、勝ち数
+
+	while (!ifs.eof())				//最後の行まで読み込み
+	{
+		std::getline(ifs, buf,',');		//カンマまで読み込み
+		yy = atoi(buf.c_str());			//年読み込み
+		
+		std::getline(ifs, buf, ',');	//カンマまで読み込み
+		mm = atoi(buf.c_str());			//月読み込み
+
+		std::getline(ifs, buf, ',');	//カンマまで読み込み
+		dd = atoi(buf.c_str());			//日読み込み
+
+		std::getline(ifs, buf, '\n');	//改行まで読み込み
+		wn = atoi(buf.c_str());			//勝ち数読み込み
+
+		this->DataCode.push_back(new DATA(yy, mm, dd, wn));		//データ追加
+
+	}
+
+	return true;	//読み込み成功
 }

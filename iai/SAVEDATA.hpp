@@ -36,5 +36,6 @@ public:
 	void Add(int);	//データ追加
 
 	bool Save();	//セーブ
+	bool Load();	//読み込み
 
 };

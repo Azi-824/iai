@@ -105,6 +105,13 @@ bool GAMEMANEGER::Load()
 
 	//セーブデータ関係
 	this->save = new SAVEDATA();	//セーブデータを管理するオブジェクトを生成
+	struct stat statbuf;			//ファイルの存在確認に使用
+	std::string filepath = SAVEDATA_DIR;
+	filepath += SAVEDATA_NAME;
+	if (stat(filepath.c_str(), &statbuf) == 0)		//セーブデータ用のファイルが作成されている場合
+	{
+		if (this->save->Load() == false) { return false; }	//セーブデータ読み込み
+	}
 
 	return true;	//読み込み成功
 }
