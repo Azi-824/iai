@@ -506,8 +506,9 @@ void GAMEMANEGER::PlayStage_Main()
 void GAMEMANEGER::PlayStage_Result()
 {
 
-	if (this->player->GetFadeEnd() ||		//敵のフェードエフェクトが終わったか、
-		this->enemy->GetFadeEnd())		//自分のフェードエフェクトが終わったら
+	if (this->player->GetFadeEnd() ||		//自分のフェードエフェクトが終わったか、
+		this->enemy->GetFadeEnd() ||		//敵のフェードエフェクトが終わったか、
+		this->player->GetResult()==(int)RESULT_OTETUKI)	//結果がお手付きだったら		
 	{
 
 		//結果表示処理開始

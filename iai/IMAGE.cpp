@@ -129,6 +129,7 @@ bool IMAGE::GetIsLoad(void)
 void IMAGE::SetIsDraw(bool isdraw)
 {
 	this->IsDraw[this->Draw_Num] = isdraw;
+	this->FadeEnd.at(this->Draw_Num) = false;	//フェードアウト終了フラグリセット
 	return;
 }
 
