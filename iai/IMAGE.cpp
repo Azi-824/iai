@@ -129,7 +129,7 @@ void IMAGE::SetIsDraw(bool isdraw)
 void IMAGE::Draw(int x, int y)
 {
 
-	static int cnt = 0;				//カウント用
+	static int cnt = FADE_MAX_CNT;				//カウント用
 	static bool end_flg = false;	//フェード終了フラグ
 
 	if (this->IsFade.at(this->Draw_Num))	//フェードアウトするときは
@@ -137,15 +137,13 @@ void IMAGE::Draw(int x, int y)
 		if (!end_flg)	//フェードアウト終了していなければ
 		{
 
-			this->IsDraw.at(this->Draw_Num) = true;	//描画する
-
 			if (this->IsDraw[this->Draw_Num])	//描画してよければ
 			{
 				
 				//60フレーム分、待つ
-				if (cnt < FADE_MAX_CNT)
+				if (cnt > 0)
 				{
-					++cnt;	//カウントアップ
+					--cnt;	//カウントアップ
 				}
 				else
 				{
@@ -166,8 +164,8 @@ void IMAGE::Draw(int x, int y)
 		else if (end_flg)	//フェードアウト終了したら
 		{
 			this->IsDraw.at(this->Draw_Num) = false;	//描画しない
-			end_flg = false;	//フェードアウト終了フラグリセット
-			cnt = 0;		//カウントリセット
+			end_flg = false;		//フェードアウト終了フラグリセット
+			cnt = FADE_MAX_CNT;		//カウントリセット
 			this->IsFade.at(this->Draw_Num) = false;	//フェードアウトしない
 		}
 

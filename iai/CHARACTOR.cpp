@@ -125,3 +125,10 @@ void CHARACTOR::SetFade(bool isfade)
 	this->image ->SetIsFade(isfade);
 	return;
 }
+
+//•`‰æ‚·‚é‚©Ý’è
+void CHARACTOR::SetIsDraw(bool isdraw)
+{
+	this->image->SetIsDraw(isdraw);
+	return;
+}

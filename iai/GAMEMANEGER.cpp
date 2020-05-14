@@ -361,6 +361,10 @@ bool GAMEMANEGER::WaitStartTime()
 //プレイ画面で使用するものをリセット
 void GAMEMANEGER::PlayReset()
 {
+
+	this->player->SetIsDraw(true);			//プレイヤーを描画する
+	this->enemy->SetIsDraw(true);			//敵を描画する
+
 	this->player->ChengeImage((int)PLAYER_IMG_NORMAL);		//描画するプレイヤーの画像を通常時の画像に変更
 	this->enemy->ChengeImage((int)ENEMY_IMG_NORMAL);		//描画する敵の画像を通常時の画像に変更
 
@@ -393,11 +397,13 @@ void GAMEMANEGER::Judg()
 	{
 		this->player->IncreaseWinNum();					//勝ち数を増やす
 		this->enemy->SpeedUp();							//敵の速度を早くする
+		this->enemy->SetFade(true);						//敵をフェードアウト
 		this->player->SetResult((int)RESULT_WIN);		//結果を設定(勝利)
 	}
 	else if (this->player->GetPushTime() > enemy->GetSpeed())		//敵より遅かったら
 	{
 		this->player->SetResult((int)RESULT_LOSE);		//結果を設定(敗北)
+		this->player->SetFade(true);					//自分をフェードアウト
 		this->enemy->SpeedReset();						//速さをリセット
 	}
 	else		//引き分けだったら
@@ -482,7 +488,7 @@ void GAMEMANEGER::PlayStage_Main()
 
 		this->effect->Draw(GAME_LEFT, GAME_TOP, (int)EFFECT_SLASH);	//エフェクト描画
 
-		this->effect->SetIsFadein(true);		//フェードインを行う
+		//this->effect->SetIsFadein(true);		//フェードインを行う
 
 		if (this->effect->GetIsDrawEnd())	//エフェクト描画が終わったら
 		{
@@ -505,18 +511,6 @@ void GAMEMANEGER::PlayStage_Result()
 	//フェードインエフェクト
 	if (this->effect->FadeIn(GAME_LEFT, GAME_TOP, GAME_WIDTH, GAME_HEIGHT))		//フェードエフェクトが終わったら
 	{
-		/*
-		修正箇所
-		ここから
-		*/
-		if (this->player->GetResult() == (int)RESULT_WIN)	//プレイヤーが勝った時は
-		{
-			this->enemy->SetFade(true);	//敵をフェードアウト
-		}
-		/*
-		修正箇所
-		ここまで
-		*/
 
 		if (this->player->GetResult() != (int)RESULT_OTETUKI)	//お手付き以外のときは
 		{
