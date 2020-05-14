@@ -488,8 +488,6 @@ void GAMEMANEGER::PlayStage_Main()
 
 		this->effect->Draw(GAME_LEFT, GAME_TOP, (int)EFFECT_SLASH);	//エフェクト描画
 
-		//this->effect->SetIsFadein(true);		//フェードインを行う
-
 		if (this->effect->GetIsDrawEnd())	//エフェクト描画が終わったら
 		{
 
@@ -508,9 +506,11 @@ void GAMEMANEGER::PlayStage_Main()
 void GAMEMANEGER::PlayStage_Result()
 {
 
-	//フェードインエフェクト
-	if (this->effect->FadeIn(GAME_LEFT, GAME_TOP, GAME_WIDTH, GAME_HEIGHT))		//フェードエフェクトが終わったら
+	if (this->player->GetFadeEnd() ||		//敵のフェードエフェクトが終わったか、
+		this->enemy->GetFadeEnd())		//自分のフェードエフェクトが終わったら
 	{
+
+		//結果表示処理開始
 
 		if (this->player->GetResult() != (int)RESULT_OTETUKI)	//お手付き以外のときは
 		{
@@ -527,7 +527,7 @@ void GAMEMANEGER::PlayStage_Result()
 
 		case (int)RESULT_WIN:		//プレイヤーが勝った時
 
-			this->DrawTextCenter(RESULT_TEXT_Y,RESULT_WIN_TEXT);		//勝利文字描画
+			this->DrawTextCenter(RESULT_TEXT_Y, RESULT_WIN_TEXT);		//勝利文字描画
 
 			this->DrawNumTextCenter(DRAW_WIN_NUM_Y, WIN_NUM_DRAW_TEXT, this->player->GetWinNum());	//勝ち数を描画
 
@@ -535,19 +535,19 @@ void GAMEMANEGER::PlayStage_Result()
 
 		case (int)RESULT_LOSE:		//プレイヤーが負けたとき
 
-			this->DrawTextCenter(RESULT_TEXT_Y,RESULT_LOSE_TEXT);	//敗北文字描画
+			this->DrawTextCenter(RESULT_TEXT_Y, RESULT_LOSE_TEXT);	//敗北文字描画
 
 			break;		//プレイヤーが負けたときここまで
 
 		case (int)RESULT_DRAW:		//引き分けのとき
 
-			this->DrawTextCenter(RESULT_TEXT_Y,RESLUT_DRAW_TEXT);	//引き分け文字描画
+			this->DrawTextCenter(RESULT_TEXT_Y, RESLUT_DRAW_TEXT);	//引き分け文字描画
 
 			break;		//引き分けのときここまで
 
 		case (int)RESULT_OTETUKI:		//お手付きのとき
 
-			this->DrawTextCenter(RESULT_TEXT_Y,RESULT_OTETUKI_TEXT);	//お手付き文字描画
+			this->DrawTextCenter(RESULT_TEXT_Y, RESULT_OTETUKI_TEXT);	//お手付き文字描画
 
 			break;		//お手付きのときここまで
 
@@ -568,7 +568,6 @@ void GAMEMANEGER::PlayStage_Result()
 		}
 
 	}
-
 
 	return;
 }

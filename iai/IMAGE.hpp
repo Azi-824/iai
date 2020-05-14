@@ -83,6 +83,7 @@ public:
 	void ChengeImage(int);						//描画する画像を変更
 
 	void SetIsFade(bool);		//フェードアウトするか設定
+	bool GetFadeEnd();			//フェードエフェクトが終了しているか取得
 
 };
 

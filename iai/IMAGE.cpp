@@ -170,7 +170,6 @@ void IMAGE::Draw(int x, int y)
 		else 		//フェードアウト終了したら
 		{
 			this->IsDraw.at(this->Draw_Num) = false;	//描画しない
-			this->FadeEnd.at(this->Draw_Num) = false;	//フェードアウト終了フラグリセット
 			cnt = FADE_MAX_CNT;							//カウントリセット
 			this->IsFade.at(this->Draw_Num) = false;	//フェードアウトしない
 		}
@@ -178,7 +177,6 @@ void IMAGE::Draw(int x, int y)
 	}
 	else		//フェードアウトしない時は
 	{
-
 		if (this->IsDraw[this->Draw_Num])	//描画してよければ
 		{
 			DrawGraph(x, y, this->Handle[this->Draw_Num], TRUE);	//画像を描画
@@ -262,5 +260,13 @@ void IMAGE::ChengeImage(int kind)
 void IMAGE::SetIsFade(bool isfade)
 {
 	this->IsFade.at(this->Draw_Num) = isfade;
+	this->FadeEnd.at(this->Draw_Num) = false;	//フェードアウト終了フラグリセット
+
 	return;
+}
+
+//フェードエフェクトが終了しているか取得
+bool IMAGE::GetFadeEnd()
+{
+	return this->FadeEnd.at(this->Draw_Num);
 }

@@ -48,6 +48,7 @@ public:
 
 	void SetFade(bool);			//フェードアウトするか設定
 	void SetIsDraw(bool);		//描画するか設定
+	bool GetFadeEnd();			//フェードエフェクトが終了したか取得
 
 };
 

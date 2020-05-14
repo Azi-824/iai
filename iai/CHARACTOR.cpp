@@ -132,3 +132,9 @@ void CHARACTOR::SetIsDraw(bool isdraw)
 	this->image->SetIsDraw(isdraw);
 	return;
 }
+
+//フェードエフェクトが終了したか取得
+bool CHARACTOR::GetFadeEnd()
+{
+	return this->image->GetFadeEnd();
+}
