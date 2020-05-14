@@ -13,6 +13,7 @@
 #include "MUSIC.hpp"
 #include "EFFECT.hpp"
 #include "FONT.hpp"
+#include "SAVEDATA.hpp"
 
 //############### マクロ定義 ################
 #define GAME_LEFT	  0		//画面の横の始点
@@ -86,6 +87,7 @@ private:
 	MUSIC *bgm;					//BGM
 	EFFECT *effect;				//エフェクト
 	FONT *font;					//フォント
+	SAVEDATA *save;				//セーブデータ
 
 	int NowScene;				//現在のシーン
 	bool IsLoad;				//読み込みが終わったか

@@ -156,6 +156,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="CHARACTOR.hpp" />
+    <ClInclude Include="DATA.hpp" />
     <ClInclude Include="EFFECT.hpp" />
     <ClInclude Include="ENEMY.hpp" />
     <ClInclude Include="FONT.hpp" />
@@ -166,9 +167,11 @@
     <ClInclude Include="main.hpp" />
     <ClInclude Include="MUSIC.hpp" />
     <ClInclude Include="PLAYER.hpp" />
+    <ClInclude Include="SAVEDATA.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CHARACTOR.cpp" />
+    <ClCompile Include="DATA.cpp" />
     <ClCompile Include="EFFECT.cpp" />
     <ClCompile Include="ENEMY.cpp" />
     <ClCompile Include="FONT.cpp" />
@@ -179,6 +182,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MUSIC.cpp" />
     <ClCompile Include="PLAYER.cpp" />
+    <ClCompile Include="SAVEDATA.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

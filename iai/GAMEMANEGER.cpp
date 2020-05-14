@@ -40,6 +40,7 @@ GAMEMANEGER::~GAMEMANEGER()
 	delete this->bgm;		//bgm破棄
 	delete this->effect;	//effect破棄
 	delete this->font;		//font破棄
+	delete this->save;		//save破棄
 
 	return;
 
@@ -102,6 +103,8 @@ bool GAMEMANEGER::Load()
 	this->effect = new EFFECT(EFFECT_DIR, EFFECT_NAME_SLASH, EFFECT_SLASH_ALL_CNT, EFFECT_SLASH_YOKO_CNT, EFFECT_SLASH_TATE_CNT, EFFECT_SLASH_WIDTH, EFFECT_SLASH_HEIGHT, EFFECT_SLASH_SPEED, false, this->fps->Getvalue());
 	if (this->effect->GetIsLoad() == false) { return false; }	//読み込み失敗
 
+	//セーブデータ関係
+	this->save = new SAVEDATA();	//セーブデータを管理するオブジェクトを生成
 
 	return true;	//読み込み成功
 }
@@ -568,6 +571,9 @@ void GAMEMANEGER::PlayStage_Result()
 
 			if (this->player->GetResult() == (int)RESULT_LOSE)	//負けたときは
 			{
+
+				this->save->Add(this->player->GetWinNum());	//セーブデータ追加
+
 				this->NowScene = (int)SCENE_TITLE;	//タイトル画面へ
 			}
 
