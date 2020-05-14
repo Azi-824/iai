@@ -60,6 +60,7 @@ private:
 	bool IsLoad;				//読み込めたか？
 	std::vector<bool> IsDraw;	//描画してよいか
 	std::vector<bool> IsFade;	//フェードアウトするか
+	std::vector<bool> FadeEnd;	//フェードエフェクトが終わったか
 
 public:
 	IMAGE(const char *,const char *);	//コンストラクタ

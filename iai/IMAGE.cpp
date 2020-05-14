@@ -51,6 +51,7 @@ IMAGE::IMAGE(const char *dir,const char *name)
 	this->IsDraw.push_back(true);	//描画してよい
 
 	this->IsFade.push_back(false);	//フェードアウトしない
+	this->FadeEnd.push_back(false);	//フェードエフェクトが終わっていない
 
 	this->ImageKind = this->Handle.size();	//読み込んだ数を取得
 
@@ -77,6 +78,12 @@ IMAGE::~IMAGE()
 
 	std::vector<bool>v4;
 	this->IsDraw.swap(v4);
+
+	std::vector<bool>v5;
+	this->IsFade.swap(v5);
+
+	std::vector<bool>v6;
+	this->FadeEnd.swap(v6);
 
 	return;
 }
@@ -130,11 +137,10 @@ void IMAGE::Draw(int x, int y)
 {
 
 	static int cnt = FADE_MAX_CNT;				//カウント用
-	static bool end_flg = false;	//フェード終了フラグ
 
 	if (this->IsFade.at(this->Draw_Num))	//フェードアウトするときは
 	{
-		if (!end_flg)	//フェードアウト終了していなければ
+		if (!this->FadeEnd.at(this->Draw_Num))	//フェードアウト終了していなければ
 		{
 
 			if (this->IsDraw[this->Draw_Num])	//描画してよければ
@@ -147,7 +153,7 @@ void IMAGE::Draw(int x, int y)
 				}
 				else
 				{
-					end_flg = true;	//フェード終了
+					this->FadeEnd.at(this->Draw_Num) = true;	//フェード終了
 				}
 
 				//フェードアウトの処理
@@ -161,11 +167,11 @@ void IMAGE::Draw(int x, int y)
 
 
 		}
-		else if (end_flg)	//フェードアウト終了したら
+		else 		//フェードアウト終了したら
 		{
 			this->IsDraw.at(this->Draw_Num) = false;	//描画しない
-			end_flg = false;		//フェードアウト終了フラグリセット
-			cnt = FADE_MAX_CNT;		//カウントリセット
+			this->FadeEnd.at(this->Draw_Num) = false;	//フェードアウト終了フラグリセット
+			cnt = FADE_MAX_CNT;							//カウントリセット
 			this->IsFade.at(this->Draw_Num) = false;	//フェードアウトしない
 		}
 
@@ -237,6 +243,7 @@ bool IMAGE::AddImage(const char *dir, const char *name)
 
 	this->IsDraw.push_back(true);	//描画してよい
 	this->IsFade.push_back(false);	//フェードアウトしない
+	this->FadeEnd.push_back(false);	//フェードエフェクトが終わっていない
 
 	this->ImageKind = this->Handle.size();	//読み込んだ数を取得
 
