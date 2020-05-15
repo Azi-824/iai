@@ -26,7 +26,7 @@
 //テキスト関係
 #define LOAD_TEXT	"NowLoading…"		//ロード画面のテキスト
 #define PUSH_TEXT	"PushEnter"			//エンターキーを押す、のテキスト
-#define TITLE_TEXT	"NowTitle"			//タイトル画面のテキスト
+#define TITLE_TEXT	"試合開始"			//タイトル画面のテキスト
 #define PLAY_TEXT	"NowPlay"			//プレイ画面のテキスト
 #define END_TEXT	"NowEnd"			//エンド画面のテキスト
 
@@ -44,6 +44,7 @@
 #define TEST_TEXT_Y	30					//テスト用のテキスト描画Y位置
 #define RESULT_TEXT_Y	5				//結果描画Y位置
 #define DRAW_WIN_NUM_Y	120				//勝ち数の描画Y位置
+#define TITLE_TEXT_Y	400				//タイトル画面のテキスト描画Y位置
 
 //色関係
 #define COLOR_RED	GetColor(255,0,0)		//赤色
@@ -135,8 +136,8 @@ public:
 	void PlayStage_Result();	//プレイ段階、結果表示のときの処理
 
 
-	void DrawTextCenter(int,const char *);			//渡された文字列を画面中央に描画する(高さは自分で指定する)
-	void DrawNumTextCenter(int, const char *, int);	//書式付き(数字)文字列を中央に描画する(高さは自分で指定する)
+	void DrawTextCenter(int,const char *,unsigned int color=COLOR_BLACK);	//渡された文字列を画面中央に描画する(高さは自分で指定する)
+	void DrawNumTextCenter(int, const char *, int);							//書式付き(数字)文字列を中央に描画する(高さは自分で指定する)
 
 	void Save();	//セーブ
 

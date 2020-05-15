@@ -280,6 +280,8 @@ void GAMEMANEGER::Draw_Scene_Title()
 
 	this->back->Draw(GAME_LEFT,GAME_TOP);	//背景描画
 
+	this->DrawTextCenter(TITLE_TEXT_Y, TITLE_TEXT, COLOR_WHITE);	//テキスト描画
+
 	return;
 }
 
@@ -605,7 +607,8 @@ void GAMEMANEGER::PlayStage_Result()
 //渡された文字列を画面中央に描画する(高さは自分で指定する)
 //引数：int：描画Y位置
 //引数：const char *：描画する文字列
-void GAMEMANEGER::DrawTextCenter(int y,const char *text)
+//引数：unsigned int：描画色：指定しない場合は、黒
+void GAMEMANEGER::DrawTextCenter(int y,const char *text,unsigned int color)
 {
 	int Strlen = 0;		//文字列の長さ取得用
 	int Width = 0;		//文字列の幅取得用
@@ -613,7 +616,7 @@ void GAMEMANEGER::DrawTextCenter(int y,const char *text)
 	Strlen = strlen(text);	//文字列長さを取得
 	Width = GetDrawStringWidth(text, Strlen);	//横幅取得
 
-	DrawString((GAME_WIDTH / 2) - (Width / 2), y, text, COLOR_BLACK);		//文字列を描画
+	DrawString((GAME_WIDTH / 2) - (Width / 2), y, text, color);		//文字列を描画
 
 	return;
 
