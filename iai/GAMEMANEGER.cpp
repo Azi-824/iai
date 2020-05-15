@@ -350,6 +350,10 @@ void GAMEMANEGER::Scene_End()
 //エンド画面の描画処理
 void GAMEMANEGER::Draw_Scene_End()
 {
+	this->font->SetSize(DEFAULT_FONTSIZE / 3);	//フォントサイズ変更
+	this->save->Draw();
+	this->font->SetSize(DEFAULT_FONTSIZE);	//フォントサイズを元の大きさに
+
 	return;
 }
 
@@ -586,7 +590,12 @@ void GAMEMANEGER::PlayStage_Result()
 
 				this->save->Save();		//セーブ処理
 
-				this->NowScene = (int)SCENE_TITLE;	//タイトル画面へ
+				this->save->Sort();		//ソート処理
+
+				//this->NowScene = (int)SCENE_TITLE;	//タイトル画面へ
+
+				this->NowScene = (int)SCENE_END;	//エンド画面へ
+
 			}
 
 		}
