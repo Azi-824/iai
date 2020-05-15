@@ -138,4 +138,6 @@ public:
 	void DrawTextCenter(int,const char *);			//渡された文字列を画面中央に描画する(高さは自分で指定する)
 	void DrawNumTextCenter(int, const char *, int);	//書式付き(数字)文字列を中央に描画する(高さは自分で指定する)
 
+	void Save();	//セーブ
+
 };

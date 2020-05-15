@@ -37,6 +37,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		*/
 	}
 
+	gamemaneger->Save();	//セーブ
 
 	Delete_Class();			//使用したクラスを破棄
 

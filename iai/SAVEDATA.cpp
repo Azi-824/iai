@@ -173,13 +173,25 @@ void SAVEDATA::Sort()
 //データ描画
 void SAVEDATA::Draw()
 {
+
+	int Height = GetFontSize();		//高さ取得
+
+	DrawString(DRAW_DATA_X, DRAW_DATA_Y, DRAW_DATA_TEXT_INDEX, GetColor(255, 255, 255));		//ランキングタイトル描画
+
 	for (int i = 0; i < this->DataCode.size();++i)
 	{
-		DrawFormatString(0, 0 + i * 30, GetColor(255, 255, 255), "%d年%d月%d日%d人抜き",
+
+		if (i >= DRAW_DATA_MAX)		//ランキング描画する最大数になったら
+		{
+			break;					//ループを抜ける
+		}
+
+		DrawFormatString(DRAW_DATA_X, DRAW_DATA_Y + (i + 1) * Height, GetColor(255, 255, 255), DRAW_DATA_TEXT,
+			i + 1,								//何位か
+			this->DataCode.at(i)->GetWinNum(),	//勝ち数
 			this->DataCode.at(i)->GetYear(),	//年
 			this->DataCode.at(i)->GetMonth(),	//月
-			this->DataCode.at(i)->GetDay(),		//日
-			this->DataCode.at(i)->GetWinNum());	//勝ち数
+			this->DataCode.at(i)->GetDay());	//日
 	}
 
 	return;

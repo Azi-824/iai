@@ -22,6 +22,7 @@
 //############### マクロ定義 ##################
 #define FONT_NAME		"HGS行書体"					//フォントの正式名称
 #define DEFAULT_FONTSIZE	128						//デフォルトのフォントサイズ
+#define FONTSIZE_DRAW_RANKING	54					//ランキング描画の時のフォントサイズ
 
 //################ マクロ定義 エラーメッセージ #################
 #define FONT_ERROR_TITLE "FONT_ERROR"						//エラータイトル

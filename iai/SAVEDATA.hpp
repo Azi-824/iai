@@ -16,6 +16,14 @@
 
 #define SAVEDATA_NAME	R"(\Savedata.csv)"		//セーブデータの名前
 
+
+//テキスト関係
+#define DRAW_DATA_TEXT_INDEX	"ランキング"					//ランキングのテキストタイトル
+#define DRAW_DATA_TEXT			"%2d位:%d人抜き(%d/%d/%d)"		//ランキング描画のテキスト
+#define DRAW_DATA_X		0	//ランキング描画開始X位置
+#define DRAW_DATA_Y		0	//ランキング描画開始Y位置
+#define DRAW_DATA_MAX	10	//描画するデータの数
+
 //############## マクロ定義：エラーメッセージ ###################
 #define DATA_ERROR_TTILE	"DATA_ERROR"						//エラータイトル
 #define DATA_ERROR_MSG		"データが読み込めませんでした"		//エラーメッセージ

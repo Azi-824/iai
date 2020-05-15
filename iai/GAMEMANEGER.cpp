@@ -350,9 +350,9 @@ void GAMEMANEGER::Scene_End()
 //エンド画面の描画処理
 void GAMEMANEGER::Draw_Scene_End()
 {
-	this->font->SetSize(DEFAULT_FONTSIZE / 3);	//フォントサイズ変更
-	this->save->Draw();
-	this->font->SetSize(DEFAULT_FONTSIZE);	//フォントサイズを元の大きさに
+	this->font->SetSize(FONTSIZE_DRAW_RANKING);	//フォントサイズ変更
+	this->save->Draw();							//ランキング描画
+	this->font->SetSize(DEFAULT_FONTSIZE);		//フォントサイズを元の大きさに
 
 	return;
 }
@@ -588,13 +588,9 @@ void GAMEMANEGER::PlayStage_Result()
 
 				this->save->Add(this->player->GetWinNum());	//セーブデータ追加
 
-				this->save->Save();		//セーブ処理
+				this->save->Sort();							//ソート処理
 
-				this->save->Sort();		//ソート処理
-
-				//this->NowScene = (int)SCENE_TITLE;	//タイトル画面へ
-
-				this->NowScene = (int)SCENE_END;	//エンド画面へ
+				this->NowScene = (int)SCENE_END;			//エンド画面へ
 
 			}
 
@@ -641,4 +637,11 @@ void GAMEMANEGER::DrawNumTextCenter(int y, const char *text, int num)
 
 	DrawString((GAME_WIDTH / 2) - (Width / 2), y, draw_text.c_str(), COLOR_BLACK);		//文字列を描画
 
+}
+
+//セーブ
+void GAMEMANEGER::Save()
+{
+	this->save->Save();
+	return;
 }
