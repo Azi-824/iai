@@ -38,4 +38,10 @@ public:
 	bool Save();	//セーブ
 	bool Load();	//読み込み
 
+	//*************** ソート関係 ********************
+	void Sort();		//ソート
+	int Partition();	//pivotを決め、pivotを境目に振り分けをする
+	void Swap(int, int);//値を交換する
+
+
 };

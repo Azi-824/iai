@@ -148,3 +148,22 @@ bool SAVEDATA::Load()
 
 	return true;	//読み込み成功
 }
+
+//**************** ソート関係 ******************
+//ソート
+void SAVEDATA::Sort()
+{
+	return;
+}
+
+//pivotを決め、pivotを境目に振り分けをする
+int SAVEDATA::Partition()
+{
+	return;
+}
+
+//値を交換する
+void SAVEDATA::Swap(int i,int j)
+{
+	return;
+}
