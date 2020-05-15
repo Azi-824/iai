@@ -39,9 +39,12 @@ public:
 	bool Load();	//読み込み
 
 	//*************** ソート関係 ********************
-	void Sort();		//ソート
-	int Partition();	//pivotを決め、pivotを境目に振り分けをする
-	void Swap(int, int);//値を交換する
+	void Sort();				//セーブデータを降順に並べ替える
+	void QuiqSort(int, int);	//クイックソート
+	int Partition(int,int);		//pivotを決め、pivotを境目に振り分けをする
+	void Swap(DATA*, DATA*);	//値を交換する
+	int GetMaxWinNum();			//勝ち数の最大値を取得
+	int GetMinWinNum();			//勝ち数の最小値を取得
 
 
 };

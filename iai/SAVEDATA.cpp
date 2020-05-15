@@ -150,20 +150,94 @@ bool SAVEDATA::Load()
 }
 
 //**************** ソート関係 ******************
-//ソート
+//セーブデータを降順に並べ替える
 void SAVEDATA::Sort()
 {
+
+	this->QuiqSort(this->GetMinWinNum(), this->GetMaxWinNum());	//クイックソート
+
+	return;
+}
+
+//クイックソート
+void SAVEDATA::QuiqSort(int left, int right)
+{
+	int pivot = 0;
+
+	if (left < right)
+	{
+		pivot = this->Partition(left, right);
+		this->QuiqSort(left, pivot - 1);		//pivotを境に再帰的にクイックソート
+		this->QuiqSort(pivot + 1, right);		//pivotを境に再帰的にクイックソート
+	}
 	return;
 }
 
 //pivotを決め、pivotを境目に振り分けをする
-int SAVEDATA::Partition()
+int SAVEDATA::Partition(int left,int right)
 {
+
+	int i = 0, j = 0, pivot = 0;	//初期化
+	i = left;
+	j = right + 1;
+	pivot = left;		//先頭要素をpivotとする
+
+	do
+	{
+
+		do { ++i; } while (this->DataCode.at(i)->GetWinNum() > this->DataCode.at(pivot)->GetWinNum());
+		do { --j; } while (this->DataCode.at(pivot)->GetWinNum() > this->DataCode.at(j)->GetWinNum());
+
+		//pivotより小さいものを左へ、大きいものを右へ
+		if (i < j)
+		{
+			this->Swap(this->DataCode.at(pivot), this->DataCode.at(j));	//pivotを更新
+		}
+
+	} while (i<j);
+
 	return;
 }
 
 //値を交換する
-void SAVEDATA::Swap(int i,int j)
+void SAVEDATA::Swap(DATA *i, DATA *j)
 {
+	auto temp = *i;	//値を一時保管する
+	*i = *j;
+	*j = temp;
+
 	return;
+}
+
+//勝ち数の最大値を取得
+int SAVEDATA::GetMaxWinNum()
+{
+	int max_value = 0;	//最大値格納用
+
+	for (int i = 0; i < this->DataCode.size(); ++i)	//データの数分ループ
+	{
+		if (this->DataCode.at(i)->GetWinNum() > max_value)	//現在の最大値より大きかったら
+		{
+			max_value = this->DataCode.at(i)->GetWinNum();	//最大値更新
+		}
+	}
+
+	return max_value;
+}
+
+//勝ち数の最小値を取得
+int SAVEDATA::GetMinWinNum()
+{
+	int min_value = 99;		//最小値格納用
+
+	for (int i = 0; i < this->DataCode.size(); ++i)
+	{
+		if (this->DataCode.at(i)->GetWinNum() < min_value)	//現在の最小値より大きかったら
+		{
+			min_value = this->DataCode.at(i)->GetWinNum();	//最小値更新
+		}
+	}
+
+	return min_value;
+
 }
