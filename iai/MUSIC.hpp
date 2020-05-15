@@ -24,6 +24,7 @@
 #define SE_NAME_GAMESTART	R"(\gamestart.mp3)"		//ゲームスータトのSEの名前
 #define SE_NAME_GAMEOVER	R"(\gameover.mp3)"		//ゲームオーバーのSEの名前
 #define SE_NAME_TEXT_SE		R"(\text_se.mp3)"		//テキスト表示のSEの名前
+#define SE_NAME_SLASH		R"(\slash.mp3)"			//斬る効果音の名前
 
 #define BGM_NAME_TITLE_BGM	R"(\title_bgm.mp3)"		//タイトルのBGMの名前
 
@@ -39,7 +40,8 @@ enum SE_TYPE
 {
 	SE_TYPE_GAMESTART,		//ゲームスタート
 	SE_TYPE_RESULT,			//結果表示
-	SE_TYPE_TEXT			//テキスト表示
+	SE_TYPE_TEXT,			//テキスト表示
+	SE_TYPE_SLASH			//斬る音
 };
 
 enum BGM_TYPE

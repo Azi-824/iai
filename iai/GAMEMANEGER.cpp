@@ -88,6 +88,7 @@ bool GAMEMANEGER::Load()
 	if (this->se->GetIsLoad() == false) { return false; }		//読み込み失敗
 	if (this->se->Add(MUSIC_DIR_SE, SE_NAME_GAMEOVER) == false) { return false; }	//ゲームオーバーの音を追加
 	if (this->se->Add(MUSIC_DIR_SE, SE_NAME_TEXT_SE) == false) { return false; }	//テキスト表示の音を追加
+	if (this->se->Add(MUSIC_DIR_SE, SE_NAME_SLASH) == false) { return false; }		//斬る音を追加
 
 	//BGM
 	this->bgm = new MUSIC(MUSIC_DIR_BGM, BGM_NAME_TITLE_BGM);	//BGMを管理するオブジェクトを生成
@@ -499,6 +500,8 @@ void GAMEMANEGER::PlayStage_Main()
 		this->player->SetPushTime((GetNowCount() - this->StartTime));	//押すまでにかかった時間を設定
 
 		this->effect->Draw(GAME_LEFT, GAME_TOP, (int)EFFECT_SLASH);	//エフェクト描画
+
+		this->se->PlayOne((int)SE_TYPE_SLASH);	//斬る効果音を再生
 
 		if (this->effect->GetIsDrawEnd())	//エフェクト描画が終わったら
 		{
