@@ -25,7 +25,8 @@
 
 //テキスト関係
 #define LOAD_TEXT	"NowLoading…"		//ロード画面のテキスト
-#define PUSH_TEXT	"PushEnter"			//エンターキーを押す、のテキスト
+#define PUSH_TEXT	"Enterで次へ"		//エンターキーを押す、のテキスト
+#define SETUMEI_TEXT "ゲームの遊び方\n画面にマークが表示されたら\nEnterを押そう！"	//説明テキスト
 #define TITLE_TEXT	"試合開始"			//タイトル画面のテキスト
 #define PLAY_TEXT	"NowPlay"			//プレイ画面のテキスト
 #define END_TEXT	"NowEnd"			//エンド画面のテキスト
@@ -137,6 +138,7 @@ public:
 
 
 	void DrawTextCenter(int,const char *,unsigned int color=COLOR_BLACK);	//渡された文字列を画面中央に描画する(高さは自分で指定する)
+	void DrawTextCenter(const char*, unsigned int color = COLOR_BLACK);		//渡された文字列を画面中央に描画する(上下左右、中央)
 	void DrawNumTextCenter(int, const char *, int);							//書式付き(数字)文字列を中央に描画する(高さは自分で指定する)
 
 	void Save();	//セーブ

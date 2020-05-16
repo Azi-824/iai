@@ -245,14 +245,17 @@ void GAMEMANEGER::Scene_Load()
 //ロード画面の描画処理
 void GAMEMANEGER::Draw_Scene_Load()
 {
+	this->font->SetSize(FONTSIZE_MINI);		//フォントサイズを小さくする
+	DrawString(GAME_LEFT, GAME_TOP, SETUMEI_TEXT, COLOR_WHITE);
+	this->font->SetSize(DEFAULT_FONTSIZE);	//フォントサイズを大きくする
 
 	if (IsLoad)	//読み込みが完了したら
 	{
-		DrawString(TEST_TEXT_X, TEST_TEXT_Y, PUSH_TEXT, COLOR_WHITE);	//プッシュ、のテキストを描画
+		this->DrawTextCenter(PUSH_TEXT, COLOR_WHITE);					//エンターキーを押す、のテキストを描画
 	}
 	else		//完了していなければ
 	{
-		DrawString(TEST_TEXT_X, TEST_TEXT_Y, LOAD_TEXT, COLOR_WHITE);	//読み込み中のテキストを描画
+		this->DrawTextCenter(LOAD_TEXT, COLOR_WHITE);					//読み込み中のテキストを描画
 	}
 
 	return;
@@ -621,6 +624,25 @@ void GAMEMANEGER::DrawTextCenter(int y,const char *text,unsigned int color)
 	Width = GetDrawStringWidth(text, Strlen);	//横幅取得
 
 	DrawString((GAME_WIDTH / 2) - (Width / 2), y, text, color);		//文字列を描画
+
+	return;
+
+}
+
+//渡された文字列を画面中央に描画する(上下左右、中央)
+//引数：const char *：描画する文字列
+//引数：unsigned int：描画色：指定しない場合は、黒
+void GAMEMANEGER::DrawTextCenter(const char* text, unsigned int color)
+{
+	int Strlen = 0;		//文字列の長さ取得用
+	int Width = 0;		//文字列の幅取得用
+	int Height = 0;		//文字列の高さ取得用
+
+	Strlen = strlen(text);	//文字列長さを取得
+	Width = GetDrawStringWidth(text, Strlen);	//横幅取得
+	Height = GetFontSize();						//高さ取得
+
+	DrawString((GAME_WIDTH / 2) - (Width / 2), (GAME_HEIGHT / 2) - (Height / 2), text, color);		//文字列を描画
 
 	return;
 
