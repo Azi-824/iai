@@ -63,6 +63,7 @@ bool GAMEMANEGER::Load()
 	this->back = new IMAGE(IMG_DIR_BACK, IMG_NAME_TITLE);	//背景画像を管理するオブジェクトを生成(タイトル画面の画像を読み込む)
 	if (this->back->GetIsLoad() == false) { return false; }	//読み込み失敗
 	if (this->back->AddImage(IMG_DIR_BACK, IMG_NAME_PLAY) == false) { return false; }		//背景画像追加(プレイ画面)
+	if (this->back->AddImage(IMG_DIR_BACK, IMG_NAME_END) == false) { return false; }		//背景画像追加(エンド画面)
 	//マーク画像
 	this->mark = new IMAGE(IMG_DIR_MARK, IMG_NAME_MARK);	//マーク画像を生成
 	if (this->mark->GetIsLoad() == false) { return false; }	//読み込み失敗
@@ -318,12 +319,6 @@ void GAMEMANEGER::Scene_Play()
 		break;
 	}
 
-
-	if (this->keydown->IsKeyDownOne(KEY_INPUT_SPACE))	//スペースキーを押されたら
-	{
-		this->NowScene = (int)SCENE_END;	//エンド画面へ
-	}
-
 	return;
 }
 
@@ -343,6 +338,8 @@ void GAMEMANEGER::Draw_Scene_Play()
 void GAMEMANEGER::Scene_End()
 {
 
+	this->back->ChengeImage((int)END_BACK);	//背景画像変更
+
 	this->bgm->Play((int)BGM_TYPE_END);		//bgmを再生
 
 	if (this->keydown->IsKeyDownOne(KEY_INPUT_RETURN))		//エンターキーを押されたら
@@ -357,6 +354,8 @@ void GAMEMANEGER::Scene_End()
 //エンド画面の描画処理
 void GAMEMANEGER::Draw_Scene_End()
 {
+
+	this->back->Draw(GAME_LEFT, GAME_TOP);		//背景描画
 	this->font->SetSize(FONTSIZE_DRAW_RANKING);	//フォントサイズ変更
 	this->save->Draw();							//ランキング描画
 	this->font->SetSize(DEFAULT_FONTSIZE);		//フォントサイズを元の大きさに

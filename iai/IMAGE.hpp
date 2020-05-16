@@ -21,6 +21,7 @@
 
 #define IMG_NAME_TITLE		R"(\Title.jpg)"					//タイトル画面の背景画像の名前
 #define IMG_NAME_PLAY		R"(\Play.jpg)"					//プレイ画面の背景画像の名前
+#define IMG_NAME_END		R"(\end.png)"					//エンド画面の背景画像の名前
 
 #define IMG_NAME_MARK		R"(\Mark.png)"					//マーク画像の名前
 
