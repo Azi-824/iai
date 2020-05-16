@@ -27,6 +27,7 @@
 #define SE_NAME_SLASH		R"(\slash.mp3)"			//斬る効果音の名前
 
 #define BGM_NAME_TITLE_BGM	R"(\title_bgm.mp3)"		//タイトルのBGMの名前
+#define BGM_NAME_END_BGM	R"(\end_bgm.mp3)"		//エンド画面のBGMの名前
 
 //##################### マクロ定義：エラーメッセージ ######################
 #define MUSIC_ERROR_TITLE "MUSIC_ERROR"					//エラータイトル
@@ -46,7 +47,8 @@ enum SE_TYPE
 
 enum BGM_TYPE
 {
-	BGM_TYPE_TITLE			//タイトルBGM
+	BGM_TYPE_TITLE,			//タイトルBGM
+	BGM_TYPE_END			//エンドBGM
 };
 
 //##################### クラス定義 ############################

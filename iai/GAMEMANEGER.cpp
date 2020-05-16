@@ -93,8 +93,10 @@ bool GAMEMANEGER::Load()
 	//BGM
 	this->bgm = new MUSIC(MUSIC_DIR_BGM, BGM_NAME_TITLE_BGM);	//BGMを管理するオブジェクトを生成
 	if (this->bgm->GetIsLoad() == false) { return false; }		//読み込み失敗
+	if (this->bgm->Add(MUSIC_DIR_BGM, BGM_NAME_END_BGM) == false) { return false; }	//エンド画面のBGM追加
 	this->bgm->ChengePlayType(DX_PLAYTYPE_LOOP);				//再生方法をループ再生に変更
 	this->bgm->ChengeVolume(50.0, (int)BGM_TYPE_TITLE);			//タイトルbgmの音量を50%に変更
+	this->bgm->ChengeVolume(50.0, (int)BGM_TYPE_END);			//エンドbgmの音量を50%に変更
 
 	//音量変更
 	this->se->ChengeVolume(50.0, (int)SE_TYPE_GAMESTART);	//ゲームスタートの音量を50%に変更
@@ -341,8 +343,11 @@ void GAMEMANEGER::Draw_Scene_Play()
 void GAMEMANEGER::Scene_End()
 {
 
+	this->bgm->Play((int)BGM_TYPE_END);		//bgmを再生
+
 	if (this->keydown->IsKeyDownOne(KEY_INPUT_RETURN))		//エンターキーを押されたら
 	{
+		this->bgm->Stop((int)BGM_TYPE_END);	//BGMを止める
 		this->NowScene = (int)SCENE_TITLE;	//タイトル画面へ
 	}
 
