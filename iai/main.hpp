@@ -17,5 +17,7 @@
 #define SET_WINDOW_ST_MODE_TITLE_FLAME_NONE	2	//タイトルバーとフレームなし
 #define SET_WINDOW_ST_MODE_FLAME_NONE		3	//フレームなし
 
+#define GAME_ICON_ID		333					//アイコンID
+
 //############## プロトタイプ宣言 #############
 void Delete_Class();		//クラスを削除する処理

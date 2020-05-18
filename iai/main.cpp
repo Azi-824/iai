@@ -17,6 +17,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
 	SetMainWindowText(TEXT(GAME_WINDOW_NAME));					//タイトルの文字
 
+	SetWindowIconID(GAME_ICON_ID);								//アイコン変更
+
 	SetAlwaysRunFlag(TRUE);										//非アクティブに設定
 
 	if (DxLib_Init() == -1) { return -1; }						//ＤＸライブラリ初期化処理
