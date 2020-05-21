@@ -462,10 +462,6 @@ void GAMEMANEGER::PlayStage_DrawText()
 void GAMEMANEGER::PlayStage_Main()
 {
 
-
-	/*
-	修正ポイント
-	*/
 	DrawBox(GAME_LEFT, GAME_TOP, GAME_WIDTH, GAME_HEIGHT,COLOR_BLACK,TRUE);	//真っ暗な画面	
 
 	this->mark->DrawCenter(GAME_WIDTH, MARK_DRAW_Y);	//マーク描画
